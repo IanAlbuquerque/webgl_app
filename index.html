@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>WebGL Simple Engine</title>
+		<!--
+			Loads the require.js module which allows quick and easy js includes.
+			Loads main.js afterwards.
+		-->
+        <script data-main="js/main.js" src="js/require.js"></script>
+		
+		<!--
+			Fragment shader script
+		-->
+		<script id="shader-fs" type="x-shader/x-fragment">
+			precision mediump float;
+
+			varying vec4 vColor;
+
+			void main(void)
+			{
+				gl_FragColor = vColor;
+			}
+		</script>
+
+		<!--
+			Vertex shader script
+		-->
+		<script id="shader-vs" type="x-shader/x-vertex">
+			attribute vec3 aVertexPosition;
+			attribute vec4 aVertexColor;
+
+			uniform mat4 uMVMatrix;
+			uniform mat4 uPMatrix;
+
+			varying vec4 vColor;
+
+			void main(void)
+			{
+				gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+				vColor = aVertexColor;
+			}
+		</script>
+    </head>
+    <body>
+        <h1>WebGL Simple Engine</h1>
+		<canvas id="main-canvas" style="border: none;" width="1000" height="500"></canvas>
+    </body>
+</html>
