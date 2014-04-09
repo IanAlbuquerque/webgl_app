@@ -10,7 +10,8 @@ requirejs.config({
 	*/
 	paths:
 	{
-		webglut: 'personal_webglut'
+		webglut: 'personal_webglut',
+		elements: 'app/elements'
 	}
 });
 

@@ -21,11 +21,11 @@ function(){
 		mvMatrix = mvMatrixStack.pop();
 	}
 
-    var setMatrixUniforms = function(gl,shaderProgram)
+	var setMatrixUniforms = function(gl,shaderProgram)
 	{
-        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
-        gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
-    }
+		gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+		gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+	}
 	
 	var mvLoadIdentity = function()
 	{
@@ -44,7 +44,7 @@ function(){
 	
 	var mvTranslate = function(vector)
 	{
-        mat4.translate(mvMatrix, vector);
+		mat4.translate(mvMatrix, vector);
 	}
 	
 	var mvScale = function(vector)
