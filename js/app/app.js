@@ -14,6 +14,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomios){
 	
 	var display = function()
 	{
+
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
         	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 

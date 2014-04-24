@@ -24,7 +24,7 @@ function(){
 	var tick = function()
 	{
 		requestAnimFrame(tick);
-		if(displayFunction) displayFunction();
+		//if(displayFunction) displayFunction();
 		
 		var timeNow = new Date().getTime();
 		if (lastTime != 0)
@@ -38,6 +38,7 @@ function(){
 	var initialize = function()
 	{
 		tick();
+		if(displayFunction) displayFunction();
 	}
 
 
