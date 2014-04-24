@@ -1,7 +1,7 @@
+var gl;
+
 define(function(){
 
-	var gl;
-	
 	var initialize = function(canvas)
 	{
 		try

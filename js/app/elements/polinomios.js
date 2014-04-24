@@ -25,7 +25,7 @@ function(GLPainter){
 			return sum;
 		}
 		
-		this.draw = function(gl,shaderProgram)
+		this.draw = function()
 		{
 			var vertices =[];
 			var colors =[]
@@ -45,7 +45,7 @@ function(GLPainter){
 				colors.push(1.0);
 				x+=dx;
 			}
-			GLPainter.drawVerticesColor2d(gl,shaderProgram,gl.LINE_STRIP,vertices,colors,this.numPontos);
+			GLPainter.drawVerticesColor2d(gl.LINE_STRIP,vertices,colors,this.numPontos);
 		}
 		
 		this.derivative = function()

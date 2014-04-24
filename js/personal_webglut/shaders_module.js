@@ -1,18 +1,18 @@
-define(function(){
+var shaderProgram;
 
-	var shaderProgram;
+define(function(){
 	
-	var getShader = function(gl, id) 
+	var getShader = function(id) 
 	{
 		// Gets the desired shader script using it's id as reference
         var shaderScript = document.getElementById(id); // Possibly a violation in modularization?
 
         if (!shaderScript)
-		{
+	{
             throw { 
-				name: "Shader not found",
-				message: "Unable to find the shader script element referenced by the id '" + id + "'" 
-			};
+			name: "Shader not found",
+			message: "Unable to find the shader script element referenced by the id '" + id + "'" 
+		};
         }
 
 		// Organizes the script content into the source code of the script
@@ -60,12 +60,12 @@ define(function(){
         return shader;
     }
 	
-	var initialize = function(gl)
+	var initialize = function()
 	{
 		try
 		{
-			var fragmentShader = getShader(gl, "shader-fs");
-			var vertexShader = getShader(gl, "shader-vs");
+			var fragmentShader = getShader("shader-fs");
+			var vertexShader = getShader("shader-vs");
 		}
 		catch(exception)
 		{

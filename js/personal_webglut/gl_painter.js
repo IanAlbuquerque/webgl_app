@@ -1,11 +1,10 @@
 define(['webglut/buffers',
-		'webglut/matrices',
-		'libs/webgl'],
+	'webglut/matrices',
+	'libs/webgl'],
 function(Buffers,Matrices){
 
-	var drawVerticesColor3d = function(gl,shaderProgram,primitive,vertices,colors,numVertices)
+	var drawVerticesColor3d = function(primitive,vertices,colors,numVertices)
 	{
-		Buffers.initialize(gl);
 		var vertexPositionBuffer = new Buffers.GLArrayBuffer(vertices,3,numVertices);
 		var vertexColorBuffer = new Buffers.GLArrayBuffer(colors,4,numVertices);
 		
@@ -20,9 +19,8 @@ function(Buffers,Matrices){
 	}
 	
 	
-	var drawVerticesColor2d = function(gl,shaderProgram,primitive,vertices,colors,numVertices)
+	var drawVerticesColor2d = function(primitive,vertices,colors,numVertices)
 	{
-		Buffers.initialize(gl);
 		var vertices3d = [];
 		for(var i=0;i<numVertices;i++)
 		{
@@ -30,7 +28,7 @@ function(Buffers,Matrices){
 			vertices3d.push(vertices[(2*i)+1]);
 			vertices3d.push(0.0);
 		}
-		drawVerticesColor3d(gl,shaderProgram,primitive,vertices3d,colors,numVertices);
+		drawVerticesColor3d(primitive,vertices3d,colors,numVertices);
 	}
 
 	return{

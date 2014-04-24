@@ -21,7 +21,7 @@ function(){
 		mvMatrix = mvMatrixStack.pop();
 	}
 
-	var setMatrixUniforms = function(gl,shaderProgram)
+	var setMatrixUniforms = function()
 	{
 		gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
 		gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);

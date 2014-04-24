@@ -10,17 +10,8 @@ define(function(){
 	}
 	*/
 	
-	var gl;
-	
 	var GLArrayBuffer = function(_data,_itemSize,_numItems)
 	{
-		if(!gl)
-		{
-			throw {
-				name: "Buffers not initialized",
-				message:"Buffers were not initialized before it's usage"
-				};
-		}
 		this.content = gl.createBuffer();
 		
 		this.data = _data;
@@ -33,13 +24,6 @@ define(function(){
 	
 	var GLElementArrayBuffer = function()
 	{
-		if(!gl)
-		{
-			throw { 
-				name: "Buffers not initialized",
-				message:"Buffers were not initialized before it's usage"
-				};
-		}
 		this.content = gl.createBuffer();
 		
 		this.data = _data;
@@ -49,14 +33,8 @@ define(function(){
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.content);
 		gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.data), gl.STATIC_DRAW);
 	}
-	
-	var initialize = function(_gl)
-	{
-		gl=_gl;
-	}
-	
+
 	return{
-		initialize: initialize,
 		GLArrayBuffer : GLArrayBuffer,
 		GLElementArrayBuffer : GLElementArrayBuffer
 	};
