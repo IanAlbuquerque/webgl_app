@@ -3,6 +3,40 @@ define(['webglut/buffers',
 	'libs/webgl'],
 function(Buffers,Matrices){
 
+	var currentColor = [];
+	currentColor = [1,1,1,1];
+	
+	var setDrawColor = function(color)
+	{
+		currentColor = color;
+	}
+	
+	var drawVertices3d = function(primitive,vertices,numVertices)
+	{
+		var colors = [];
+		for(var i=0;i<numVertices;i++)
+		{
+			colors.push(currentColor[0]);
+			colors.push(currentColor[1]);
+			colors.push(currentColor[2]);
+			colors.push(currentColor[3]);
+		}
+		drawVerticesColor3d(primitive,vertices,colors,numVertices);
+	}
+	
+	var drawVertices2d = function(primitive,vertices,numVertices)
+	{
+		var colors = [];
+		for(var i=0;i<numVertices;i++)
+		{
+			colors.push(currentColor[0]);
+			colors.push(currentColor[1]);
+			colors.push(currentColor[2]);
+			colors.push(currentColor[3]);
+		}
+		drawVerticesColor2d(primitive,vertices,colors,numVertices);
+	}
+
 	var drawVerticesColor3d = function(primitive,vertices,colors,numVertices)
 	{
 		var vertexPositionBuffer = new Buffers.GLArrayBuffer(vertices,3,numVertices);
@@ -32,6 +66,9 @@ function(Buffers,Matrices){
 	}
 
 	return{
+		setDrawColor : setDrawColor,
+		drawVertices2d : drawVertices2d,
+		drawVertices3d : drawVertices3d,
 		drawVerticesColor3d : drawVerticesColor3d,
 		drawVerticesColor2d : drawVerticesColor2d
 	};

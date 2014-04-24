@@ -19,13 +19,18 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomios){
 
 		Matrices.mvLoadIdentity();
 		
-		GLPainter.drawVerticesColor2d(gl.LINES,[-1,0,1,0,0,-1,0,1],[0,1,0,1,0,1,0,1,0,0,1,1,0,0,1,1],4);
+		// Eixo X
+		GLPainter.setDrawColor([0,1,0,1]);
+		GLPainter.drawVertices2d(gl.LINES,[-1,0,1,0],2);
+		
+		// Eixo y
+		GLPainter.setDrawColor([0,0,1,1]);
+		GLPainter.drawVertices2d(gl.LINES,[0,-1,0,1],2);
 
 		Matrices.mvPushMatrix();
 			polinomio.draw();
 			der.draw();
 		Matrices.mvPopMatrix();
-	
 	}
 	
 	var loop = function(timeElapsed)
@@ -43,8 +48,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomios){
 		
 		Events.setDisplayFunction(display);
 		Events.setLoopFunction(loop);
-		Events.initialize();
-		
+		Events.initialize();	
 	}
 
 	return{
