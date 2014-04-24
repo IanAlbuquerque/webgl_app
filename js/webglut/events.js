@@ -1,5 +1,4 @@
-define(['libs/webgl'],
-function(){
+define(function(){
 
 	var displayFunction;
 	var loopFunction;

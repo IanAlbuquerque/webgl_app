@@ -1,17 +1,15 @@
-define(['webglut/buffers',
-	'webglut/matrices',
-	'libs/webgl'],
+define(['webglut/buffers','webglut/matrices'],
 function(Buffers,Matrices){
 
 	var currentColor = [];
 	currentColor = [1,1,1,1];
-	
+
 	var currentPrimitive;
 	
 	var pointsBuffer = [];
+	
 	var numberOfPoints = 0;
-	
-	
+
 	var setDrawColor = function(color)
 	{
 		currentColor = color;
@@ -84,7 +82,6 @@ function(Buffers,Matrices){
 		Matrices.setMatrixUniforms(gl,shaderProgram);
 		gl.drawArrays(primitive, 0, numVertices);
 	}
-	
 	
 	var drawVerticesColor2d = function(primitive,vertices,colors,numVertices)
 	{

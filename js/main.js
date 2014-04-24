@@ -1,22 +1,15 @@
-// Requirejs configuration
 requirejs.config({
-	/*
-		By default load any module IDs from js
-	*/
+	// By default load any module IDs from js
 	baseUrl: 'js',
-	/* 
-		Except, if the module ID starts with the following names, load
-		from the specified paths.
-	*/
+	// Except, if the module ID starts with the following names, load from the specified paths.
 	paths:
 	{
-		webglut: 'personal_webglut',
 		elements: 'app/elements'
 	}
 });
 
-// Start the main app logic.
-requirejs(['app/app'],function (App) {
+requirejs(['app/app','libs/webgl','libs/glMatrix'], function (App) {
+
 
 	var canvas = document.getElementById("main-canvas");
 	try

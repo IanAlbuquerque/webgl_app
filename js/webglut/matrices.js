@@ -1,5 +1,4 @@
-define(['libs/glMatrix'],
-function(){
+define(function(){
 
 	var mvMatrix = mat4.create();
 	var mvMatrixStack = [];

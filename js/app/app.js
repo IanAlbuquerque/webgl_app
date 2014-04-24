@@ -3,9 +3,7 @@ define(['webglut/gl_module',
 	'webglut/gl_painter',
 	'webglut/matrices',
 	'webglut/events',
-	'elements/polinomios',
-	'libs/glMatrix',
-	'libs/webgl'],
+	'elements/polinomios'],
 function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomios){
 
 	var angle=0;
@@ -25,7 +23,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomios){
 		GLPainter.setDrawColor([0,1,0,1]);
 		GLPainter.drawVertices2d(gl.LINES,[-1,0,1,0],2);
 		
-		// Eixo y
+		//Eixo y
 		GLPainter.setDrawColor([0,0,1,1]);
 		GLPainter.drawVertices2d(gl.LINES,[0,-1,0,1],2);
 		*/

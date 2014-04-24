@@ -33,7 +33,7 @@
 /**
  * @fileoverview This file contains functions every webgl program will need
  * a version of one way or another.
- *
+ * 
  * Instead of setting up a context manually it is recommended to
  * use. This will check for success or failure. On failure it
  * will attempt to present an approriate message to the user.
@@ -99,7 +99,7 @@ var OTHER_PROBLEM = '' +
  *     context from.
  * @param {WebGLContextCreationAttirbutes} opt_attribs Any
  *     creation attributes you want to pass in.
- * @param {function:(msg)} opt_onError An function to call
+ * @param {function(msg)} opt_onError An function to call
  *     if there is an error during creation.
  * @return {WebGLRenderingContext} The created context.
  */
