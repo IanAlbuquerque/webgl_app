@@ -19,6 +19,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomios){
 
 		Matrices.mvLoadIdentity();
 		
+		/*
 		// Eixo X
 		GLPainter.setDrawColor([0,1,0,1]);
 		GLPainter.drawVertices2d(gl.LINES,[-1,0,1,0],2);
@@ -26,6 +27,20 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomios){
 		// Eixo y
 		GLPainter.setDrawColor([0,0,1,1]);
 		GLPainter.drawVertices2d(gl.LINES,[0,-1,0,1],2);
+		*/
+		
+		GLPainter.setDrawColor([0,1,0,1]);
+		GLPainter.begin(gl.LINES);
+			GLPainter.vertex2d(-1,0);
+			GLPainter.vertex2d(1,0);
+		GLPainter.end();
+		
+		GLPainter.setDrawColor([0,0,1,1]);
+		GLPainter.begin(gl.LINES);
+			GLPainter.vertex2d(0,-1);
+			GLPainter.vertex2d(0,1);
+			GLPainter.vertex2d(1,0.5);
+		GLPainter.end();
 
 		Matrices.mvPushMatrix();
 			polinomio.draw();

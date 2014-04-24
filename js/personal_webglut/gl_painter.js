@@ -6,9 +6,42 @@ function(Buffers,Matrices){
 	var currentColor = [];
 	currentColor = [1,1,1,1];
 	
+	var currentPrimitive;
+	
+	var pointsBuffer = [];
+	var numberOfPoints = 0;
+	
+	
 	var setDrawColor = function(color)
 	{
 		currentColor = color;
+	}
+	
+	var begin = function(primitive)
+	{
+		currentPrimitive = primitive;
+		pointsBuffer = [];
+		numberOfPoints = 0;
+	}
+	
+	var vertex2d = function(x,y)
+	{
+		vertex3d(x,y,0.0);
+	}
+	
+	var vertex3d = function(x,y,z)
+	{
+		pointsBuffer.push(x);
+		pointsBuffer.push(y);
+		pointsBuffer.push(z);
+		numberOfPoints++;
+	}
+	
+	var end = function()
+	{
+		drawVertices3d(currentPrimitive,pointsBuffer,numberOfPoints);
+		pointsBuffer = [];
+		numberOfPoints = 0;
 	}
 	
 	var drawVertices3d = function(primitive,vertices,numVertices)
@@ -66,6 +99,10 @@ function(Buffers,Matrices){
 	}
 
 	return{
+		begin : begin,
+		vertex2d : vertex2d,
+		vertex3d : vertex3d,
+		end : end,
 		setDrawColor : setDrawColor,
 		drawVertices2d : drawVertices2d,
 		drawVertices3d : drawVertices3d,

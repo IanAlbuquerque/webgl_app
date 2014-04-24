@@ -16,15 +16,9 @@ define(function(){
 			throw exception;
 		}
 	}
-	
-	var getGL = function()
-	{
-		return gl;
-	}
 
 	return{
-		initialize: initialize,
-		getGL : getGL
+		initialize: initialize
 	};
 	
 });

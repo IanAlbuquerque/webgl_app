@@ -4,7 +4,7 @@ define(function(){
 	
 	var getShader = function(id) 
 	{
-		// Gets the desired shader script using it's id as reference
+	// Gets the desired shader script using it's id as reference
         var shaderScript = document.getElementById(id); // Possibly a violation in modularization?
 
         if (!shaderScript)
@@ -15,11 +15,11 @@ define(function(){
 		};
         }
 
-		// Organizes the script content into the source code of the script
+	// Organizes the script content into the source code of the script
         var scriptSourceCode = "";
         var script = shaderScript.firstChild;
         while (script) 
-		{
+	{
             if (script.nodeType == 3) 
 			{
                 scriptSourceCode += script.textContent;
@@ -27,7 +27,7 @@ define(function(){
             script = script.nextSibling;
         }
 		
-		// Creates the shader according to it's type 
+	// Creates the shader according to it's type 
         var shader;
         if (shaderScript.type == "x-shader/x-fragment")
 		{
@@ -96,15 +96,9 @@ define(function(){
 		shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 		shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
 	}
-	
-	var getShaderProgram = function()
-	{
-		return shaderProgram;
-	}
 
 	return{
-		initialize : initialize,
-		getShaderProgram : getShaderProgram
+		initialize : initialize
 	};
 	
 });
