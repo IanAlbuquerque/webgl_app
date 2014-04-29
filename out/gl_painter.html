@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/docs.css" rel="stylesheet">
+    <link href="styles/bootstrap-custom.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="header navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Documentation</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4">
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Namespaces</li><li><a href="gl_module.html"><i class="icon-code"></i> webglut/gl_module</a></li><li><a href="gl_painter.html"><i class="icon-code"></i> webglut/gl_painter</a></li><li><a href="shaders_module.html"><i class="icon-code"></i> webglut/shaders_module</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Global</li><li><a href="global.html#gl"><i class="icon-globe" style="color: black;"></i> gl</a></li><li><a href="global.html#shaderProgram"><i class="icon-globe" style="color: black;"></i> shaderProgram</a></li></ul></div>
+          </div>
+
+          <div class="span8">
+              <h1 class="page-header"><i class="icon-code"></i> webglut/gl_painter</h1>
+              
+
+
+
+<section>
+    
+<header>
+    <h2>
+    webglut/gl_painter
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview hero-unit">
+    
+
+    
+
+    
+    
+    
+        
+            <div class="description"><p>The module that is responsible for the drawing methods.</p></div>
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+   </div>
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl class="bs-docs-example bs-members">
+            
+<dt>
+    <h4 class="name" id="currentColor"><span class="label label-info">private</span> <span class="label label-info">inner</span> currentColor<span class="type-signature"> :Array.&lt;number></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The current color being utilized for the drawings.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy"><li>[1,1,1,1]</li></ul></dd>
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="currentPrimitive"><span class="label label-info">private</span> <span class="label label-info">inner</span> currentPrimitive<span class="type-signature"> :GLPrimitive</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The current GL primitive being utilized for the drawings.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="numberOfPoints"><span class="label label-info">private</span> <span class="label label-info">inner</span> numberOfPoints<span class="type-signature"> :number</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Number of vertices being kept in buffer.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="pointsBuffer"><span class="label label-info">private</span> <span class="label label-info">inner</span> pointsBuffer<span class="type-signature"> :Array.&lt;number></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The entries of the vertices being kept on the buffer before being drawn.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl class="bs-docs-example bs-methods">
+            
+<dt>
+    <h4 class="name" id="begin"><span class="label label-info">inner</span> begin<span class="signature">(primitive)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Begin drawing a primitive utilizing a vertex buffer. 
+It's expected to be followed by <a href="gl_painter.html#vertex2d">vertex2d</a> or <a href="gl_painter.html#vertex3d">vertex3d</a> as well as <a href="gl_painter.html#end">end</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">primitive</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">GLPrimitive</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The primitive being utilized for drawing the following vertices.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Sets the current drawing color to red.
+GLPainter.setDrawColor([1,0,0,1]);
+
+// Begin drawing a line
+GLPainter.begin(gl.LINES);
+	// Adds first vertex (-1,0) to the buffer
+	GLPainter.vertex2d(-1,0);
+	// Adds second vertex (1,0) to the buffer
+	GLPainter.vertex2d(1,0);
+// Finishes drawing the line (actually, only after this line of code the line is drawn)
+GLPainter.end();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="drawVertices2d"><span class="label label-info">inner</span> drawVertices2d<span class="signature">(primitive, vertices, numVertices)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Draws the given vertices (in 2 dimensions) using a primitive.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">primitive</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">GLPrimitive</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The GL primitive to be used.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">vertices</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The entries of the vertices. It's expected 2 entries per vertex.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">numVertices</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of vertices to be drawn.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Sets the the color of the drawings to red.
+GLPainter.setDrawColor([0,1,0,1]);
+
+// Draws a line from (1,0) to (-1,0)
+GLPainter.drawVertices2d(gl.LINES,[1,0,-1,0],2);</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="drawVertices3d"><span class="label label-info">inner</span> drawVertices3d<span class="signature">(primitive, vertices, numVertices)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Draws the given vertices (in 3 dimensions) using a primitive.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">primitive</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">GLPrimitive</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The GL primitive to be used.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">vertices</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The entries of the vertices. It's expected 3 entries per vertex.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">numVertices</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of vertices to be drawn.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Sets the the color of the drawings to red.
+GLPainter.setDrawColor([0,1,0,1]);
+
+// Draws a line from (1,0,0) to (-1,0,0)
+GLPainter.drawVertices3d(gl.LINES,[1,0,0,-1,0,0],2);</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="end"><span class="label label-info">inner</span> end<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Draws the vertices stored in the internal vertex buffer. 
+It's expected to be preceeded by <a href="gl_painter.html#begin">begin</a>, and the commands <a href="gl_painter.html#vertex2d">vertex2d</a> or <a href="gl_painter.html#vertex3d">vertex3d</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Sets the current drawing color to red.
+GLPainter.setDrawColor([1,0,0,1]);
+
+// Begin drawing a line
+GLPainter.begin(gl.LINES);
+	// Adds first vertex (-1,0) to the buffer
+	GLPainter.vertex2d(-1,0);
+	// Adds second vertex (1,0) to the buffer
+	GLPainter.vertex2d(1,0);
+// Finishes drawing the line (actually draws the line)
+GLPainter.end();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="setDrawColor"><span class="label label-info">inner</span> setDrawColor<span class="signature">(color)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Sets the current color being used for the drawings.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">color</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new color to be utilized for the drawing. Uses the RBGA system. Expects 4 numbers between or equal to 0 and 1 representing the colors Red, Green, Blue and the opacity Alpha, in this order.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Examples</h5>
+        
+    <pre class="prettyprint"><code>// Sets the current drawing color to red.
+GLPainter.setDrawColor([1,0,0,1]);
+// Sets the current drawing color to blue.
+GLPainter.setDrawColor([0,0,1,1]);
+// Sets the current drawing color to green.
+GLPainter.setDrawColor([0,1,0,1]);
+// Sets the current drawing color to pink.
+GLPainter.setDrawColor([1,0,1,1]);
+// Sets the current drawing color to grey.
+GLPainter.setDrawColor([0.5,0.5,0.5,1]);</code></pre>
+
+    <pre class="prettyprint"><code>// Sets the current drawing color to red.
+GLPainter.setDrawColor([1,0,0,1]);
+
+// Begin drawing a line
+GLPainter.begin(gl.LINES);
+	// Adds first vertex (-1,0) to the buffer
+	GLPainter.vertex2d(-1,0);
+	// Adds second vertex (1,0) to the buffer
+	GLPainter.vertex2d(1,0);
+// Finishes drawing the line (actually, only after this line of code the line is drawn)
+GLPainter.end();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="vertex2d"><span class="label label-info">inner</span> vertex2d<span class="signature">(x, y)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Adds a 2 dimensional vertex to the drawing buffer. 
+It's expected to be preceeded by <a href="gl_painter.html#begin">begin</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">x</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The first coordenate of the 2 dimensional vertice to be drawn.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">y</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The second coordenate of the 2 dimensional vertice to be drawn.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Sets the current drawing color to red.
+GLPainter.setDrawColor([1,0,0,1]);
+
+// Begin drawing a line
+GLPainter.begin(gl.LINES);
+	// Adds first vertex (-1,0) to the buffer
+	GLPainter.vertex2d(-1,0);
+	// Adds second vertex (1,0) to the buffer
+	GLPainter.vertex2d(1,0);
+// Finishes drawing the line (actually, only after this line of code the line is drawn)
+GLPainter.end();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="vertex3d"><span class="label label-info">inner</span> vertex3d<span class="signature">(x, y, z)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Adds a 3 dimensional vertex to the drawing buffer.
+It's expected to be preceeded by <a href="gl_painter.html#begin">begin</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">x</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The first coordenate of the 3 dimensional vertice to be drawn.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">y</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The second coordenate of the 3 dimensional vertice to be drawn.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">z</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The third coordenate of the 3 dimensional vertice to be drawn.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Sets the current drawing color to red.
+GLPainter.setDrawColor([1,0,0,1]);
+
+// Begin drawing a line
+GLPainter.begin(gl.LINES);
+	// Adds first vertex (-1,0,0) to the buffer
+	GLPainter.vertex3d(-1,0,0);
+	// Adds second vertex (1,0,0) to the buffer
+	GLPainter.vertex3d(1,0,0);
+// Finishes drawing the line (actually, only after this line of code the line is drawn)
+GLPainter.end();</code></pre>
+
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+          </div>
+      </div>
+
+        <br clear="both">
+
+      <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Apr 28 2014 20:59:20 GMT-0300 (BRT)
+        <br>
+      </footer>
+      <script> prettyPrint(); </script>
+    </div>
+  </body>
+</html>

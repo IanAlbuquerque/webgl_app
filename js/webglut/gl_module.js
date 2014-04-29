@@ -23,6 +23,11 @@ function()
 	* @param {Canvas} canvas The canvas element to associate the {@link gl}.
 	* @throws {Exception}
 	* @public
+	* @example
+	* 	// Gets the document element with the id "main-canvas"
+	*	var canvas = document.getElementById("main-canvas");
+	* 	// Initialize the gl global object using a "webgl" context associated to the canvas selected
+	*	GLModule.initialize(canvas);
 	*/
 	var initialize = function(canvas)
 	{
