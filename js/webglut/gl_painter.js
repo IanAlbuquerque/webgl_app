@@ -192,7 +192,7 @@ function(Buffers,Matrices){
 	* @public
 	* @example
 	*	// Sets the the color of the drawings to red.
-	*	GLPainter.setDrawColor([0,1,0,1]);
+	*	GLPainter.setDrawColor([1,0,0,1]);
 	*
 	*	// Draws a line from (1,0,0) to (-1,0,0)
 	*	GLPainter.drawVertices3d(gl.LINES,[1,0,0,-1,0,0],2);
@@ -219,7 +219,7 @@ function(Buffers,Matrices){
 	* @public
 	* @example
 	*	// Sets the the color of the drawings to red.
-	*	GLPainter.setDrawColor([0,1,0,1]);
+	*	GLPainter.setDrawColor([1,0,0,1]);
 	*
 	*	// Draws a line from (1,0) to (-1,0)
 	*	GLPainter.drawVertices2d(gl.LINES,[1,0,-1,0],2);
@@ -237,6 +237,14 @@ function(Buffers,Matrices){
 		drawVerticesColor2d(primitive,vertices,colors,numVertices);
 	}
 
+	/**
+	* Draws the given vertices (in 3 dimensions) using a primitive and a individual color per vertex.
+	* @param {GLPrimitive} primitive The GL primitive to be used.
+	* @param {number[]} vertices The entries of the vertices. It's expected 3 entries per vertex.
+	* @param {number[]} colors The color of the vertices, in the order that the vertices appear. It's expected 4 color entries per vertex (RGBA).
+	* @param {number} numVertices The number of vertices to be drawn.
+	* @public
+	*/
 	var drawVerticesColor3d = function(primitive,vertices,colors,numVertices)
 	{
 		var vertexPositionBuffer = new Buffers.GLArrayBuffer(vertices,3,numVertices);
@@ -251,7 +259,15 @@ function(Buffers,Matrices){
 		Matrices.setMatrixUniforms(gl,shaderProgram);
 		gl.drawArrays(primitive, 0, numVertices);
 	}
-	
+
+	/**
+	* Draws the given vertices (in 2 dimensions) using a primitive and a individual color per vertex.
+	* @param {GLPrimitive} primitive The GL primitive to be used.
+	* @param {number[]} vertices The entries of the vertices. It's expected 2 entries per vertex.
+	* @param {number[]} colors The color of the vertices, in the order that the vertices appear. It's expected 4 color entries per vertex (RGBA).
+	* @param {number} numVertices The number of vertices to be drawn.
+	* @public
+	*/
 	var drawVerticesColor2d = function(primitive,vertices,colors,numVertices)
 	{
 		var vertices3d = [];

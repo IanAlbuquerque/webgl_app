@@ -27,4 +27,6 @@ requirejs(['app/app','libs/webgl','libs/glMatrix'], function (App) {
 		return;
 	}
 	
+	document.getElementById("functionSubmit").onclick = App.updateFunction;
+	
 });
