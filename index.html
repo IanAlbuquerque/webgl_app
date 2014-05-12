@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>WebGL Simple Engine</title>
+        <title>Applications with WebGL</title>
 	<!--
 		Loads the require.js module which allows quick and easy js includes.
 		Loads main.js afterwards.
@@ -43,13 +43,31 @@
 	</script>
     </head>
     <body>
-        <h1>WebGL Simple Engine</h1>
+        <h1>Applications with WebGL</h1>
+		
+		<hr/>
+		
+		Function f(x) to be drawn: f(x)=
+		
+		<input type="text" name="function" value="x*x*x" placeholder="ex: Math.sin(x*100)*x" id="functionValue"/>
+		<input type="submit" value="Draw" id="functionSubmit"/>
+		
+		<br/>
+		
+		Use functions of x only. Use Math.cos(x),Math.sin(x),Math.exp(x),Math.PI for the cos,sin,exp functions and the PI value.
+		
+		<br/>
+		
+		<hr/>
+		
 		<canvas id="main-canvas" style="border: none;" width="500" height="500"></canvas>
 		<br/>
-		Function f(x) to be drawn: f(x)= 
-		<input type="text" name="function" id="functionValue"/>
-		<input type="submit" value="Submit" id="functionSubmit"/> 
-		<br/>
+		
+		<hr/>
+		
 		<a href="out/index.html">Documentation</a> (Still Under Construction)
+		<br/>
+		
+		<hr/>
     </body>
 </html>

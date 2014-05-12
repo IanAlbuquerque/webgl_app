@@ -32,40 +32,16 @@
           </div>
 
           <div class="span8">
-              <h1 class="page-header">Index</h1>
+              <h1 class="page-header"><i class="icon-code"></i> webglut/buffers</h1>
               
 
 
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
 
 <section>
     
 <header>
     <h2>
-    js/libs/webgl.js
+    webglut/buffers
     </h2>
     
 </header>  
@@ -80,18 +56,7 @@
     
     
         
-            <div class="description"><p>This file contains functions every webgl program will need
-a version of one way or another.</p><p>Instead of setting up a context manually it is recommended to
-use. This will check for success or failure. On failure it
-will attempt to present an approriate message to the user.</p><p>      gl = WebGLUtils.setupWebGL(canvas);</p><p>For animated WebGL apps use of setTimeout or setInterval are
-discouraged. It is recommended you structure your rendering
-loop like this.</p><p>      function render() {
-        window.requestAnimFrame(render, canvas);</p><p>        // do rendering
-        ...
-      }
-      render();</p><p>This will call your rendering function up to the refresh rate
-of your display but will stop rendering if your app is not
-visible.</p></div>
+            <div class="description"><p>The module hat is responsible for creating gl buffers.</p></div>
         
         
         
@@ -135,44 +100,23 @@ visible.</p></div>
     
     
     
-    
-    
-    
-    
-    
-    
-</article>
-
-</section>  
-
-
-
-
-
-
-<section>
-    
-<header>
-    <h2>
-    js/webglut/buffers.js
-    </h2>
-    
-</header>  
-
-<article>
-    <div class="container-overview hero-unit">
-    
-
-    
-
-    
-    
-    
+        <h3 class="subsection-title">Members</h3>
         
-            <div class="description"><p>Defines the module that is responsible for creating gl buffers.</p></div>
-        
-        
-        
+        <dl class="bs-docs-example bs-members">
+            
+<dt>
+    <h4 class="name" id="content">content<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The buffer itself.
+    </div>
+    
+    
+    
 <dl class="details">
     
         
@@ -201,56 +145,25 @@ visible.</p></div>
     
 </dl>
 
+    
+    
+</dd>
+
         
-        
-    
-   </div>
-    
-    
+            
+<dt>
+    <h4 class="name" id="content">content<span class="type-signature"></span></h4>
     
     
+</dt>
+<dd>
     
-    
-    
-    
-    
-    
+    <div class="description">
+        The buffer itself.
+    </div>
     
     
     
-    
-</article>
-
-</section>  
-
-
-
-
-
-
-<section>
-    
-<header>
-    <h2>
-    js/webglut/events.js
-    </h2>
-    
-</header>  
-
-<article>
-    <div class="container-overview hero-unit">
-    
-
-    
-
-    
-    
-    
-        
-            <div class="description"><p>Defines the module that is responsible for the events methods, such as display functions and the main loop processing.</p></div>
-        
-        
-        
 <dl class="details">
     
         
@@ -279,56 +192,25 @@ visible.</p></div>
     
 </dl>
 
+    
+    
+</dd>
+
         
-        
-    
-   </div>
-    
-    
+            
+<dt>
+    <h4 class="name" id="data">data<span class="type-signature"></span></h4>
     
     
+</dt>
+<dd>
     
-    
-    
-    
-    
-    
+    <div class="description">
+        The array containing the data to be inserted into the buffer.
+    </div>
     
     
     
-    
-</article>
-
-</section>  
-
-
-
-
-
-
-<section>
-    
-<header>
-    <h2>
-    js/webglut/gl_module.js
-    </h2>
-    
-</header>  
-
-<article>
-    <div class="container-overview hero-unit">
-    
-
-    
-
-    
-    
-    
-        
-            <div class="description"><p>Defines the module that is responsible for initializing the <a href="global.html#gl">gl</a> global object.</p></div>
-        
-        
-        
 <dl class="details">
     
         
@@ -357,56 +239,25 @@ visible.</p></div>
     
 </dl>
 
+    
+    
+</dd>
+
         
-        
-    
-   </div>
-    
-    
+            
+<dt>
+    <h4 class="name" id="data">data<span class="type-signature"></span></h4>
     
     
+</dt>
+<dd>
     
-    
-    
-    
-    
-    
+    <div class="description">
+        The array containing the data to be inserted into the buffer.
+    </div>
     
     
     
-    
-</article>
-
-</section>  
-
-
-
-
-
-
-<section>
-    
-<header>
-    <h2>
-    js/webglut/gl_painter.js
-    </h2>
-    
-</header>  
-
-<article>
-    <div class="container-overview hero-unit">
-    
-
-    
-
-    
-    
-    
-        
-            <div class="description"><p>Defines the module that is responsible for the drawing methods.</p></div>
-        
-        
-        
 <dl class="details">
     
         
@@ -435,56 +286,25 @@ visible.</p></div>
     
 </dl>
 
+    
+    
+</dd>
+
         
-        
-    
-   </div>
-    
-    
+            
+<dt>
+    <h4 class="name" id="itemSize">itemSize<span class="type-signature"></span></h4>
     
     
+</dt>
+<dd>
     
-    
-    
-    
-    
-    
+    <div class="description">
+        The number of entries in the array that defines an unique element.
+    </div>
     
     
     
-    
-</article>
-
-</section>  
-
-
-
-
-
-
-<section>
-    
-<header>
-    <h2>
-    js/webglut/matrices.js
-    </h2>
-    
-</header>  
-
-<article>
-    <div class="container-overview hero-unit">
-    
-
-    
-
-    
-    
-    
-        
-            <div class="description"><p>Defines the module that is responsible for the matrix operations in the canvas scene view.</p></div>
-        
-        
-        
 <dl class="details">
     
         
@@ -513,56 +333,25 @@ visible.</p></div>
     
 </dl>
 
+    
+    
+</dd>
+
         
-        
-    
-   </div>
-    
-    
+            
+<dt>
+    <h4 class="name" id="itemSize">itemSize<span class="type-signature"></span></h4>
     
     
+</dt>
+<dd>
     
-    
-    
-    
-    
-    
+    <div class="description">
+        The number of entries in the array that defines an unique element.
+    </div>
     
     
     
-    
-</article>
-
-</section>  
-
-
-
-
-
-
-<section>
-    
-<header>
-    <h2>
-    js/webglut/shaders_module.js
-    </h2>
-    
-</header>  
-
-<article>
-    <div class="container-overview hero-unit">
-    
-
-    
-
-    
-    
-    
-        
-            <div class="description"><p>Defines the module that is responsible for initializing the <a href="global.html#shaderProgram">shaderProgram</a> global object.</p></div>
-        
-        
-        
 <dl class="details">
     
         
@@ -591,10 +380,32 @@ visible.</p></div>
     
 </dl>
 
+    
+    
+</dd>
+
         
+            
+<dt>
+    <h4 class="name" id="numItems">numItems<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The number of unique elements in the array.
+    </div>
+    
+    
+    
+<dl class="details">
+    
         
     
-   </div>
+    
+    
+
     
     
     
@@ -602,6 +413,72 @@ visible.</p></div>
     
     
     
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="numItems">numItems<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The number of unique elements in the array.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
     
     
     

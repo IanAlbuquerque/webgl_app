@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/docs.css" rel="stylesheet">
+    <link href="styles/bootstrap-custom.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="header navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Documentation</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4">
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="GLArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLArrayBuffer</a></li><li><a href="GLElementArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLElementArrayBuffer</a></li><li><a href="Polinomio.html"><i class="icon-shield" style="color: #0186d1"></i> Polinomio</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Namespaces</li><li><a href="buffers.html"><i class="icon-code"></i> webglut/buffers</a></li><li><a href="gl_events.html"><i class="icon-code"></i> webglut/gl_events</a></li><li><a href="gl_module.html"><i class="icon-code"></i> webglut/gl_module</a></li><li><a href="gl_painter.html"><i class="icon-code"></i> webglut/gl_painter</a></li><li><a href="matrices.html"><i class="icon-code"></i> webglut/matrices</a></li><li><a href="shaders_module.html"><i class="icon-code"></i> webglut/shaders_module</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Global</li><li><a href="global.html#gl"><i class="icon-globe" style="color: black;"></i> gl</a></li><li><a href="global.html#shaderProgram"><i class="icon-globe" style="color: black;"></i> shaderProgram</a></li></ul></div>
+          </div>
+
+          <div class="span8">
+              <h1 class="page-header"><i class="icon-code"></i> webglut/matrices</h1>
+              
+
+
+
+<section>
+    
+<header>
+    <h2>
+    webglut/matrices
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview hero-unit">
+    
+
+    
+
+    
+    
+    
+        
+            <div class="description"><p>The module that is responsible for the matrix operations in the canvas scene view.</p></div>
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+   </div>
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl class="bs-docs-example bs-members">
+            
+<dt>
+    <h4 class="name" id="mvMatrix"><span class="label label-info">private</span> <span class="label label-info">inner</span> mvMatrix<span class="type-signature"> :Matrix</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The model view matrix. It's responsible for the positioning transformations in the scene.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mvMatrixStack"><span class="label label-info">private</span> <span class="label label-info">inner</span> mvMatrixStack<span class="type-signature"> :Array.&lt;Matrix></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The model view matrix stack.
+It's responsible for holding several model view matrices in order to deal with scenes that require multiple model view matrices.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="pMatrix"><span class="label label-info">private</span> <span class="label label-info">inner</span> pMatrix<span class="type-signature"> :Matrix</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The projection matrix. It's responsible for the projection transformations in the scene.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl class="bs-docs-example bs-methods">
+            
+<dt>
+    <h4 class="name" id="mvLoadIdentity"><span class="label label-info">inner</span> mvLoadIdentity<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Sets the current <a href="matrices.html#mvMatrix">model view matrix</a> as the identity matrix.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>Matrices.mvLoadIdentity();
+// This cube will be free of model view transformations
+drawCube();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mvPopMatrix"><span class="label label-info">inner</span> mvPopMatrix<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Deletes the current <a href="matrices.html#mvMatrix">model view matrix</a> and recovers the 
+last <a href="matrices.html#mvMatrix">model view matrix</a> from the stack, setting it as the current one.
+Is expected to be used together with the function <a href="matrices.html#mvPushMatrix">mvPushMatrix</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    <h5>Throws:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Exception</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>Matrices.mvTranslate([10,0,0]);
+// This cube will be only Translated
+drawCube();
+
+Matrices.mvPushMatrix();
+	Matrices.mvRotate(30,[0,0,1]);
+	// This cube will be Rotated and Translated
+	drawCube();
+Matrices.mvPopMatrix();	
+
+// This cube will be only Translated, exactly as the first one.
+drawCube();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mvPushMatrix"><span class="label label-info">inner</span> mvPushMatrix<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Pushes a copy of the current <a href="matrices.html#mvMatrix">model view matrix</a> into the stack, preserving it.
+Is expected to be used together with the function <a href="matrices.html#mvPopMatrix">mvPopMatrix</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>Matrices.mvTranslate([10,0,0]);
+// This cube will be only Translated
+drawCube();
+
+Matrices.mvPushMatrix();
+	Matrices.mvRotate(30,[0,0,1]);
+	// This cube will be Rotated and Translated
+	drawCube();
+Matrices.mvPopMatrix();	
+
+// This cube will be only Translated, exactly as the first one.
+drawCube();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mvRotate"><span class="label label-info">inner</span> mvRotate<span class="signature">(angle, axis)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Applies a rotation to the current <a href="matrices.html#mvMatrix">model view matrix</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">angle</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Angle, in degrees, to rotate the scene.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">axis</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Axis to be used for the rotation. Expects an array with three entries.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>Matrices.mvRotate(30,[0,1,0]);
+// This cube will rotated by 30 degrees in the y axe.
+drawCube();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mvScale"><span class="label label-info">inner</span> mvScale<span class="signature">(ratio)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Applies a scale to the current <a href="matrices.html#mvMatrix">model view matrix</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">ratio</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The (x,y,z) scale ratio of the scene. Expects an array with three entries.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>Matrices.mvScale([10,5,1]);
+// This cube will be not appear as a cube anymore. It will have it's dimentions scaled by the factor (10 times, 5 times, 1 time).
+drawCube();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mvTranslate"><span class="label label-info">inner</span> mvTranslate<span class="signature">(vector)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Applies a translation to the current <a href="matrices.html#mvMatrix">model view matrix</a>.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">vector</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The (x,y,z) vector to translate the scene. Expects an array with three entries.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>Matrices.mvTranslate([10,5,1]);
+// This cube will be only translated according to the vector (10,5,1)
+drawCube();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="pLoadIdentity"><span class="label label-info">inner</span> pLoadIdentity<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Sets the current <a href="matrices.html#pMatrix">projection matrix</a> as the identity matrix.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>Matrices.pLoadIdentity();
+// This cube will be free of projection transformations
+drawCube();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="pOrtho"><span class="label label-info">inner</span> pOrtho<span class="signature">(left, right, bottom, top, near, far)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Sets the current <a href="matrices.html#pMatrix">projection matrix</a> as a ortographic projection. Usually used for two dimentional drawings.
+Further objects will appear as big as close objects.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">left</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The left bound of the points of the scene.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">right</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The right bound of the points of the scene.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">bottom</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The bottom bound of the points of the scene.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">top</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The top bound of the points of the scene.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">near</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">How close objects will be rendered.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">far</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">How far objects will be rendered.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>GLModule.initialize(canvas);
+ShadersModule.initialize();
+
+gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+// Used to define the projection of a scene that draws in the XY plane in the interval given by the product [-10,10] x [-10,10]
+Matrices.pOrtho(-10,10,-10,10,-1,1);
+
+Events.setDisplayFunction(display);
+Events.setLoopFunction(loop);
+Events.initialize();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="pSetPerspective"><span class="label label-info">inner</span> pSetPerspective<span class="signature">(fovy, aspect, near, far)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Sets the current <a href="matrices.html#pMatrix">projection matrix</a> as a three dimentional perspective projection, given the necessary parameters.
+Further objects will appear smaller than close objects.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">fovy</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The fovy aspect of the projection. (The opening angle of view).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">aspect</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The aspect ratio of the projection. (The ratio between the view port width and height).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">near</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">How close objects will be rendered.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">far</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">How far objects will be rendered.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>GLModule.initialize(canvas);
+ShadersModule.initialize();
+
+gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+// Defines the perspective of the scene
+Matrices.pSetPerspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0);
+
+Events.setDisplayFunction(display);
+Events.setLoopFunction(loop);
+Events.initialize();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="setMatrixUniforms"><span class="label label-info">inner</span> setMatrixUniforms<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Loads the <a href="matrices.html#mvMatrix">model view matrix</a> and the <a href="matrices.html#pMatrix">projection matrix</a>.
+into the scene related to the <a href="global.html#gl">gl</a> global object.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Implementation of the drawVerticesColor3d function
+var drawVerticesColor3d = function(primitive,vertices,colors,numVertices)
+{
+	var vertexPositionBuffer = new Buffers.GLArrayBuffer(vertices,3,numVertices);
+	var vertexColorBuffer = new Buffers.GLArrayBuffer(colors,4,numVertices);
+
+	gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer.content);
+	gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+	gl.bindBuffer(gl.ARRAY_BUFFER, vertexColorBuffer.content);
+	gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, vertexColorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+	// Loads the model view and projection matrices and draws the vertices given
+	Matrices.setMatrixUniforms(gl,shaderProgram);
+	gl.drawArrays(primitive, 0, numVertices);
+}</code></pre>
+
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+          </div>
+      </div>
+
+        <br clear="both">
+
+      <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon May 12 2014 20:43:23 GMT-0300 (BRT)
+        <br>
+      </footer>
+      <script> prettyPrint(); </script>
+    </div>
+  </body>
+</html>

@@ -1,2 +1,2 @@
-jsdoc/jsdoc -p index.html js/* -t jsdoc/templates/bootstrap
+jsdoc/jsdoc -p index.html js/* js/app/* -t jsdoc/templates/bootstrap
 

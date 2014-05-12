@@ -2,8 +2,9 @@ define(['webglut/gl_module',
 	'webglut/shaders_module',
 	'webglut/gl_painter',
 	'webglut/matrices',
-	'webglut/events'],
-function(GLModule,ShadersModule,GLPainter,Matrices,Events){
+	'webglut/events',
+	'elements/polinomios'],
+function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio){
 	
 	var f = function(x)
 	{
@@ -53,7 +54,6 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events){
 	
 	var display = function()
 	{
-
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
         	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -65,7 +65,6 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events){
 	
 	var loop = function(timeElapsed)
 	{
-
 	}
 	
 	var initialize = function(canvas)
