@@ -50,7 +50,7 @@
 		Function f(x) to be drawn: f(x)=
 		
 		<input type="text" name="function" value="Math.sin(1/x)*x" placeholder="ex: Math.sin(1/x)*x" id="functionValue"/>
-		<input type="submit" value="Draw" id="functionSubmit"/>
+		<input type="submit" value="Draw Function" id="functionSubmit"/>
 		
 		<br/>
 		
@@ -58,11 +58,32 @@
 		
 		<br/>
 		
+		
+		<hr/>
+		
+		Implicit curve C(x,y) to be drawn:
+		
+		<input type="text" name="function" value="x*x+y*y" placeholder="ex: x*x+y*y" id="implicitCurveValue"/>
+		= 0
+		<input type="submit" value="Draw Implicit Curve" id="implicitCurveSubmit"/>
+		
+		<br/>
+		
+		Use x and y only to describe the curve. Use Math.cos(x),Math.sin(x),Math.exp(x),Math.PI for the cos,sin,exp functions and the PI value.
+		
+		<br/>
+		
+		<hr/>
+		Options:
+		
+		<input type="submit" value="Reset Image Position" id="resetDrawing"/>
+		
 		<hr/>
 		
 		<canvas id="main-canvas" style="border: none;" width="500" height="500"></canvas>
 		<br/>
-		Use your mouse to interact.
+		Use your mouse to drag the image. Scroll to zoom in/out.
+		<br/>
 		
 		<hr/>
 		

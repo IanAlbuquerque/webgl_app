@@ -28,5 +28,7 @@ requirejs(['app/app','libs/webgl','libs/glMatrix'], function (App) {
 	}
 	
 	document.getElementById("functionSubmit").onclick = App.updateFunction;
+	document.getElementById("implicitCurveSubmit").onclick = App.updateImplicitCurve;
+	document.getElementById("resetDrawing").onclick = App.resetScreenButton;
 	
 });

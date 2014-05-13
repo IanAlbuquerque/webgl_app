@@ -4,21 +4,42 @@ define(['webglut/gl_module',
 	'webglut/matrices',
 	'webglut/events',
 	'elements/polinomios',
-	'elements/functionR2'],
-function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
+	'elements/functionR2',
+	'elements/implicitCurve'],
+function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2,ImplicitCurve){
 
-	var screen = [];
-	screen.left = -1;
-	screen.right = 1;
-	screen.top = 1;
-	screen.bottom = -1;
+
+	var resetScreenButton = function()
+	{
+		resetScreen();
+		Events.postRedisplay();
+	}	
 	
-	var myFunction = new FunctionR2(screen.left,screen.right,400,"Math.sin(1/x)*x");
+	var resetScreen = function()
+	{
+		screen.left = -1;
+		screen.right = 1;
+		screen.top = 1;
+		screen.bottom = -1;
+	}
+	
+	var screen = [];
+	resetScreen();
+	
+	var myFunction = new FunctionR2(screen.left,screen.right,500,"Math.sin(1/x)*x");
+	var myCurve = new ImplicitCurve(screen.left,screen.right,screen.bottom,screen.top,20,"x*x+y*y");
 	
 	var updateFunction = function()
 	{
 		var functionText = document.getElementById("functionValue").value;
 		myFunction.setF(functionText);
+		Events.postRedisplay();
+	};
+	
+	var updateFunction = function()
+	{
+		var equationText = document.getElementById("implicitCurveValue").value;
+		myCurve.setEquation(equationText);
 		Events.postRedisplay();
 	};
 	
@@ -40,6 +61,11 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		var ystart = Math.floor(screen.bottom/delta)*delta;
 		var yend = Math.floor(screen.top/delta)*delta;
 		GLPainter.begin(gl.LINES);
+		
+		// To avoid computing a grid that won't be visible
+		if((xend - xstart)/delta > 500) return;
+		if((yend - ystart)/delta > 500) return;
+		
 		for(var x=xstart;x<=xend;x+=delta)
 		{
 			GLPainter.vertex2d(x,screen.bottom);
@@ -77,6 +103,12 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 			
 			myFunction.setDomain(screen.left,screen.right);
 			myFunction.draw();
+					
+			GLPainter.setDrawColor([1,0,0,1]);
+			
+			myCurve.setDomain(screen.left,screen.right,screen.bottom,screen.top);
+			myCurve.draw();
+		
 		
 		Matrices.mvPopMatrix();	
 	}
@@ -109,7 +141,6 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	var newX = 0;
 	var newY = 0;
 	var mouseDown = false;
-	var scale = 1;
 	function handleMouseDown(event)
 	{
 		mouseDown = true;
@@ -151,15 +182,13 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	
 	function handleKeyDown(event)
 	{
-		if(event.keyCode == 37) 
+		/* Press R to reset
+		if(event.keyCode == 82) 
 		{
-			scale *= 1.1;
-		}
-		else if(event.keyCode == 39)
-		{
-			scale *= 0.9;
+			resetScreen();
 		}
 		Events.postRedisplay();
+		*/
 	}
 	
 	function handleMouseScroll(event)
@@ -211,6 +240,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 
 	return{
 		initialize: initialize,
-		updateFunction : updateFunction
+		updateFunction : updateFunction,
+		resetScreenButton : resetScreenButton
 	};
 });
