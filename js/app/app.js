@@ -7,7 +7,13 @@ define(['webglut/gl_module',
 	'elements/functionR2'],
 function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 
-	var myFunction = new FunctionR2(-1,1,400,"Math.sin(x*100)*x");
+	var screen = [];
+	screen.left = -1;
+	screen.right = 1;
+	screen.top = 1;
+	screen.bottom = -1;
+	
+	var myFunction = new FunctionR2(screen.left,screen.right,400,"Math.sin(1/x)*x");
 	
 	var updateFunction = function()
 	{
@@ -20,11 +26,33 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	{
 		// X Axe
 		GLPainter.setDrawColor([0,1,0,1]);
-		GLPainter.drawVertices2d(gl.LINES,[-1,0,1,0],2);
+		GLPainter.drawVertices2d(gl.LINES,[screen.left,0,screen.right,0],2);
 		
 		//Y Axe
 		GLPainter.setDrawColor([0,0,1,1]);
-		GLPainter.drawVertices2d(gl.LINES,[0,-1,0,1],2);
+		GLPainter.drawVertices2d(gl.LINES,[0,screen.bottom,0,screen.top],2);
+	}
+	
+	var drawGrid = function(delta)
+	{
+		var xstart = Math.floor(screen.left/delta)*delta;
+		var xend = Math.floor(screen.right/delta)*delta;
+		var ystart = Math.floor(screen.bottom/delta)*delta;
+		var yend = Math.floor(screen.top/delta)*delta;
+		GLPainter.begin(gl.LINES);
+		for(var x=xstart;x<=xend;x+=delta)
+		{
+			GLPainter.vertex2d(x,screen.bottom);
+			GLPainter.vertex2d(x,screen.top);
+		}
+		
+		for(var y=ystart;y<=yend;y+=delta)
+		{
+			GLPainter.vertex2d(screen.left,y);
+			GLPainter.vertex2d(screen.right,y);
+		}
+		
+		GLPainter.end();
 	}
 	
 	var display = function()
@@ -32,25 +60,25 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
         	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
+		Matrices.pOrtho(screen.left,screen.right,screen.bottom,screen.top,-1,1);
 		Matrices.mvLoadIdentity();
 			
 		Matrices.mvPushMatrix();
-			Matrices.mvScale([scale,scale,scale]);
-			Matrices.mvTranslate(translation);
 		
+			GLPainter.setDrawColor([0.2,0.2,0.2,1]);
+			drawGrid(0.1);
+			GLPainter.setDrawColor([0.3,0.3,0.3,1]);
+			drawGrid(0.5);
+			GLPainter.setDrawColor([0.5,0.5,0.5,1]);
+			drawGrid(1);
 			drawAxis();
 		
 			GLPainter.setDrawColor([1,0,1,1]);
+			
+			myFunction.setDomain(screen.left,screen.right);
 			myFunction.draw();
 		
-		Matrices.mvPopMatrix();
-		
-		if(mouseDown)
-		{
-			GLPainter.setDrawColor([1,0,0,1]);
-			GLPainter.drawVertices2d(gl.LINES,[convertXToScreen(lastMouseX),convertYToScreen(lastMouseY),convertXToScreen(newX),convertYToScreen(newY)],2);
-		}
-		
+		Matrices.mvPopMatrix();	
 	}
 	
 	var translation = [0,0,0];
@@ -69,11 +97,11 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	}
 	function convertXToScreen(x)
 	{
-		return convertXToScreenPercentage(x)*2-1;
+		return convertXToScreenPercentage(x)*(screen.right-screen.left)-screen.left;
 	}
 	function convertYToScreen(y)
 	{
-		return -(convertYToScreenPercentage(y)*2-1);
+		return -(convertYToScreenPercentage(y)*(screen.top-screen.bottom)-screen.bottom);
 	}
 	
 	var lastMouseX = 0;
@@ -95,20 +123,6 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	function handleMouseUp(event)
 	{
 		mouseDown = false;
-
-		newX = event.pageX;
-		newY = event.pageY;
-
-		var deltaX = convertXToScreen(newX) - convertXToScreen(lastMouseX);
-		translation[0] += deltaX/scale;
-
-		var deltaY = convertYToScreen(newY) - convertYToScreen(lastMouseY);
-		translation[1] += deltaY/scale;
-
-		lastMouseX = newX
-		lastMouseY = newY;
-		
-		Events.postRedisplay();
 	}
 
 	function handleMouseMove(event)
@@ -117,9 +131,20 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		{
 			return;
 		}
-		
+
 		newX = event.pageX;
 		newY = event.pageY;
+
+		var deltaX = convertXToScreen(newX) - convertXToScreen(lastMouseX);
+		screen.left -= deltaX;
+		screen.right -= deltaX;
+
+		var deltaY = convertYToScreen(newY) - convertYToScreen(lastMouseY);
+		screen.top -= deltaY;
+		screen.bottom -= deltaY;
+
+		lastMouseX = newX;
+		lastMouseY = newY;
 		
 		Events.postRedisplay();
 	}
@@ -140,8 +165,22 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	function handleMouseScroll(event)
 	{	
 	
-		var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
-		scale *= 1+(delta/10);
+		var scrollInfo = event.wheelDelta || -event.detail;
+		var delta = 0;
+		if(scrollInfo < 0) delta = -1;
+		if(scrollInfo > 0) delta = 1;
+		
+		var screenScale = delta/10;
+		var screenXGrowth = (screenScale)*(screen.right - screen.left);
+		var screenYGrowth = (screenScale)*(screen.top - screen.bottom);
+		var deltaX = screenXGrowth/2.0;
+		var deltaY = screenYGrowth/2.0;
+		screen.left += deltaX;
+		screen.right -= deltaX;
+		
+		screen.bottom += deltaY;
+		screen.top -= deltaY;
+		
 		Events.postRedisplay();
 	}
 	
@@ -151,7 +190,6 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		ShadersModule.initialize();
 
 		gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-		Matrices.pOrtho(-1,1,-1,1,-1,1);
 		
 		Events.setDisplayFunction(display);
 		Events.setLoopFunction(loop);

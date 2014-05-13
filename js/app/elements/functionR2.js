@@ -93,6 +93,18 @@ function(GLPainter){
 		{
 			this.fOfX = _fOfX;
 		}
+	
+		/**
+		* Sets domain of the function.
+		* @param {number} xMin The left bound of the domain.
+		* @param {number} xMax The right bound of the domain.
+		* @public
+		*/
+		this.setDomain = function(_xMin,_xMax)
+		{
+			this.xMin = _xMin;
+			this.xMax = _xMax;
+		}
 
 	}
 
