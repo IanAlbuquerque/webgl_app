@@ -11,7 +11,7 @@ function(GLPainter){
 	* @class FunctionR2
 	* @example
 	*	// Function sin(x).
-	*	var myFunction = new Polinomio(-1,1,500,"Math.sin(x)");
+	*	var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
 	*	// Draws the function.
 	*	myFunction.draw();
 	**/
@@ -53,7 +53,7 @@ function(GLPainter){
 		*/
 		this.f = function(x)
 		{
-			return eval(fOfX);
+			return eval(this.fOfX);
 		}
 	
 		/**
@@ -61,7 +61,7 @@ function(GLPainter){
 		* @public
 		* @example
 		*	// Function sin(x).
-		*	var myFunction = new Polinomio(-1,1,500,"Math.sin(x)");
+		*	var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
 		*	// Draws the function.
 		*	myFunction.draw();
 		*
@@ -82,6 +82,16 @@ function(GLPainter){
 				x+=dx;
 			}
 			GLPainter.end();
+		}
+	
+		/**
+		* Sets the string that will be evaluated as f(x).
+		* @param {string} fOfX A string containing the script that is evaluated as f(x). The x variable must be used.
+		* @public
+		*/
+		this.setF = function(_fOfX)
+		{
+			this.fOfX = _fOfX;
 		}
 
 	}

@@ -3,43 +3,18 @@ define(['webglut/gl_module',
 	'webglut/gl_painter',
 	'webglut/matrices',
 	'webglut/events',
-	'elements/polinomios'],
-function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio){
-	
-	var f = function(x)
-	{
-		return x*x*x;
-	}
+	'elements/polinomios',
+	'elements/functionR2'],
+function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
+
+	var myFunction = new FunctionR2(-1,1,400,"Math.sin(x*100)*x");
 	
 	var updateFunction = function()
 	{
 		var functionText = document.getElementById("functionValue").value;
-		f = function(x)
-		{
-			return eval(functionText);
-		}
+		myFunction.setF(functionText);
 		Events.postRedisplay();
 	};
-
-	var drawFunction = function()
-	{
-		var numPontos = 1000;
-		var xMin = -1;
-		var xMax = 1;
-		var dx;
-		var x,y;
-		dx = (xMax-xMin)/numPontos;
-		x=xMin;
-		GLPainter.setDrawColor([1,0,0,1]);
-		GLPainter.begin(gl.LINE_STRIP);
-		for(var i=0;i<numPontos;i++)
-		{
-			y=f(x);
-			GLPainter.vertex2d(x,y);
-			x+=dx;
-		}
-		GLPainter.end();
-	}
 	
 	var drawAxis = function()
 	{
@@ -58,13 +33,86 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio){
         	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 		Matrices.mvLoadIdentity();
+		Matrices.mvTranslate(translation);
 		
 		drawAxis();
-		drawFunction();
+		
+		GLPainter.setDrawColor([1,0,1,1]);
+		myFunction.draw();
+		
+		if(mouseDown)
+		{
+			GLPainter.setDrawColor([1,0,0,1]);
+			GLPainter.drawVertices2d(gl.LINES,[convertXToScreen(lastMouseX),convertYToScreen(lastMouseY),convertXToScreen(newX),convertYToScreen(newY)],2);
+		}
 	}
 	
+	var translation = [0,0,0];
 	var loop = function(timeElapsed)
 	{
+	
+	}
+	
+	function convertXToScreenPercentage(x)
+	{
+		return (x-gl.viewPortLeft)/(gl.viewPortRight - gl.viewPortLeft);
+	}
+	function convertYToScreenPercentage(y)
+	{
+		return (y - gl.viewPortTop)/(gl.viewPortBottom - gl.viewPortTop);
+	}
+	function convertXToScreen(x)
+	{
+		return convertXToScreenPercentage(x)*2-1;
+	}
+	function convertYToScreen(y)
+	{
+		return -(convertYToScreenPercentage(y)*2-1);
+	}
+	
+	var lastMouseX = 0;
+	var lastMouseY = 0;
+	var newX = 0;
+	var newY = 0;
+	var mouseDown = false;
+	function handleMouseDown(event)
+	{
+		mouseDown = true;
+		lastMouseX = event.clientX;
+		lastMouseY = event.clientY;
+		Events.postRedisplay();
+	}
+
+	function handleMouseUp(event)
+	{
+		mouseDown = false;
+		
+		newX = event.clientX;
+		newY = event.clientY;
+
+		var deltaX = convertXToScreen(newX) - convertXToScreen(lastMouseX);
+		translation[0] = deltaX;
+
+		var deltaY = convertYToScreen(newY) - convertYToScreen(lastMouseY);
+		translation[1] = deltaY;
+
+		lastMouseX = newX
+		lastMouseY = newY;
+		
+		Events.postRedisplay();
+	}
+
+	function handleMouseMove(event)
+	{
+		if (!mouseDown)
+		{
+			return;
+		}
+		
+		newX = event.clientX;
+		newY = event.clientY;
+		
+		Events.postRedisplay();
 	}
 	
 	var initialize = function(canvas)
@@ -77,7 +125,16 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio){
 		
 		Events.setDisplayFunction(display);
 		Events.setLoopFunction(loop);
-		Events.initialize();	
+		Events.initialize();
+		
+		//alert(gl.viewPortTop);	
+		//alert(gl.viewPortBottom);
+		//alert(gl.viewPortLeft);
+		//alert(gl.viewPortRight);
+		
+		canvas.onmousedown = handleMouseDown;
+		document.onmouseup = handleMouseUp;
+		document.onmousemove = handleMouseMove;
 	}
 
 	return{

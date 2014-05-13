@@ -4,7 +4,7 @@
 */
 
 /**
-* The module hat is responsible for creating gl buffers.
+* The module that is responsible for creating gl buffers.
 * @namespace webglut/buffers
 */
 

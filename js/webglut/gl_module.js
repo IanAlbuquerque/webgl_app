@@ -36,6 +36,13 @@ function()
 			gl = canvas.getContext("webgl");
 			gl.viewportWidth = canvas.width;
 			gl.viewportHeight = canvas.height;
+			
+			var canvasRectangle = canvas.getBoundingClientRect();
+			
+			gl.viewPortTop = canvasRectangle.top;
+			gl.viewPortBottom = canvasRectangle.bottom;
+			gl.viewPortLeft = canvasRectangle.left;
+			gl.viewPortRight = canvasRectangle.right;
 		} 
 		catch (exception) 
 		{

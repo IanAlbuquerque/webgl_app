@@ -32,7 +32,7 @@
           </div>
 
           <div class="span8">
-              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> Polinomio</h1>
+              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> FunctionR2</h1>
               
 
 
@@ -41,7 +41,7 @@
     
 <header>
     <h2>
-    Polinomio
+    FunctionR2
     </h2>
     
 </header>  
@@ -57,7 +57,7 @@
     
         
 <dt>
-    <h4 class="name" id="Polinomio">new Polinomio<span class="signature">(xMin, xMax, numPontos, coefficients)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="FunctionR2">new FunctionR2<span class="signature">(xMin, xMax, numPontos, fOfX)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -66,7 +66,7 @@
     
     <div class="description">
         <p>
-        A polinomio.
+        A function defined from R to R.
         </p>
     </div>
     
@@ -170,13 +170,13 @@
 
         <tr>
             
-                <td class="name">coefficients</td>
+                <td class="name">fOfX</td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;number></span>
+<span class="param-type">string</span>
 
 
             
@@ -186,7 +186,7 @@
 
             
 
-            <td class="description last">An array containing the coefficients of the polinomio. The entry coefficients[i] corresponds to the coefficient of x^i.</td>
+            <td class="description last">A string containing the script that is evaluated as f(x). The x variable must be used.</td>
         </tr>
 
 	
@@ -238,12 +238,10 @@
     
         <h5>Example</h5>
         
-    <pre class="prettyprint"><code>// Polinomio x^2.
-var myPolinomio = new Polinomio(-1,1,500,[0,0,1]);
-// Draws the polinomio.
-myPolinomio.draw();
-// Draws 2*x, the derivative of the polinomio
-myPolinomio.derivative().draw();</code></pre>
+    <pre class="prettyprint"><code>// Function sin(x).
+var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
+// Draws the function.
+myFunction.draw();</code></pre>
 
     
 </dd>
@@ -263,7 +261,7 @@ myPolinomio.derivative().draw();</code></pre>
         <dl class="bs-docs-example bs-members">
             
 <dt>
-    <h4 class="name" id="coefficients">coefficients<span class="type-signature"></span></h4>
+    <h4 class="name" id="fOfX">fOfX<span class="type-signature"></span></h4>
     
     
 </dt>
@@ -463,100 +461,6 @@ myPolinomio.derivative().draw();</code></pre>
         <dl class="bs-docs-example bs-methods">
             
 <dt>
-    <h4 class="name" id="derivative">derivative<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Polinomio.html">Polinomio</a>}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Creates the derivative of the polinomio.
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            <div class="returns">
-
-
-    
-<span class="param-type"><a href="Polinomio.html">Polinomio</a></span>
-
-
-
-
-<span class="param-desc">
-    The derivative of the polinomio.
-</span>
-
-</div>
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>// Polinomio x^2.
-var myPolinomio = new Polinomio(-1,1,500,[0,0,1]);
-// Draws the polinomio.
-myPolinomio.draw();
-// Draws 2*x, the derivative of the polinomio
-myPolinomio.derivative().draw();</code></pre>
-
-    
-</dd>
-
-        
-            
-<dt>
     <h4 class="name" id="draw">draw<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
@@ -566,7 +470,7 @@ myPolinomio.derivative().draw();</code></pre>
     
     <div class="description">
         <p>
-        Draws the polinomio in the plane XY. Uses the color red for the drawing.
+        Draws the function in the plane XY.
         </p>
     </div>
     
@@ -620,10 +524,10 @@ myPolinomio.derivative().draw();</code></pre>
     
         <h5>Example</h5>
         
-    <pre class="prettyprint"><code>// Polinomio x^2.
-var myPolinomio = new Polinomio(-1,1,500,[0,0,1]);
-// Draws the polinomio.
-myPolinomio.draw();</code></pre>
+    <pre class="prettyprint"><code>// Function sin(x).
+var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
+// Draws the function.
+myFunction.draw();</code></pre>
 
     
 </dd>
@@ -640,7 +544,7 @@ myPolinomio.draw();</code></pre>
     
     <div class="description">
         <p>
-        Returns the polinomio evaluted in a point in domain.
+        Returns the function evaluted in a point in domain.
         </p>
     </div>
     
@@ -691,7 +595,122 @@ myPolinomio.draw();</code></pre>
 
             
 
-            <td class="description last">The point in the domain to evaluate the value of the polinomio.</td>
+            <td class="description last">The point in the domain to evaluate the value of the function.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="setF">setF<span class="signature">(fOfX)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Sets the string that will be evaluated as f(x).
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">fOfX</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A string containing the script that is evaluated as f(x). The x variable must be used.</td>
         </tr>
 
 	
