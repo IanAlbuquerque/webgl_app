@@ -35,6 +35,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		Matrices.mvLoadIdentity();
 			
 		Matrices.mvPushMatrix();
+			Matrices.mvScale([scale,scale,scale]);
 			Matrices.mvTranslate(translation);
 		
 			drawAxis();
@@ -80,11 +81,12 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	var newX = 0;
 	var newY = 0;
 	var mouseDown = false;
+	var scale = 1;
 	function handleMouseDown(event)
 	{
 		mouseDown = true;
-		lastMouseX = event.clientX;
-		lastMouseY = event.clientY;
+		lastMouseX = event.pageX;
+		lastMouseY = event.pageY;
 		newX = lastMouseX;
 		newY = lastMouseY;
 		Events.postRedisplay();
@@ -93,15 +95,15 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	function handleMouseUp(event)
 	{
 		mouseDown = false;
-		
-		newX = event.clientX;
-		newY = event.clientY;
+
+		newX = event.pageX;
+		newY = event.pageY;
 
 		var deltaX = convertXToScreen(newX) - convertXToScreen(lastMouseX);
-		translation[0] += deltaX;
+		translation[0] += deltaX/scale;
 
 		var deltaY = convertYToScreen(newY) - convertYToScreen(lastMouseY);
-		translation[1] += deltaY;
+		translation[1] += deltaY/scale;
 
 		lastMouseX = newX
 		lastMouseY = newY;
@@ -116,9 +118,30 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 			return;
 		}
 		
-		newX = event.clientX;
-		newY = event.clientY;
+		newX = event.pageX;
+		newY = event.pageY;
 		
+		Events.postRedisplay();
+	}
+	
+	function handleKeyDown(event)
+	{
+		if(event.keyCode == 37) 
+		{
+			scale *= 1.1;
+		}
+		else if(event.keyCode == 39)
+		{
+			scale *= 0.9;
+		}
+		Events.postRedisplay();
+	}
+	
+	function handleMouseScroll(event)
+	{	
+	
+		var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+		scale *= 1+(delta/10);
 		Events.postRedisplay();
 	}
 	
@@ -142,10 +165,10 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		canvas.onmousedown = handleMouseDown;
 		document.onmouseup = handleMouseUp;
 		document.onmousemove = handleMouseMove;
+		document.addEventListener('keydown', handleKeyDown);
 		
-		canvas.touchstart = handleMouseDown;
-		document.touchmove = handleMouseUp;
-		document.touchend = handleMouseMove;
+		document.onmousewheel = handleMouseScroll;
+    		document.addEventListener('DOMMouseScroll',handleMouseScroll,false);
 	}
 
 	return{
