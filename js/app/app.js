@@ -142,6 +142,10 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		canvas.onmousedown = handleMouseDown;
 		document.onmouseup = handleMouseUp;
 		document.onmousemove = handleMouseMove;
+		
+		canvas.touchstart = handleMouseDown;
+		document.touchmove = handleMouseUp;
+		document.touchend = handleMouseMove;
 	}
 
 	return{
