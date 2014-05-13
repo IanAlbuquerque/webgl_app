@@ -33,18 +33,23 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
         	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 		Matrices.mvLoadIdentity();
-		Matrices.mvTranslate(translation);
+			
+		Matrices.mvPushMatrix();
+			Matrices.mvTranslate(translation);
 		
-		drawAxis();
+			drawAxis();
 		
-		GLPainter.setDrawColor([1,0,1,1]);
-		myFunction.draw();
+			GLPainter.setDrawColor([1,0,1,1]);
+			myFunction.draw();
+		
+		Matrices.mvPopMatrix();
 		
 		if(mouseDown)
 		{
 			GLPainter.setDrawColor([1,0,0,1]);
 			GLPainter.drawVertices2d(gl.LINES,[convertXToScreen(lastMouseX),convertYToScreen(lastMouseY),convertXToScreen(newX),convertYToScreen(newY)],2);
 		}
+		
 	}
 	
 	var translation = [0,0,0];
@@ -59,7 +64,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 	}
 	function convertYToScreenPercentage(y)
 	{
-		return (y - gl.viewPortTop)/(gl.viewPortBottom - gl.viewPortTop);
+		return (y-gl.viewPortTop)/(gl.viewPortBottom - gl.viewPortTop);
 	}
 	function convertXToScreen(x)
 	{
@@ -80,6 +85,8 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		mouseDown = true;
 		lastMouseX = event.clientX;
 		lastMouseY = event.clientY;
+		newX = lastMouseX;
+		newY = lastMouseY;
 		Events.postRedisplay();
 	}
 
@@ -91,10 +98,10 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2){
 		newY = event.clientY;
 
 		var deltaX = convertXToScreen(newX) - convertXToScreen(lastMouseX);
-		translation[0] = deltaX;
+		translation[0] += deltaX;
 
 		var deltaY = convertYToScreen(newY) - convertYToScreen(lastMouseY);
-		translation[1] = deltaY;
+		translation[1] += deltaY;
 
 		lastMouseX = newX
 		lastMouseY = newY;
