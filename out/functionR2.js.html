@@ -28,7 +28,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
           <div class="span4">
-              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="GLArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLArrayBuffer</a></li><li><a href="GLElementArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLElementArrayBuffer</a></li><li><a href="Polinomio.html"><i class="icon-shield" style="color: #0186d1"></i> Polinomio</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Namespaces</li><li><a href="buffers.html"><i class="icon-code"></i> webglut/buffers</a></li><li><a href="gl_events.html"><i class="icon-code"></i> webglut/gl_events</a></li><li><a href="gl_module.html"><i class="icon-code"></i> webglut/gl_module</a></li><li><a href="gl_painter.html"><i class="icon-code"></i> webglut/gl_painter</a></li><li><a href="matrices.html"><i class="icon-code"></i> webglut/matrices</a></li><li><a href="shaders_module.html"><i class="icon-code"></i> webglut/shaders_module</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Global</li><li><a href="global.html#gl"><i class="icon-globe" style="color: black;"></i> gl</a></li><li><a href="global.html#shaderProgram"><i class="icon-globe" style="color: black;"></i> shaderProgram</a></li></ul></div>
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="GLArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLArrayBuffer</a></li><li><a href="GLElementArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLElementArrayBuffer</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="Polinomio.html"><i class="icon-shield" style="color: #0186d1"></i> Polinomio</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Namespaces</li><li><a href="buffers.html"><i class="icon-code"></i> webglut/buffers</a></li><li><a href="gl_events.html"><i class="icon-code"></i> webglut/gl_events</a></li><li><a href="gl_module.html"><i class="icon-code"></i> webglut/gl_module</a></li><li><a href="gl_painter.html"><i class="icon-code"></i> webglut/gl_painter</a></li><li><a href="matrices.html"><i class="icon-code"></i> webglut/matrices</a></li><li><a href="shaders_module.html"><i class="icon-code"></i> webglut/shaders_module</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Global</li><li><a href="global.html#gl"><i class="icon-globe" style="color: black;"></i> gl</a></li><li><a href="global.html#shaderProgram"><i class="icon-globe" style="color: black;"></i> shaderProgram</a></li></ul></div>
           </div>
 
           <div class="span8">
@@ -39,9 +39,9 @@
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define(['webglut/gl_painter'],
+            <pre class="prettyprint source"><code>define(
 /** @lends FunctionR2 */
-function(GLPainter){
+function(){
 	
 	/**
 	* A function defined from R to R.
@@ -90,6 +90,7 @@ function(GLPainter){
 		/**
 		* Returns the function evaluted in a point in domain.
 		* @param {number} x The point in the domain to evaluate the value of the function.
+		* @return {number} The value f(x)
 		* @public
 		*/
 		this.f = function(x)
@@ -99,30 +100,29 @@ function(GLPainter){
 	
 		/**
 		* Draws the function in the plane XY.
+		* @returns {number[]} The list of points that represents the drawing. Every two entries represents the x and y informations of a point. 
+		* The drawing should be made using gl.LINE_STRIP.
 		* @public
-		* @example
-		*	// Function sin(x).
-		*	var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
-		*	// Draws the function.
-		*	myFunction.draw();
-		*
 		*/
-		this.draw = function()
+		this.calculateDrawingPoints = function()
 		{
+			var points = [];
 			var dx;
 			var x,y;
 			
 			dx = (this.xMax-this.xMin)/this.numPontos;
 			
 			x=this.xMin;
-			GLPainter.begin(gl.LINE_STRIP);
 			for(var i=0;i&lt;this.numPontos;i++)
 			{
 				y=this.f(x);
-				GLPainter.vertex2d(x,y);
+
+				points.push(x);
+				points.push(y);
+				
 				x+=dx;
 			}
-			GLPainter.end();
+			return points;
 		}
 	
 		/**
@@ -133,6 +133,18 @@ function(GLPainter){
 		this.setF = function(_fOfX)
 		{
 			this.fOfX = _fOfX;
+		}
+	
+		/**
+		* Sets domain of the function.
+		* @param {number} xMin The left bound of the domain.
+		* @param {number} xMax The right bound of the domain.
+		* @public
+		*/
+		this.setDomain = function(_xMin,_xMax)
+		{
+			this.xMin = _xMin;
+			this.xMax = _xMax;
 		}
 
 	}
@@ -152,7 +164,7 @@ function(GLPainter){
         <br clear="both">
 
       <footer>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon May 12 2014 21:39:50 GMT-0300 (BRT)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed May 14 2014 18:34:38 GMT-0300 (BRT)
         <br>
       </footer>
       <script> prettyPrint(); </script>

@@ -1,6 +1,6 @@
-define(['webglut/gl_painter'],
+define(
 /** @lends FunctionR2 */
-function(GLPainter){
+function(){
 	
 	/**
 	* A function defined from R to R.
@@ -49,6 +49,7 @@ function(GLPainter){
 		/**
 		* Returns the function evaluted in a point in domain.
 		* @param {number} x The point in the domain to evaluate the value of the function.
+		* @return {number} The value f(x)
 		* @public
 		*/
 		this.f = function(x)
@@ -58,30 +59,29 @@ function(GLPainter){
 	
 		/**
 		* Draws the function in the plane XY.
+		* @returns {number[]} The list of points that represents the drawing. Every two entries represents the x and y informations of a point. 
+		* The drawing should be made using gl.LINE_STRIP.
 		* @public
-		* @example
-		*	// Function sin(x).
-		*	var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
-		*	// Draws the function.
-		*	myFunction.draw();
-		*
 		*/
-		this.draw = function()
+		this.calculateDrawingPoints = function()
 		{
+			var points = [];
 			var dx;
 			var x,y;
 			
 			dx = (this.xMax-this.xMin)/this.numPontos;
 			
 			x=this.xMin;
-			GLPainter.begin(gl.LINE_STRIP);
 			for(var i=0;i<this.numPontos;i++)
 			{
 				y=this.f(x);
-				GLPainter.vertex2d(x,y);
+
+				points.push(x);
+				points.push(y);
+				
 				x+=dx;
 			}
-			GLPainter.end();
+			return points;
 		}
 	
 		/**

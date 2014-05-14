@@ -54,6 +54,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2,I
 		GLPainter.drawVertices2d(gl.LINES,[0,screen.bottom,0,screen.top],2);
 	}
 	
+	/* Draws grid with cell spacing equal to delta */
 	var drawGrid = function(delta)
 	{
 		var xstart = Math.floor(screen.left/delta)*delta;
@@ -62,7 +63,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2,I
 		var yend = Math.floor(screen.top/delta)*delta;
 		GLPainter.begin(gl.LINES);
 		
-		// To avoid computing a grid that won't be visible
+		// To avoid computing a grid that won't be visible, do nothing if too many cells are requested
 		if((xend - xstart)/delta > 500) return;
 		if((yend - ystart)/delta > 500) return;
 		
@@ -97,17 +98,20 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2,I
 			drawGrid(0.5);
 			GLPainter.setDrawColor([0.5,0.5,0.5,1]);
 			drawGrid(1);
+			
 			drawAxis();
 		
-			GLPainter.setDrawColor([1,0,1,1]);
 			
 			myFunction.setDomain(screen.left,screen.right);
-			myFunction.draw();
+			var functionPoints = myFunction.calculateDrawingPoints();
+			GLPainter.setDrawColor([1,0,1,1]);
+			GLPainter.drawVertices2d(gl.LINE_STRIP,functionPoints,functionPoints.length/2);
 					
-			GLPainter.setDrawColor([1,0,0,1]);
 			
 			myCurve.setDomain(screen.left,screen.right,screen.bottom,screen.top);
-			myCurve.draw();
+			var curvePoints = myCurve.calculateDrawingPoints();
+			GLPainter.setDrawColor([1,0,0,1]);
+			GLPainter.drawVertices2d(gl.LINES,curvePoints,curvePoints.length/2);
 		
 		
 		Matrices.mvPopMatrix();	

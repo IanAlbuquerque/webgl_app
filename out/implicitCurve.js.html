@@ -1,6 +1,47 @@
-define(
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/docs.css" rel="stylesheet">
+    <link href="styles/bootstrap-custom.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="header navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Documentation</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4">
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="GLArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLArrayBuffer</a></li><li><a href="GLElementArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLElementArrayBuffer</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="Polinomio.html"><i class="icon-shield" style="color: #0186d1"></i> Polinomio</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Namespaces</li><li><a href="buffers.html"><i class="icon-code"></i> webglut/buffers</a></li><li><a href="gl_events.html"><i class="icon-code"></i> webglut/gl_events</a></li><li><a href="gl_module.html"><i class="icon-code"></i> webglut/gl_module</a></li><li><a href="gl_painter.html"><i class="icon-code"></i> webglut/gl_painter</a></li><li><a href="matrices.html"><i class="icon-code"></i> webglut/matrices</a></li><li><a href="shaders_module.html"><i class="icon-code"></i> webglut/shaders_module</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Global</li><li><a href="global.html#gl"><i class="icon-globe" style="color: black;"></i> gl</a></li><li><a href="global.html#shaderProgram"><i class="icon-globe" style="color: black;"></i> shaderProgram</a></li></ul></div>
+          </div>
+
+          <div class="span8">
+              <h1 class="page-header">Source: app/elements/implicitCurve.js</h1>
+              
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>define(['webglut/gl_painter'],
 /** @lends ImplicitCurve */
-function(){
+function(painter){
 	
 	/**
 	* A implicit curve in R^2
@@ -89,7 +130,7 @@ function(){
 		this.calculateDrawingPointsInTriangle = function(trianglePoints)
 		{
 			var value = []
-			for(var i=0;i<3;i++)
+			for(var i=0;i&lt;3;i++)
 				value[i] = this.evaluate(trianglePoints[2*i],trianglePoints[2*i+1]);
 			
 			var points = [];
@@ -98,25 +139,26 @@ function(){
 			var inext;
 			var x;
 			var y;
-			for(var i=0;i<3;i++)
+			for(var i=0;i&lt;3;i++)
 			{
 				inext = (i+1)%3;
-				if((value[i]*value[inext]) < 0)
+				if((value[i]*value[inext]) &lt; 0)
 				{
 					var t = -value[i]/(value[inext]-value[i]);
 					
 					x = trianglePoints[2*i] + t * (trianglePoints[2*inext] - trianglePoints[2*i]);
 					y = trianglePoints[2*i+1] + t * (trianglePoints[2*inext+1] - trianglePoints[2*i+1]);
-					
 					points.push(x);
 					points.push(y);
-				
+					
+					painter.setDrawColor([0,1,0,1]);
+					painter.drawVertices2d(gl.LINE_LOOP,[x,y,x+0.1,y,x,y+0.1],3);
 					
 					totalPoints++;
 				}
 			}
 			
-			for(var i=0;i<3;i++)
+			for(var i=0;i&lt;3;i++)
 			{
 				if(value[i]==0)
 				{
@@ -150,9 +192,9 @@ function(){
 			dy = (this.yMax-this.yMin)/this.numPontos;
 			
 			
-			for(var ix=0;ix<this.numPontos;ix++)
+			for(var ix=0;ix&lt;this.numPontos;ix++)
 			{
-				for(var iy=0;iy<this.numPontos;iy++)
+				for(var iy=0;iy&lt;this.numPontos;iy++)
 				{
 					x = this.xMin + ix*dx;
 					y = this.yMin + iy*dy;
@@ -167,9 +209,11 @@ function(){
 					trianglePoints.push(x);
 					trianglePoints.push(y + dy);
 					
+					painter.setDrawColor([0,0,1,1]);
+					painter.drawVertices2d(gl.LINE_STRIP,trianglePoints,trianglePoints.length/2);
+					
 					pointsReceivedFromTriangle = this.calculateDrawingPointsInTriangle(trianglePoints);
-					for(var i=0;i<pointsReceivedFromTriangle.length;i++)
-						points.push(pointsReceivedFromTriangle[i]);
+					while(pointsReceivedFromTriangle.length) points.push(pointsReceivedFromTriangle.pop());
 					
 					trianglePoints = [];
 					trianglePoints.push(x);
@@ -181,9 +225,11 @@ function(){
 					trianglePoints.push(x + dy);
 					trianglePoints.push(y + dy);
 					
+					painter.setDrawColor([0,0,1,1]);
+					painter.drawVertices2d(gl.LINE_STRIP,trianglePoints,trianglePoints.length/2);
+					
 					pointsReceivedFromTriangle = this.calculateDrawingPointsInTriangle(trianglePoints);
-					for(var i=0;i<pointsReceivedFromTriangle.length;i++)
-						points.push(pointsReceivedFromTriangle[i]);
+					while(pointsReceivedFromTriangle.length) points.push(pointsReceivedFromTriangle.pop());
 				}
 			}
 			
@@ -210,3 +256,23 @@ function(){
 
 	return FunctionR2;
 });
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+          </div>
+      </div>
+
+        <br clear="both">
+
+      <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed May 14 2014 18:34:38 GMT-0300 (BRT)
+        <br>
+      </footer>
+      <script> prettyPrint(); </script>
+    </div>
+  </body>
+</html>

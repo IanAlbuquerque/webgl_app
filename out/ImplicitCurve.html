@@ -32,7 +32,7 @@
           </div>
 
           <div class="span8">
-              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> FunctionR2</h1>
+              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> ImplicitCurve</h1>
               
 
 
@@ -41,7 +41,7 @@
     
 <header>
     <h2>
-    FunctionR2
+    ImplicitCurve
     </h2>
     
 </header>  
@@ -57,7 +57,7 @@
     
         
 <dt>
-    <h4 class="name" id="FunctionR2">new FunctionR2<span class="signature">(xMin, xMax, numPontos, fOfX)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ImplicitCurve">new ImplicitCurve<span class="signature">(xMin, xMax, yMin, yMax, numPontos, equation)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -66,7 +66,7 @@
     
     <div class="description">
         <p>
-        A function defined from R to R.
+        A implicit curve in R^2
         </p>
     </div>
     
@@ -147,6 +147,52 @@
 
         <tr>
             
+                <td class="name">yMin</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The bottom bound of the domain.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">yMax</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The top bound of the domain.</td>
+        </tr>
+
+	
+
+        <tr>
+            
                 <td class="name">numPontos</td>
             
 
@@ -170,7 +216,7 @@
 
         <tr>
             
-                <td class="name">fOfX</td>
+                <td class="name">equation</td>
             
 
             <td class="type">
@@ -186,7 +232,7 @@
 
             
 
-            <td class="description last">A string containing the script that is evaluated as f(x). The x variable must be used.</td>
+            <td class="description last">A string containing the script that is evaluated as the equation of the implicit curve. The x and y variables must be used.</td>
         </tr>
 
 	
@@ -236,14 +282,6 @@
     
     
     
-        <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>// Function sin(x).
-var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
-// Draws the function.
-myFunction.draw();</code></pre>
-
-    
 </dd>
 
     
@@ -261,7 +299,7 @@ myFunction.draw();</code></pre>
         <dl class="bs-docs-example bs-members">
             
 <dt>
-    <h4 class="name" id="fOfX">fOfX<span class="type-signature"></span></h4>
+    <h4 class="name" id="equation">equation<span class="type-signature"></span></h4>
     
     
 </dt>
@@ -290,6 +328,9 @@ myFunction.draw();</code></pre>
     
     
     
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy"><li>"x*x+y*y-1"</li></ul></dd>
     
 
     
@@ -337,6 +378,9 @@ myFunction.draw();</code></pre>
     
     
     
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy"><li>40</li></ul></dd>
     
 
     
@@ -452,6 +496,106 @@ myFunction.draw();</code></pre>
     
 </dd>
 
+        
+            
+<dt>
+    <h4 class="name" id="yMax">yMax<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The top bound of the domain.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy"><li>1</li></ul></dd>
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="yMin">yMin<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The bottom bound of the domain.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy"><li>-1</li></ul></dd>
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
         </dl>
     
     
@@ -470,7 +614,7 @@ myFunction.draw();</code></pre>
     
     <div class="description">
         <p>
-        Draws the function in the plane XY.
+        Draws the implicit curve in the plane XY using the algorithm "Marching Triangles"
         </p>
     </div>
     
@@ -533,7 +677,7 @@ myFunction.draw();</code></pre>
 
 <span class="param-desc">
     The list of points that represents the drawing. Every two entries represents the x and y informations of a point. 
-The drawing should be made using gl.LINE_STRIP.
+The drawing should be made using gl.LINES.
 </span>
 
 </div>
@@ -546,7 +690,7 @@ The drawing should be made using gl.LINE_STRIP.
         
             
 <dt>
-    <h4 class="name" id="f">f<span class="signature">(x)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="calculateDrawingPointsInTriangle"><span class="label label-info">private</span> calculateDrawingPointsInTriangle<span class="signature">(trianglePoints)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -555,7 +699,122 @@ The drawing should be made using gl.LINE_STRIP.
     
     <div class="description">
         <p>
-        Returns the function evaluted in a point in domain.
+        Draws the linear approximation of the implicit curve in the given triangle.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">trianglePoints</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Point></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The vertices of the triangle. Three entries are expected.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="evaluate">evaluate<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Evaluates the implicit curve expression in a point in the plane XY.
         </p>
     </div>
     
@@ -606,7 +865,30 @@ The drawing should be made using gl.LINE_STRIP.
 
             
 
-            <td class="description last">The point in the domain to evaluate the value of the function.</td>
+            <td class="description last">The first entry of the point to be evaluated</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">y</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The second entry of the point to be evaluated</td>
         </tr>
 
 	
@@ -666,7 +948,7 @@ The drawing should be made using gl.LINE_STRIP.
 
 
 <span class="param-desc">
-    The value f(x)
+    The expression evaluated in (x,y)
 </span>
 
 </div>
@@ -679,7 +961,7 @@ The drawing should be made using gl.LINE_STRIP.
         
             
 <dt>
-    <h4 class="name" id="setDomain">setDomain<span class="signature">(xMin, xMax)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="setDomain">setDomain<span class="signature">(xMin, xMax, yMin, yMax)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -688,7 +970,7 @@ The drawing should be made using gl.LINE_STRIP.
     
     <div class="description">
         <p>
-        Sets domain of the function.
+        Sets domain where the curve is defined.
         </p>
     </div>
     
@@ -766,6 +1048,52 @@ The drawing should be made using gl.LINE_STRIP.
         </tr>
 
 	
+
+        <tr>
+            
+                <td class="name">yMin</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The bottom bound of the domain.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">yMax</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The top bound of the domain.</td>
+        </tr>
+
+	
 	</tbody>
 </table>
 
@@ -817,7 +1145,7 @@ The drawing should be made using gl.LINE_STRIP.
         
             
 <dt>
-    <h4 class="name" id="setF">setF<span class="signature">(fOfX)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="setEquation">setEquation<span class="signature">(equation)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -826,7 +1154,7 @@ The drawing should be made using gl.LINE_STRIP.
     
     <div class="description">
         <p>
-        Sets the string that will be evaluated as f(x).
+        Sets the string that will be evaluated as the implicit expression of the curve.
         </p>
     </div>
     
@@ -861,7 +1189,7 @@ The drawing should be made using gl.LINE_STRIP.
 
         <tr>
             
-                <td class="name">fOfX</td>
+                <td class="name">equation</td>
             
 
             <td class="type">
@@ -877,7 +1205,7 @@ The drawing should be made using gl.LINE_STRIP.
 
             
 
-            <td class="description last">A string containing the script that is evaluated as f(x). The x variable must be used.</td>
+            <td class="description last">A string containing the script that is evaluated as the equation of the curve. The x and y variables must be used.</td>
         </tr>
 
 	
