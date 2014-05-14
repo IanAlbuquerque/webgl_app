@@ -53,11 +53,16 @@ function(GLPainter){
 		
 		/**
 		* The array containing the coefficients of the polinomio. The entry coefficients[i] corresponds to the coefficient of x^i.
-		* @defaulf "x*x*x"
+		* @defaulf "x*x+y*y-1"
 		**/
 		if(_equation) this.equation = _equation;
-		else this.equation = "x*x+y*y";
+		else this.equation = "x*x+y*y-1";
 	
+		this.setEquation = function(_equation)
+		{
+			this.equation = _equation;
+		}
+		
 		this.evaluate = function(x,y)
 		{
 			return eval(this.equation);
@@ -70,7 +75,10 @@ function(GLPainter){
 				value[i] = this.evaluate(trianglePoints[i].x,trianglePoints[i].y);
 			
 			var pointsToPlot = [];
-			var numPoints = 0;
+			pointsToPlot[0] = [];
+			pointsToPlot[1] = [];
+			pointsToPlot[2] = [];
+			var totalPoints = 0;
 			
 			var inext;
 			for(var i=0;i<3;i++)
@@ -79,9 +87,9 @@ function(GLPainter){
 				if((value[i]*value[inext]) < 0)
 				{
 					var t = -value[i]/(value[inext]-value[i]);
-					pointsToPlot[numPoints].x = trianglePoints[i].x + t * (trianglePoints[inext].x - trianglePoints[i].x);
-					pointsToPlot[numPoints].y = trianglePoints[i].y + t * (trianglePoints[inext].y - trianglePoints[i].y);
-					numPoints++;
+					pointsToPlot[totalPoints].x = trianglePoints[i].x + t * (trianglePoints[inext].x - trianglePoints[i].x);
+					pointsToPlot[totalPoints].y = trianglePoints[i].y + t * (trianglePoints[inext].y - trianglePoints[i].y);
+					totalPoints++;
 				}
 			}
 			
@@ -89,13 +97,13 @@ function(GLPainter){
 			{
 				if(value[i]==0)
 				{
-					pointsToPlot[numPoints].x = trianglePoints[i].x;
-					pointsToPlot[numPoints].y = trianglePoints[i].y;
-					numPoints++;
+					pointsToPlot[totalPoints].x = trianglePoints[i].x;
+					pointsToPlot[totalPoints].y = trianglePoints[i].y;
+					totalPoints++;
 				}
 			}
 			
-			if(numPoints == 2)
+			if(totalPoints == 2)
 			{
 				GLPainter.begin(gl.LINES);
 					GLPainter.vertex2d(pointsToPlot[0].x,pointsToPlot[0].y);
@@ -115,19 +123,20 @@ function(GLPainter){
 			var x,y;
 			var trianglePoints = [];
 			var dumy = [];
-			trianglePoints.push(dumy);
-			trianglePoints.push(dumy);
-			trianglePoints.push(dumy);
+			trianglePoints[0] = [];
+			trianglePoints[1] = [];
+			trianglePoints[2] = [];
 			
 			dx = (this.xMax-this.xMin)/this.numPontos;
 			dy = (this.yMax-this.yMin)/this.numPontos;
+			
 			
 			for(var ix=0;ix<this.numPontos;ix++)
 			{
 				for(var iy=0;iy<this.numPontos;iy++)
 				{
-					x = this.xMin + ix*this.numPontos;
-					y = this.yMin + iy*this.numPontos;
+					x = this.xMin + ix*dx;
+					y = this.yMin + iy*dy;
 					
 					trianglePoints[0].x = x;
 					trianglePoints[0].y = y;
@@ -138,16 +147,31 @@ function(GLPainter){
 					trianglePoints[2].x = x;
 					trianglePoints[2].y = y + dy;
 					
-					//this.drawInTriangle(trianglePoints);
-					
+					this.drawInTriangle(trianglePoints);
+					/*GLPainter.begin(gl.LINE_LOOP);
 					for(var i=0;i<3;i++)
 					{
-						GLPainter.begin(gl.LINES);
-							GLPainter.vertex2d(x,y);
-							GLPainter.vertex2d(x+dx,y);
-							GLPainter.vertex2d(x,y+dy);
-						GLPainter.end();
+						GLPainter.vertex2d(trianglePoints[i].x,trianglePoints[i].y);
 					}
+					GLPainter.end();*/
+					
+					trianglePoints[0].x = x;
+					trianglePoints[0].y = y + dy;
+					
+					trianglePoints[1].x = x + dx;
+					trianglePoints[1].y = y;
+					
+					trianglePoints[2].x = x + dy;
+					trianglePoints[2].y = y + dy;
+					
+					this.drawInTriangle(trianglePoints);
+					/*GLPainter.begin(gl.LINE_LOOP);
+					for(var i=0;i<3;i++)
+					{
+						GLPainter.vertex2d(trianglePoints[i].x,trianglePoints[i].y);
+					}
+					GLPainter.end();*/
+
 				}
 			}
 		}

@@ -27,7 +27,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2,I
 	resetScreen();
 	
 	var myFunction = new FunctionR2(screen.left,screen.right,500,"Math.sin(1/x)*x");
-	var myCurve = new ImplicitCurve(screen.left,screen.right,screen.bottom,screen.top,20,"x*x+y*y");
+	var myCurve = new ImplicitCurve(screen.left,screen.right,screen.bottom,screen.top,20,"x*x+y*y-1");
 	
 	var updateFunction = function()
 	{
@@ -36,7 +36,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2,I
 		Events.postRedisplay();
 	};
 	
-	var updateFunction = function()
+	var updateImplicitCurve = function()
 	{
 		var equationText = document.getElementById("implicitCurveValue").value;
 		myCurve.setEquation(equationText);
@@ -241,6 +241,7 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2,I
 	return{
 		initialize: initialize,
 		updateFunction : updateFunction,
+		updateImplicitCurve : updateImplicitCurve,
 		resetScreenButton : resetScreenButton
 	};
 });
