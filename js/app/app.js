@@ -197,7 +197,9 @@ function(GLModule,ShadersModule,GLPainter,Matrices,Events,Polinomio,FunctionR2,I
 	
 	function handleMouseScroll(event)
 	{	
-	
+		if(event.pageX<gl.viewPortLeft || event.pageX>gl.viewPortRight) return;
+		if(event.pageY<gl.viewPortTop || event.pageY>gl.viewPortBottom) return;
+		 
 		var scrollInfo = event.wheelDelta || -event.detail;
 		var delta = 0;
 		if(scrollInfo < 0) delta = -1;
