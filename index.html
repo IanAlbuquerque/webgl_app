@@ -5,9 +5,9 @@
         <title>Applications with WebGL</title>
 	<!--
 		Loads the require.js module which allows quick and easy js includes.
-		Loads main.js afterwards.
+		Loads require-config.js afterwards.
 	-->
-        <script data-main="js/main.js" src="js/require.js"></script>
+        <script data-main="js/require-config.js" src="js/require.js"></script>
 		
 	<!--
 		Fragment shader script
@@ -44,49 +44,9 @@
     </head>
     <body>
         <h1>Applications with WebGL</h1>
-		
-		<hr/>
-		
-		Function f(x) to be drawn: f(x)=
-		
-		<input type="text" name="function" value="Math.sin(1/x)*x" placeholder="ex: Math.sin(1/x)*x" id="functionValue"/>
-		<input type="submit" value="Draw Function" id="functionSubmit"/>
-		
-		<br/>
-		
-		Use functions of x only. Use Math.cos(x),Math.sin(x),Math.exp(x),Math.PI for the cos,sin,exp functions and the PI value.
-		
-		<br/>
-		
-		
-		<hr/>
-		
-		Implicit curve C(x,y) to be drawn:
-		
-		<input type="text" name="function" value="x*x+y*y-1" placeholder="ex: x*x+y*y-1" id="implicitCurveValue"/>
-		= 0
-		<input type="submit" value="Draw Implicit Curve" id="implicitCurveSubmit"/>
-		
-		<br/>
-		
-		Use x and y only to describe the curve. Use Math.cos(x),Math.sin(x),Math.exp(x),Math.PI for the cos,sin,exp functions and the PI value.
-		
-		<br/>
-		
-		<hr/>
-		Options:
-		
-		<input type="submit" value="Reset Image Position" id="resetDrawing"/>
-		
-		<hr/>
-		
+
 		<canvas id="main-canvas" style="border: none;" width="500" height="500"></canvas>
-		<br/>
-		Use your mouse to drag the image. Scroll to zoom in/out.
-		<br/>
-		Touch interface for mobile devices isn't enabled (yet)!
-		<br/>
-		
+
 		<hr/>
 		
 		<a href="out/index.html">Documentation</a> (Still Under Construction)
