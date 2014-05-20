@@ -1,25 +1,12 @@
 define(['canvas-webgl-utility/drawings-handler',
-	'canvas-webgl-utility/events-handler',
-	'canvas-webgl-utility/matrices-handler',
-	'canvas-webgl-utility/shaders-handler',
-	'canvas-webgl-utility/exceptions/canvas-webgl-context-not-found-exception'],
-function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWebGLContextNotFoundException)
+'canvas-webgl-utility/events-handler',
+'canvas-webgl-utility/matrices-handler',
+'canvas-webgl-utility/shaders-handler',
+'canvas-webgl-utility/exceptions/canvas-webgl-context-not-found-exception',
+'canvas-webgl-utility/viewport'],
+function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWebGLContextNotFoundException,Viewport)
 {
-	function Viewport(canvas)
-	{
-		var object = this;
-		
-		object.width = canvas.width;
-		object.height = canvas.height;
-		
-		var canvasBoundingRectangle = canvas.getBoundingClientRect();
-		
-		object.top = canvasBoundingRectangle.top;
-		object.bottom = canvasBoundingRectangle.bottom;
-		object.left = canvasBoundingRectangle.left;
-		object.right = canvasBoundingRectangle.right;
-	}
-	
+
 	function CanvasWebGLUtility(_canvas)
 	{
 		var object = this;

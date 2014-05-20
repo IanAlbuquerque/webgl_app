@@ -1,8 +1,8 @@
 define(['canvas-webgl-utility/canvas-webgl-utility'],
 function(CanvasWebGLUtility)
 {
-	var main_screen;
-	var second_screen;
+	var primary_screen;
+	var secondary_screen;
 	
 	var drawAxis = function(screen)
 	{
@@ -16,12 +16,12 @@ function(CanvasWebGLUtility)
 	var clearScreen = function(screen)
 	{
 		screen.clearColor(0.0, 0.0, 0.0, 1.0);
-        	screen.clear(screen.COLOR_BUFFER_BIT | screen.DEPTH_BUFFER_BIT);
+        screen.clear(screen.COLOR_BUFFER_BIT | screen.DEPTH_BUFFER_BIT);
 	}
 	
 	var display = function()
 	{
-		var screen = main_screen;
+		var screen = primary_screen;
 		
 		clearScreen(screen)
 		screen.pOrtho(-1,1,-1,1,-1,1);
@@ -33,7 +33,7 @@ function(CanvasWebGLUtility)
 	
 	var second_display = function()
 	{
-		var screen = second_screen;
+		var screen = secondary_screen;
 		
 		clearScreen(screen)
 		screen.pOrtho(-1,1,-1,1,-1,1);
@@ -49,22 +49,22 @@ function(CanvasWebGLUtility)
 	
 		try
 		{
-			var canvas = document.getElementById("main-canvas");
-			main_screen = new CanvasWebGLUtility(canvas);
+			var primary_canvas = document.getElementById("primary-canvas");
+			primary_screen = new CanvasWebGLUtility(primary_canvas);
 		
-			var canvas2 = document.getElementById("second-canvas");
-			second_screen = new CanvasWebGLUtility(canvas2);
+			var secondary_canvas = document.getElementById("secondary-canvas");
+			secondary_screen = new CanvasWebGLUtility(secondary_canvas);
 		}
 		catch(e)
 		{
 			alert(e.name + " : " + e.message);
 		}
 
-		main_screen.setDisplayFunction(display);
-		main_screen.initializeMainLoop();
+		primary_screen.setDisplayFunction(display);
+		primary_screen.initializeMainLoop();
 
-		second_screen.setDisplayFunction(second_display);
-		second_screen.initializeMainLoop();
+		secondary_screen.setDisplayFunction(second_display);
+		secondary_screen.initializeMainLoop();
 	}
 	
 	return { main : main }

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/docs.css" rel="stylesheet">
+    <link href="styles/bootstrap-custom.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="header navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Documentation</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4">
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Namespaces</li><li><a href="app.html"><i class="icon-code"></i> app</a></li><li><a href="env.html"><i class="icon-code"></i> env</a></li></ul></div><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Global</li><li><a href="global.html#dump"><i class="icon-globe" style="color: black;"></i> dump</a></li></ul></div>
+          </div>
+
+          <div class="span8">
+              <h1 class="page-header">Source: jsdoc.js</h1>
+              
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>#!/usr/bin/env node
+/*global arguments */
+/**
+ * @project jsdoc
+ * @author Michael Mathews &lt;micmath@gmail.com>
+ * @license See LICENSE.md file included in this distribution.
+ */
+
+/**
+ * Data representing the environment in which this app is running.
+ *
+ * @namespace
+ * @name env
+ */
+global.env = {
+    /**
+     * Running start and finish times.
+     *
+     * @memberof env
+     */
+    run: {
+        start: new Date(),
+        finish: null
+    },
+
+    /**
+     * The command-line arguments passed into JSDoc.
+     *
+     * @type Array
+     * @memberof env
+     */
+    args: [],
+
+    /**
+     * The parsed JSON data from the configuration file.
+     *
+     * @type Object
+     * @memberof env
+     */
+    conf: {},
+
+    /**
+     * The absolute path to the base directory of the JSDoc application.
+     *
+     * @private
+     * @type string
+     * @memberof env
+     */
+    dirname: '.',
+
+    /**
+     * The user's working directory at the time that JSDoc was started.
+     *
+     * @private
+     * @type string
+     * @memberof env
+     */
+    pwd: null,
+
+    /**
+     * The command-line options, parsed into a key/value hash.
+     *
+     * @type Object
+     * @memberof env
+     * @example if (global.env.opts.help) { console.log('Helpful message.'); }
+    */
+    opts: {},
+
+    /**
+     * The source files that JSDoc will parse.
+     * @type Array
+     * @memberof env
+     */
+    sourceFiles: [],
+
+    /**
+     * The JSDoc version number and revision date.
+     *
+     * @type Object
+     * @memberof env
+     */
+    version: {}
+};
+
+// initialize the environment for the current JavaScript VM
+(function(args) {
+    'use strict';
+
+    if (args[0] &amp;&amp; typeof args[0] === 'object') {
+        // we should be on Node.js
+        args = [__dirname, process.cwd()];
+    }
+
+    require('jsdoc/util/runtime').initialize(args);
+})( Array.prototype.slice.call(arguments, 0) );
+
+/**
+ * Data that must be shared across the entire application.
+ *
+ * @namespace
+ * @name app
+ */
+global.app = {
+    jsdoc: {
+        scanner: new (require('jsdoc/src/scanner').Scanner)(),
+        parser: null,
+        name: require('jsdoc/name')
+    }
+};
+
+/**
+ * Recursively print an object's properties to stdout. This method is safe to use with objects that
+ * contain circular references. In addition, on Mozilla Rhino, this method is safe to use with
+ * native Java objects.
+ *
+ * @global
+ * @name dump
+ * @private
+ * @param {Object} obj - Object(s) to print to stdout.
+ */
+global.dump = function() {
+    'use strict';
+
+    var doop = require('jsdoc/util/doop').doop;
+    var _dump = require('jsdoc/util/dumper').dump;
+    for (var i = 0, l = arguments.length; i &lt; l; i++) {
+        console.log( _dump(doop(arguments[i])) );
+    }
+};
+
+(function() {
+    'use strict';
+
+    var logger = require('jsdoc/util/logger');
+    var path = require('jsdoc/path');
+    var runtime = require('jsdoc/util/runtime');
+
+    var cli = require( path.join(global.env.dirname, 'cli') );
+
+    cli.setVersionInfo()
+        .loadConfig();
+
+    if (!global.env.opts.test) {
+        cli.configureLogger();
+    }
+
+    cli.logStart();
+
+    function cb(errorCode) {
+        cli.logFinish();
+        cli.exit(errorCode || 0);
+    }
+
+    // On Rhino, we use a try/catch block so we can log the Java exception (if available)
+    if ( runtime.isRhino() ) {
+        try {
+            cli.runCommand(cb);
+        }
+        catch(e) {
+            if (e.rhinoException) {
+                logger.fatal( e.rhinoException.printStackTrace() );
+            } else {
+                console.trace(e);
+                cli.exit(1);
+            }
+        }
+    }
+    else {
+        cli.runCommand(cb);
+    }
+})();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+          </div>
+      </div>
+
+        <br clear="both">
+
+      <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue May 20 2014 17:38:27 GMT-0300 (BRT)
+        <br>
+      </footer>
+      <script> prettyPrint(); </script>
+    </div>
+  </body>
+</html>

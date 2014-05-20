@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/docs.css" rel="stylesheet">
+    <link href="styles/bootstrap-custom.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="header navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Documentation</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4">
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="GLElementArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLElementArrayBuffer</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="Polinomio.html"><i class="icon-shield" style="color: #0186d1"></i> Polinomio</a></li></ul></div>
+          </div>
+
+          <div class="span8">
+              <h1 class="page-header">Source: app-classes/implicit-curve.js</h1>
+              
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>define(
+/** @lends ImplicitCurve */
+function(){
+	
+	/**
+	* A implicit curve in R^2
+	* @param {number} xMin The left bound of the domain.
+	* @param {number} xMax The right bound of the domain.
+	* @param {number} yMin The bottom bound of the domain.
+	* @param {number} yMax The top bound of the domain.
+	* @param {number} numPontos The number of points to be used for the function drawing discretization.
+	* @param {string} equation A string containing the script that is evaluated as the equation of the implicit curve. The x and y variables must be used.
+	* @class ImplicitCurve
+	**/
+	var FunctionR2 = function(_xMin,_xMax,_yMin,_yMax,_numPontos,_equation)
+	{
+		/**
+		* The left bound of the domain.
+		* @default -1
+		**/
+		if(_xMin) this.xMin = _xMin;
+		else this.xMin = -1;
+		
+		/**
+		* The right bound of the domain.
+		* @default 1
+		**/
+		if(_xMax) this.xMax = _xMax;
+		else this.xMax = 1;
+		
+		/**
+		* The bottom bound of the domain.
+		* @default -1
+		**/
+		if(_yMin) this.yMin = _yMin;
+		else this.yMin = -1;
+		
+		/**
+		* The top bound of the domain.
+		* @default 1
+		**/
+		if(_yMax) this.yMax = _yMax;
+		else this.yMax = 1;
+		
+		
+		/**
+		* The number of points to be used for the function drawing discretization.
+		* @default 40
+		**/
+		if(_numPontos) this.numPontos = _numPontos;
+		else this.numPontos = 40;
+		
+		
+		/**
+		* The array containing the coefficients of the polinomio. The entry coefficients[i] corresponds to the coefficient of x^i.
+		* @default "x*x+y*y-1"
+		**/
+		if(_equation) this.equation = _equation;
+		else this.equation = "x*x+y*y-1";
+	
+		/**
+		* Sets the string that will be evaluated as the implicit expression of the curve.
+		* @param {string} equation A string containing the script that is evaluated as the equation of the curve. The x and y variables must be used.
+		* @public
+		*/
+		this.setEquation = function(_equation)
+		{
+			this.equation = _equation;
+		}
+		
+		/**
+		* Evaluates the implicit curve expression in a point in the plane XY.
+		* @param {number} x The first entry of the point to be evaluated
+		* @param {number} y The second entry of the point to be evaluated
+		* @returns {number} The expression evaluated in (x,y)
+		* @public
+		*/
+		this.evaluate = function(x,y)
+		{
+			return eval(this.equation);
+		}
+	
+		
+		/**
+		* Draws the linear approximation of the implicit curve in the given triangle.
+		* @param {Point[]} trianglePoints The vertices of the triangle. Three entries are expected.
+		* @private
+		*/
+		this.calculateDrawingPointsInTriangle = function(trianglePoints)
+		{
+			var value = []
+			for(var i=0;i&lt;3;i++)
+				value[i] = this.evaluate(trianglePoints[2*i],trianglePoints[2*i+1]);
+			
+			var points = [];
+			var totalPoints = 0;
+			
+			var inext;
+			var x;
+			var y;
+			for(var i=0;i&lt;3;i++)
+			{
+				inext = (i+1)%3;
+				if((value[i]*value[inext]) &lt; 0)
+				{
+					var t = -value[i]/(value[inext]-value[i]);
+					
+					x = trianglePoints[2*i] + t * (trianglePoints[2*inext] - trianglePoints[2*i]);
+					y = trianglePoints[2*i+1] + t * (trianglePoints[2*inext+1] - trianglePoints[2*i+1]);
+					
+					points.push(x);
+					points.push(y);
+				
+					
+					totalPoints++;
+				}
+			}
+			
+			for(var i=0;i&lt;3;i++)
+			{
+				if(value[i]==0)
+				{
+					points.push(trianglePoints[2*i]);
+					points.push(trianglePoints[2*i+1]);
+					totalPoints++;
+				}
+			}
+			
+			if(totalPoints != 2)
+				points = [];
+			return points;
+		}
+		
+		/**
+		* Draws the implicit curve in the plane XY using the algorithm "Marching Triangles"
+		* @returns {number[]} The list of points that represents the drawing. Every two entries represents the x and y informations of a point. 
+		* The drawing should be made using gl.LINES.
+		* @public
+		*/
+		this.calculateDrawingPoints = function()
+		{
+			var dx,dy;
+			var x,y;
+			var trianglePoints = [];
+			var points = [];
+			var pointsReceivedFromTriangle = [];
+			var dumy = [];
+			
+			dx = (this.xMax-this.xMin)/this.numPontos;
+			dy = (this.yMax-this.yMin)/this.numPontos;
+			
+			
+			for(var ix=0;ix&lt;this.numPontos;ix++)
+			{
+				for(var iy=0;iy&lt;this.numPontos;iy++)
+				{
+					x = this.xMin + ix*dx;
+					y = this.yMin + iy*dy;
+					
+					trianglePoints = [];
+					trianglePoints.push(x);
+					trianglePoints.push(y);
+					
+					trianglePoints.push(x + dx);
+					trianglePoints.push(y);
+					
+					trianglePoints.push(x);
+					trianglePoints.push(y + dy);
+					
+					pointsReceivedFromTriangle = this.calculateDrawingPointsInTriangle(trianglePoints);
+					for(var i=0;i&lt;pointsReceivedFromTriangle.length;i++)
+						points.push(pointsReceivedFromTriangle[i]);
+					
+					trianglePoints = [];
+					trianglePoints.push(x);
+					trianglePoints.push(y + dy);
+					
+					trianglePoints.push(x + dx);
+					trianglePoints.push(y);
+					
+					trianglePoints.push(x + dy);
+					trianglePoints.push(y + dy);
+					
+					pointsReceivedFromTriangle = this.calculateDrawingPointsInTriangle(trianglePoints);
+					for(var i=0;i&lt;pointsReceivedFromTriangle.length;i++)
+						points.push(pointsReceivedFromTriangle[i]);
+				}
+			}
+			
+			return points;
+		}
+
+		/**
+		* Sets domain where the curve is defined.
+		* @param {number} xMin The left bound of the domain.
+		* @param {number} xMax The right bound of the domain.
+		* @param {number} yMin The bottom bound of the domain.
+		* @param {number} yMax The top bound of the domain.
+		* @public
+		*/
+		this.setDomain = function(_xMin,_xMax,_yMin,_yMax)
+		{
+			this.xMin = _xMin;
+			this.xMax = _xMax;
+			this.yMin = _yMin;
+			this.yMax = _yMax;
+		}
+
+	}
+
+	return FunctionR2;
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+          </div>
+      </div>
+
+        <br clear="both">
+
+      <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue May 20 2014 18:40:16 GMT-0300 (BRT)
+        <br>
+      </footer>
+      <script> prettyPrint(); </script>
+    </div>
+  </body>
+</html>

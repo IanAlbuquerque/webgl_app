@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/docs.css" rel="stylesheet">
+    <link href="styles/bootstrap-custom.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="header navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Documentation</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4">
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="GLElementArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLElementArrayBuffer</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="Polinomio.html"><i class="icon-shield" style="color: #0186d1"></i> Polinomio</a></li></ul></div>
+          </div>
+
+          <div class="span8">
+              <h1 class="page-header">Source: app-classes/function-r2.js</h1>
+              
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>define(
+/** @lends FunctionR2 */
+function(){
+	
+	/**
+	* A function defined from R to R.
+	* @param {number} xMin The left bound of the domain.
+	* @param {number} xMax The right bound of the domain.
+	* @param {number} numPontos The number of points to be used for the function drawing discretization.
+	* @param {string} fOfX A string containing the script that is evaluated as f(x). The x variable must be used.
+	* @class FunctionR2
+	* @example
+	*	// Function sin(x).
+	*	var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
+	*	// Draws the function.
+	*	myFunction.draw();
+	**/
+	var FunctionR2 = function(_xMin,_xMax,_numPontos,_fOfX)
+	{
+		/**
+		* The left bound of the domain.
+		* @default -1
+		**/
+		if(_xMin) this.xMin = _xMin;
+		else this.xMin = -1;
+		
+		/**
+		* The right bound of the domain.
+		* @default 1
+		**/
+		if(_xMax) this.xMax = _xMax;
+		else this.xMax = 1;
+		
+		/**
+		* The number of points to be used for the function drawing discretization.
+		* @defaulf 400
+		**/
+		if(_numPontos) this.numPontos = _numPontos;
+		else this.numPontos = 400;
+		
+		
+		/**
+		* The array containing the coefficients of the polinomio. The entry coefficients[i] corresponds to the coefficient of x^i.
+		* @defaulf "x*x*x"
+		**/
+		if(_fOfX) this.fOfX = _fOfX;
+		else this.fOfX = "x*x*x";
+		
+		/**
+		* Returns the function evaluted in a point in domain.
+		* @param {number} x The point in the domain to evaluate the value of the function.
+		* @return {number} The value f(x)
+		* @public
+		*/
+		this.f = function(x)
+		{
+			return eval(this.fOfX);
+		}
+	
+		/**
+		* Draws the function in the plane XY.
+		* @returns {number[]} The list of points that represents the drawing. Every two entries represents the x and y informations of a point. 
+		* The drawing should be made using gl.LINE_STRIP.
+		* @public
+		*/
+		this.calculateDrawingPoints = function()
+		{
+			var points = [];
+			var dx;
+			var x,y;
+			
+			dx = (this.xMax-this.xMin)/this.numPontos;
+			
+			x=this.xMin;
+			for(var i=0;i&lt;this.numPontos;i++)
+			{
+				y=this.f(x);
+
+				points.push(x);
+				points.push(y);
+				
+				x+=dx;
+			}
+			return points;
+		}
+	
+		/**
+		* Sets the string that will be evaluated as f(x).
+		* @param {string} fOfX A string containing the script that is evaluated as f(x). The x variable must be used.
+		* @public
+		*/
+		this.setF = function(_fOfX)
+		{
+			this.fOfX = _fOfX;
+		}
+	
+		/**
+		* Sets domain of the function.
+		* @param {number} xMin The left bound of the domain.
+		* @param {number} xMax The right bound of the domain.
+		* @public
+		*/
+		this.setDomain = function(_xMin,_xMax)
+		{
+			this.xMin = _xMin;
+			this.xMax = _xMax;
+		}
+
+	}
+
+	return FunctionR2;
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+          </div>
+      </div>
+
+        <br clear="both">
+
+      <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue May 20 2014 18:40:16 GMT-0300 (BRT)
+        <br>
+      </footer>
+      <script> prettyPrint(); </script>
+    </div>
+  </body>
+</html>

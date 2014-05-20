@@ -32,32 +32,8 @@
           </div>
 
           <div class="span8">
-              <h1 class="page-header">Index</h1>
+              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> ArrayWebGLBuffer</h1>
               
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
 
 
 
@@ -65,7 +41,7 @@
     
 <header>
     <h2>
-    js/libs/webgl.js
+    ArrayWebGLBuffer
     </h2>
     
 </header>  
@@ -80,21 +56,123 @@
     
     
         
-            <div class="description"><p>This file contains functions every webgl program will need
-a version of one way or another.</p><p>Instead of setting up a context manually it is recommended to
-use. This will check for success or failure. On failure it
-will attempt to present an approriate message to the user.</p><p>      gl = WebGLUtils.setupWebGL(canvas);</p><p>For animated WebGL apps use of setTimeout or setInterval are
-discouraged. It is recommended you structure your rendering
-loop like this.</p><p>      function render() {
-        window.requestAnimFrame(render, canvas);</p><p>        // do rendering
-        ...
-      }
-      render();</p><p>This will call your rendering function up to the refresh rate
-of your display but will stop rendering if your app is not
-visible.</p></div>
+<dt>
+    <h4 class="name" id="ArrayWebGLBuffer">new ArrayWebGLBuffer<span class="signature">(data, itemSize, numItems)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        A webgl array buffer. Used to store a variety of data needed for redering scenes.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
         
-        
-        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">data</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The array containing the data to be inserted into the buffer.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">itemSize</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of entries in the array that defines an unique element.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">numItems</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of unique elements in the array.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
 <dl class="details">
     
         
@@ -123,8 +201,20 @@ visible.</p></div>
     
 </dl>
 
-        
-        
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
     
    </div>
     

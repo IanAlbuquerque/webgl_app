@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/docs.css" rel="stylesheet">
+    <link href="styles/bootstrap-custom.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="header navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Documentation</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4">
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="GLElementArrayBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> GLElementArrayBuffer</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="Polinomio.html"><i class="icon-shield" style="color: #0186d1"></i> Polinomio</a></li></ul></div>
+          </div>
+
+          <div class="span8">
+              <h1 class="page-header">Source: canvas-webgl-utility/shaders-handler.js</h1>
+              
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>define(['canvas-webgl-utility/exceptions/shader-compile-failure-exception',
+	'canvas-webgl-utility/exceptions/shader-invalid-type-exception',
+	'canvas-webgl-utility/exceptions/shader-not-found-exception',
+	'canvas-webgl-utility/exceptions/shader-program-link-failure-exception',
+	'canvas-webgl-utility/shader-fragment',
+	'canvas-webgl-utility/shader-vertex'],
+function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFoundException,ShaderProgramLinkFailureException,ShaderFragment,ShaderVertex)
+{
+
+	var ShadersHandler = function()
+	{
+		var object = this;
+		
+		/**
+		* Creates a shader based on a id given.
+		* @param {string} id The id of the scripf of the shader intended to be created.
+		* @throws {Exception}
+		* @returns {Shader} The shader generated.
+		* @private
+		*/
+		object.getShader = function(webgl_context,shader_object) 
+		{
+			if (!shader_object)
+			{
+			    throw new ShaderNotFoundException();
+			}
+
+			// Organizes the script content into the source code of the script
+			var script_source_code = shader_object.script;
+		
+			// Creates the shader according to it's type 
+			var shader;
+			if (shader_object.type == "fragment")
+			{
+			    shader = webgl_context.createShader(webgl_context.FRAGMENT_SHADER);
+			} 
+			else if (shader_object.type == "vertex")
+			{
+			    shader = webgl_context.createShader(webgl_context.VERTEX_SHADER);
+			} 
+			else 
+			{
+			    throw new ShaderInvalidTypeException();
+			}
+
+			// Compile the shader's code
+			webgl_context.shaderSource(shader, script_source_code);
+			webgl_context.compileShader(shader);
+
+			if (!webgl_context.getShaderParameter(shader, webgl_context.COMPILE_STATUS))
+			{
+			    throw new ShaderCompileFailureException();
+			}
+
+			return shader;
+	   	 }
+	
+		object.setUpShaderProgram = function(webgl_context,shader_program)
+		{
+			try
+			{
+				var fragment_shader = object.getShader(webgl_context,new ShaderFragment());
+				var vertex_shader = object.getShader(webgl_context,new ShaderVertex());
+			}
+			catch(exception)
+			{
+				throw exception;
+				return;
+			}
+
+			webgl_context.attachShader(shader_program, vertex_shader);
+			webgl_context.attachShader(shader_program, fragment_shader);
+			webgl_context.linkProgram(shader_program);
+
+			if (!webgl_context.getProgramParameter(shader_program, webgl_context.LINK_STATUS))
+			{
+				throw new ShaderProgramLinkFailureException();
+			}
+		
+			webgl_context.useProgram(shader_program);
+
+			shader_program.vertexPositionAttribute = webgl_context.getAttribLocation(shader_program, "aVertexPosition");
+			webgl_context.enableVertexAttribArray(shader_program.vertexPositionAttribute);
+
+			shader_program.vertexColorAttribute = webgl_context.getAttribLocation(shader_program, "aVertexColor");
+			webgl_context.enableVertexAttribArray(shader_program.vertexColorAttribute);
+
+			shader_program.pMatrixUniform = webgl_context.getUniformLocation(shader_program, "uPMatrix");
+			shader_program.mvMatrixUniform = webgl_context.getUniformLocation(shader_program, "uMVMatrix");
+		} 
+	}
+
+	return ShadersHandler;
+	
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+          </div>
+      </div>
+
+        <br clear="both">
+
+      <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue May 20 2014 18:40:16 GMT-0300 (BRT)
+        <br>
+      </footer>
+      <script> prettyPrint(); </script>
+    </div>
+  </body>
+</html>
