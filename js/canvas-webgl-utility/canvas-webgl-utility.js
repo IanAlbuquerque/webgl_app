@@ -101,6 +101,18 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		object.setLoopFunction = object.events_handler.setLoopFunction;
 		object.postRedisplay = object.events_handler.postRedisplay;
 		object.initializeMainLoop = object.events_handler.initializeMainLoop;
+		
+		object.COLOR_BUFFER_BIT = object.webgl_context.COLOR_BUFFER_BIT;
+		object.DEPTH_BUFFER_BIT = object.webgl_context.DEPTH_BUFFER_BIT;
+		object.clear = function(clear_elements)
+		{
+			object.clear = object.webgl_context.clear(clear_elements);
+		}
+		object.clearColor = function(R,G,B,A)
+		{
+			object.webgl_context.clearColor(R,G,B,A);
+		}
+		object.LINES = object.webgl_context.LINES;
 	}
 	
 	return CanvasWebGLUtility;

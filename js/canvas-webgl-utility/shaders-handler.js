@@ -1,8 +1,10 @@
 define(['canvas-webgl-utility/exceptions/shader-compile-failure-exception',
 	'canvas-webgl-utility/exceptions/shader-invalid-type-exception',
 	'canvas-webgl-utility/exceptions/shader-not-found-exception',
-	'canvas-webgl-utility/exceptions/shader-program-link-failure-exception'],
-function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFoundException,ShaderProgramLinkFailureException)
+	'canvas-webgl-utility/exceptions/shader-program-link-failure-exception',
+	'canvas-webgl-utility/shader-fragment',
+	'canvas-webgl-utility/shader-vertex'],
+function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFoundException,ShaderProgramLinkFailureException,ShaderFragment,ShaderVertex)
 {
 
 	var ShadersHandler = function()
@@ -16,35 +18,23 @@ function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFound
 		* @returns {Shader} The shader generated.
 		* @private
 		*/
-		object.getShader = function(webgl_context,id) 
+		object.getShader = function(webgl_context,shader_object) 
 		{
-			// Gets the desired shader script using it's id as reference
-			var shader_script = document.getElementById(id); // Possibly a violation in modularization?
-
-			if (!shader_script)
+			if (!shader_object)
 			{
 			    throw new ShaderNotFoundException();
 			}
 
 			// Organizes the script content into the source code of the script
-			var script_source_code = "";
-			var script = shader_script.firstChild;
-			while (script) 
-			{
-			    if (script.nodeType == 3) 
-					{
-				script_source_code += script.textContent;
-			    }
-			    script = script.nextSibling;
-			}
+			var script_source_code = shader_object.script;
 		
 			// Creates the shader according to it's type 
 			var shader;
-			if (shader_script.type == "x-shader/x-fragment")
+			if (shader_object.type == "fragment")
 			{
 			    shader = webgl_context.createShader(webgl_context.FRAGMENT_SHADER);
 			} 
-			else if (shader_script.type == "x-shader/x-vertex")
+			else if (shader_object.type == "vertex")
 			{
 			    shader = webgl_context.createShader(webgl_context.VERTEX_SHADER);
 			} 
@@ -69,8 +59,8 @@ function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFound
 		{
 			try
 			{
-				var fragment_shader = object.getShader(webgl_context,"shader-fs");
-				var vertex_shader = object.getShader(webgl_context,"shader-vs");
+				var fragment_shader = object.getShader(webgl_context,new ShaderFragment());
+				var vertex_shader = object.getShader(webgl_context,new ShaderVertex());
 			}
 			catch(exception)
 			{
