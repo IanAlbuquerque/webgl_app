@@ -41,8 +41,8 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		object.drawings_handler = new DrawingsHandler();
 		object.events_handler = new EventsHandler();
 		object.matrices_handler = new MatricesHandler();
-		object.drawVertex2d = object.drawings_handler.drawVertex2d;
-		object.drawVertex3d = object.drawings_handler.drawVertex3d;
+		object.pushVertex2d = object.drawings_handler.pushVertex2d;
+		object.pushVertex3d = object.drawings_handler.pushVertex3d;
 		object.setDrawingColor = object.drawings_handler.setDrawingColor;
 		object.beginDrawing = function(primitive)
 		{
