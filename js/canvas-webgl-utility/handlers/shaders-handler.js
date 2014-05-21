@@ -2,9 +2,9 @@ define(['canvas-webgl-utility/exceptions/shader-compile-failure-exception',
 	'canvas-webgl-utility/exceptions/shader-invalid-type-exception',
 	'canvas-webgl-utility/exceptions/shader-not-found-exception',
 	'canvas-webgl-utility/exceptions/shader-program-link-failure-exception',
-	'canvas-webgl-utility/shader-fragment',
-	'canvas-webgl-utility/shader-vertex'],
-function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFoundException,ShaderProgramLinkFailureException,ShaderFragment,ShaderVertex)
+	'canvas-webgl-utility/shaders/fragment-shader',
+	'canvas-webgl-utility/shaders/vertex-shader'],
+function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFoundException,ShaderProgramLinkFailureException,FragmentShader,VertexShader)
 {
 
 	var ShadersHandler = function()
@@ -59,8 +59,8 @@ function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFound
 		{
 			try
 			{
-				var fragment_shader = object.getShader(webgl_context,new ShaderFragment());
-				var vertex_shader = object.getShader(webgl_context,new ShaderVertex());
+				var fragment_shader = object.getShader(webgl_context,new FragmentShader());
+				var vertex_shader = object.getShader(webgl_context,new VertexShader());
 			}
 			catch(exception)
 			{

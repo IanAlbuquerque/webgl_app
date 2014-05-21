@@ -1,4 +1,4 @@
-define(['canvas-webgl-utility/array-webgl-buffer'],
+define(['canvas-webgl-utility/buffers/array-webgl-buffer'],
 function(ArrayWebGLBuffer)
 {
 	/**

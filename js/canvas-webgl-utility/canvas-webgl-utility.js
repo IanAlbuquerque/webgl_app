@@ -1,9 +1,9 @@
-define(['canvas-webgl-utility/drawings-handler',
-'canvas-webgl-utility/events-handler',
-'canvas-webgl-utility/matrices-handler',
-'canvas-webgl-utility/shaders-handler',
+define(['canvas-webgl-utility/handlers/drawings-handler',
+'canvas-webgl-utility/handlers/events-handler',
+'canvas-webgl-utility/handlers/matrices-handler',
+'canvas-webgl-utility/handlers/shaders-handler',
 'canvas-webgl-utility/exceptions/canvas-webgl-context-not-found-exception',
-'canvas-webgl-utility/viewport'],
+'canvas-webgl-utility/utility/viewport'],
 function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWebGLContextNotFoundException,Viewport)
 {
 
