@@ -32,14 +32,14 @@
           </div>
 
           <div class="span8">
-              <h1 class="page-header">Source: canvas-webgl-utility/drawings-handler.js</h1>
+              <h1 class="page-header">Source: canvas-webgl-utility/handlers/drawings-handler.js</h1>
               
 
 
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>define(['canvas-webgl-utility/array-webgl-buffer'],
+            <pre class="prettyprint source"><code>define(['canvas-webgl-utility/buffers/array-webgl-buffer'],
 function(ArrayWebGLBuffer)
 {
 	/**
@@ -291,19 +291,15 @@ function(ArrayWebGLBuffer)
 		*/
 		that.drawVerticesColor3d = function(webgl_context,shader_program,primitive,vertices,colors,number_of_vertices)
 		{
-			// Creates the buffers required for drawing.
 			var vertex_position_webgl_buffer = new ArrayWebGLBuffer(webgl_context,vertices,3,number_of_vertices);
 			var vertex_color_webgl_buffer = new ArrayWebGLBuffer(webgl_context,colors,4,number_of_vertices);
 		
-			// Bind the buffers content to the WebGL context
-			// and points the Shaders Program's position and color attributes to the buffers.
 			webgl_context.bindBuffer(webgl_context.ARRAY_BUFFER, vertex_position_webgl_buffer.content);
 			webgl_context.vertexAttribPointer(shader_program.vertexPositionAttribute, vertex_position_webgl_buffer.item_size, webgl_context.FLOAT, false, 0, 0);
 
 			webgl_context.bindBuffer(webgl_context.ARRAY_BUFFER, vertex_color_webgl_buffer.content);
 			webgl_context.vertexAttribPointer(shader_program.vertexColorAttribute, vertex_color_webgl_buffer.item_size, webgl_context.FLOAT, false, 0, 0);
 
-			// Draws the content of the buffers that were bind
 			webgl_context.drawArrays(primitive, 0, number_of_vertices);
 		}
 		

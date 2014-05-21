@@ -1,153 +1,199 @@
 define(['canvas-webgl-utility/exceptions/matrix-stack-empty-exception'],
-function(MatrixStackEmptyException){
-
+function(MatrixStackEmptyException)
+{
+	/**
+	* A matrices operations handler.
+	* It's responsible for managing all the transformations and matrices-related
+	* operations of a WebGL application.
+	* @class MatricesHandler
+	*/
 	var MatricesHandler = function()
+	/** @lends MatricesHandler# */
 	{
-		var object = this;
-		
-		object.model_view_matrix = mat4.create();
+		var that = this;
+
+		/*
+		-------------------------------------------------------------------------------
+		 PRIVATE:
+		-------------------------------------------------------------------------------
+		*/
+
+		/**
+		* The current model view matrix. It's responsible for storing all the positioning
+		* transformations that should be applied to vertices being drawn.
+		* @type {glMatrixArrayType}
+		* @memberOf MatricesHandler#
+		* @private
+		*/
+		var current_model_view_matrix = mat4.create();
 
 		/**
 		* The model view matrix stack.
-		* It's responsible for holding several model view matrices in order to deal with scenes that require multiple model view matrices.
+		* It's responsible for holding several model view matrices in order to deal with 
+		* scenes that require storing different model view matrices.
+		* @type {glMatrixArrayType[]}
+		* @memberOf MatricesHandler#
 		* @private
-		* @type {Matrix[]}
 		*/
-		object.model_view_matrix_stack = [];
+		var model_view_matrix_stack = [];
 	
 		/**
-		* The projection matrix. It's responsible for the projection transformations in the scene.
+		* The current projection matrix. It's responsible for storing the projection 
+		* transformations that will be applied to the scene.
+		* @type {glMatrixArrayType}
+		* @memberOf MatricesHandler#
 		* @private
-		* @type {Matrix}
 		*/
-		object.projection_matrix = mat4.create();
+		var current_projection_matrix = mat4.create();
+
+		/*
+		-------------------------------------------------------------------------------
+		 PUBLIC:
+		-------------------------------------------------------------------------------
+		*/
 
 		/**
-		* Pushes a copy of the current [model view matrix]{@link webglut/matrices~mvMatrix} into the stack, preserving it.
-		* Is expected to be used together with the function [mvPopMatrix]{@link webglut/matrices~mvPopMatrix}.
+		* Pushes a copy of the [current model view matrix]{@link MatricesHandler#current_model_view_matrix} 
+		* into the [model view matrix stack]{@link MatricesHandler#model_view_matrix_stack}, preserving
+		* it for future uses.
+		* Is expected to be used together with the method [mvPopMatrix]{@link MatricesHandler#mvPopMatrix}
 		* @public
 		*/
-		object.mvPushMatrix = function()
+		that.mvPushMatrix = function()
 		{
-			var copy = mat4.create();
-			mat4.set(object.model_view_matrix, copy);
-			object.model_view_matrix_stack.push(copy);
+			var copy_of_current_model_view_matrix = mat4.create();
+			mat4.set(current_model_view_matrix, copy_of_current_model_view_matrix);
+			model_view_matrix_stack.push(copy_of_current_model_view_matrix);
 		}
 
 		/**
-		* Deletes the current [model view matrix]{@link webglut/matrices~mvMatrix} and recovers the 
-		* last [model view matrix]{@link webglut/matrices~mvMatrix} from the stack, setting it as the current one.
-		* Is expected to be used together with the function [mvPushMatrix]{@link webglut/matrices~mvPushMatrix}.
-		* @public
+		* Deletes the [current model view matrix]{@link MatricesHandler#current_model_view_matrix}
+		* and pops the last pushed matrix from the
+		* [model view matrix stack]{@link MatricesHandler#model_view_matrix_stack}, copying it
+		* as the new [current model view matrix]{@link MatricesHandler#current_model_view_matrix}.
+		* Is expected to be used together with the method [mvPushMatrix]{@link MatricesHandler#mvPushMatrix}.
 		* @throws {MatrixStackEmptyException}
+		* @public
 		*/
-		object.mvPopMatrix = function()
+		that.mvPopMatrix = function()
 		{
-			if (object.model_view_matrix_stack.length == 0) 
+			if (model_view_matrix_stack.length == 0) 
 			{
 				throw new MatrixStackEmptyException();
 			}
-			object.model_view_matrix = object.model_view_matrix_stack.pop();
+			current_model_view_matrix = model_view_matrix_stack.pop();
 		}
 
 		/**
-		* Loads the [model view matrix]{@link webglut/matrices~mvMatrix} and the [projection matrix]{@link webglut/matrices~pMatrix}.
-		* into the scene related to the {@link gl} global object.
+		* Loads the [current model view matrix]{@link MatricesHandler#current_model_view_matrix}
+		* and the [current projection matrix]{@link MatricesHandler#current_projection_matrix} into
+		* the given WebGL canvas context and Shader Program.
+		* @param {WebGLContext} webgl_context The WebGL canvas context that will be used for 
+		* loading the matrices.
+		* @param {ShaderProgram} shader_program The Shader Program that will be used for 
+		* loading the matrices.
 		* @public
 		*/
-		object.setMatrixUniforms = function(webgl_context,shader_program)
+		that.setMatrixUniforms = function(webgl_context,shader_program)
 		{
-			webgl_context.uniformMatrix4fv(shader_program.pMatrixUniform, false, object.projection_matrix);
-			webgl_context.uniformMatrix4fv(shader_program.mvMatrixUniform, false, object.model_view_matrix);
+			webgl_context.uniformMatrix4fv(shader_program.pMatrixUniform, false, current_projection_matrix);
+			webgl_context.uniformMatrix4fv(shader_program.mvMatrixUniform, false, current_model_view_matrix);
 		}
 
 		/**
-		* Sets the current [model view matrix]{@link webglut/matrices~mvMatrix} as the identity matrix.
+		* Sets the [current model view matrix]{@link MatricesHandler#current_model_view_matrix}
+		* to the identity matrix. Overides any matrix values previously stored.
 		* @public
 		*/
-		object.mvLoadIdentity = function()
+		that.mvLoadIdentity = function()
 		{
-			mat4.identity(object.model_view_matrix);
+			mat4.identity(current_model_view_matrix);
 		}
 	
 		/**
-		* Sets the current [projection matrix]{@link webglut/matrices~pMatrix} as the identity matrix.
+		* Sets the [current projection matrix]{@link MatricesHandler#current_projection_matrix}
+		* as the identity matrix. Overides any matrix values previously stored.
 		* @public
 		*/
-		object.pLoadIdentity = function()
+		that.pLoadIdentity = function()
 		{
-			mat4.identity(object.projection_matrix);
+			mat4.identity(current_projection_matrix);
+		}
+	
+		/**
+		* Sets the [current projection matrix]{@link MatricesHandler#current_projection_matrix}
+		* as a three dimensional perspective projection, given the necessary parameters.
+		* When using this kind of projection, further objects in the screne will appear smaller
+		* than closer objects.
+		* @param {number} fovy The fovy aspect of the projection. (The angle of view).
+		* @param {number} aspect The aspect ratio of the projection. (The ratio between the viewport width and height).
+		* @param {number} near How close objects will still be rendered.
+		* @param {number} far How far objects will still be rendered.
+		* @public
+		*/
+		that.pSetPerspective = function(fovy,aspect,near,far)
+		{
+			mat4.perspective(fovy,aspect,near,far,current_projection_matrix);
+		}
+	
+		/**
+		* Multiplies (applies) a translation matrix to the
+		* [current model view matrix]{@link MatricesHandler#current_model_view_matrix}.
+		* @param {number[]} vector The [x,y,z] vector to translate the scene. 
+		* Expects an array with three entries.
+		* Use the third coordinate as zero if drawing 2d scenes.
+		* @public
+		*/
+		that.mvTranslate = function(vector)
+		{
+			mat4.translate(current_model_view_matrix, vector);
+		}
+	
+		/**
+		* Multiplies (applies) a scale matrix to the
+		* [current model view matrix]{@link MatricesHandler#current_model_view_matrix}.
+		* @param {number[]} ratio The [x,y,z] scale ratio of the scene.
+		* Expects an array with three entries.
+		* Use the third coordinate as one if drawing 2d scenes.
+		* @public
+		*/
+		that.mvScale = function(ratio)
+		{
+			mat4.scale(current_model_view_matrix,ratio);
+		}
+	
+		/**
+		* Multiplies (applies) a rotation matrix to the
+		* [current model view matrix]{@link MatricesHandler#current_model_view_matrix}.
+		* @param {number} angle_in_radians Angle, in radians, of the rotation.
+		* @param {number[]} axe Axe to be used for the rotation. The matrix multiplied
+		* will be a rotation around this axe.
+		* Expects an array [x,y,z] with three entries.
+		* @public
+		*/
+		that.mvRotate = function(angle_in_radians,axe)
+		{
+			mat4.rotate(current_model_view_matrix,angle_in_radians,axe);
 		}
 	
 	
 		/**
-		* Sets the current [projection matrix]{@link webglut/matrices~pMatrix} as a three dimentional perspective projection, given the necessary parameters.
-		* Further objects will appear smaller than close objects.
-		* @param {number} fovy The fovy aspect of the projection. (The opening angle of view).
-		* @param {number} aspect The aspect ratio of the projection. (The ratio between the view port width and height).
-		* @param {number} near How close objects will be rendered.
-		* @param {number} far How far objects will be rendered.
-		* @public
-		*/
-		object.pSetPerspective = function(fovy,aspect,near,far)
-		{
-			mat4.perspective(fovy,aspect,near,far,object.projection_matrix);
-		}
-	
-		/**
-		* Applies a translation to the current [model view matrix]{@link webglut/matrices~mvMatrix}.
-		* @param {number[]} vector The (x,y,z) vector to translate the scene. Expects an array with three entries.
-		* @public
-		* @example
-		*	Matrices.mvTranslate([10,5,1]);
-		*	// This cube will be only translated according to the vector (10,5,1)
-		*	drawCube();
-		*/
-		object.mvTranslate = function(vector)
-		{
-			mat4.translate(object.model_view_matrix, vector);
-		}
-	
-	
-		/**
-		* Applies a scale to the current [model view matrix]{@link webglut/matrices~mvMatrix}.
-		* @param {number[]} ratio The (x,y,z) scale ratio of the scene. Expects an array with three entries.
-		* @public
-		*/
-		object.mvScale = function(ratio)
-		{
-			mat4.scale(object.model_view_matrix,ratio);
-		}
-	
-		/**
-		* Applies a rotation to the current [model view matrix]{@link webglut/matrices~mvMatrix}.
-		* @param {number} angle Angle, in degrees, to rotate the scene.
-		* @param {number[]} axis Axis to be used for the rotation. Expects an array with three entries.
-		* @public
-		* @example
-		*	Matrices.mvRotate(30,[0,1,0]);
-		*	// This cube will rotated by 30 degrees in the y axe.
-		*	drawCube();
-		*/
-		object.mvRotate = function(angle_in_radians,axis)
-		{
-			mat4.rotate(object.model_view_matrix,angle_in_radians,axis);
-		}
-	
-	
-		/**
-		* Sets the current [projection matrix]{@link webglut/matrices~pMatrix} as a ortographic projection. Usually used for two dimentional drawings.
-		* Further objects will appear as big as close objects.
+		* Sets the [current projection matrix]{@link MatricesHandler#current_projection_matrix}
+		* as a orthographic, given the necessary parameters.
+		* When using this kind of projection, further objects in the screne will appear as big
+		* as closer objects. This projection should be used for thow dimensional
+		* drawings.
 		* @param {number} left The left bound of the points of the scene.
 		* @param {number} right The right bound of the points of the scene.
 		* @param {number} bottom The bottom bound of the points of the scene.
 		* @param {number} top The top bound of the points of the scene.
-		* @param {number} near How close objects will be rendered.
-		* @param {number} far How far objects will be rendered.
+		* @param {number} near How close objects will still be rendered.
+		* @param {number} far How far objects will still be rendered.
+		* @public
 		*/
-		object.pOrtho = function(left, right, bottom, top, near, far)
+		that.pOrtho = function(left, right, bottom, top, near, far)
 		{
-			mat4.ortho(left, right, bottom, top, near, far, object.projection_matrix);
+			mat4.ortho(left, right, bottom, top, near, far, current_projection_matrix);
 		}
 	}
 	
