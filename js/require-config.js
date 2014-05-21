@@ -8,7 +8,7 @@ requirejs.config({
 	}
 });
 
-requirejs(['main','libs/webgl','libs/glMatrix'], 
+requirejs(['main','libs/webgl','libs/gl_matrix'], 
 function (Main)
 {
 	Main.main();
