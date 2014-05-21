@@ -1,92 +1,133 @@
 define(
-function(){
-
+function()
+{
+	/**
+	* A Events handler.
+	* It's responsible for managing the events that happen in the canvas scene, as well
+	* as keeping track of important functions such as the display function.
+	* @class EventsHandler
+	*/
 	var EventsHandler = function()
+	/** @lends EventsHandler# */
 	{
-		var object = this;
+		var that = this;
+
+		/*
+		-------------------------------------------------------------------------------
+		 PRIVATE:
+		-------------------------------------------------------------------------------
+		*/
+
+		/**
+		* The display function that will be called whenever it's necessary to display elements
+		* in the canvas. This function should receive no parameters and return nothing.
+		* @type {function}
+		* @memberOf EventsHandler#
+		* @private
+		*/
+		var display_function;
 		
 		/**
-		* The display function to be used to display elements in the canvas element.
-		* @private
+		* The loop function that will be called whenever a complete event loop is completed.
+		* This function will be called periodically and should receive as parameter 
+		* time_elapsed_in_milliseconds, the time elapsed since it's function last call.
+		* This functions should not return any value.
 		* @type {function}
-		*/
-		object.display_function;
-	
-		/**
-		* The loop function to be called every cycle.
+		* @memberOf EventsHandler#
 		* @private
-		* @type {function}
 		*/
-		object.loop_function;
-	
+		var loop_function;
+
 		/**
-		* Sets the function to be called whenever it's necessary to display something in the canvas element.
-		* This function is expected to have no parameters
-		* @param {function()} displayFunction The function to be called as the display function.
-		* @public
-		*/
-		object.setDisplayFunction= function(_display_function)
-		{
-			object.display_function = _display_function;
-		}
-	
-		/**
-		* Sets the function to be called every cycle. The function is expected to have as parameter the time elapsed since it's last call, in milliseconds.
-		* @param {function(timeElapsedInMilliseconds)} loopFunction The function to be called as the loop function. Has the time elapsed since it's last call as parameter
-		* @public
-		*/
-		object.setLoopFunction = function(_loop_function)
-		{
-			object.loop_function = _loop_function;
-		}
-	
-		/**
-		* Calls the [display function]{@link webglut/gl_events~displayFunction}.
-		* @public
-		*/
-		object.postRedisplay = function()
-		{
-			object.display_function();
-		}
-	
-		/**
-		* When the last loop function was called, in milliseconds.
-		* @private
+		* When, in milliseconds, the last event loop happened.
+		* This value is used to allow evaluating how long it has been since
+		* the last event loop happened.
 		* @type {number}
 		* @default 0
-		*/
-		object.last_time_in_milliseconds = 0;
-	
-	
-		/**
-		* The main loop structure of the [events]{@link webglut/gl_events} module. Is responsable for the event's handling and function calls.
+		* @memberOf EventsHandler#
 		* @private
 		*/
-		object.loopStep = function()
+		var last_time_in_milliseconds = 0;
+
+		/**
+		* The main loop function called periodically in the [EventsHandler]{@link EventsHandler}
+		* events cycle.
+		* Is responsible for the periodic functions calls, such as the
+		* [loop function]{@link EventsHandler#loop_function}.
+		* @memberOf EventsHandler#
+		* @private
+		*/
+		function loopStep()
 		{
-			requestAnimFrame(object.loopStep);
+			// Request this function call whenever it's possible.
+			requestAnimFrame(loopStep);
 		
+			// Calculate the time elapsed since this function last call.
 			var time_now_in_milliseconds = new Date().getTime();
-			if (object.last_time_in_milliseconds != 0)
+			if(last_time_in_milliseconds != 0)
 			{
-				var time_elapsed_in_milliseconds = time_now_in_milliseconds - object.last_time_in_milliseconds;
-				if(object.loop_function)
+				var time_elapsed_in_milliseconds = time_now_in_milliseconds - last_time_in_milliseconds;
+
+				// Call the loop_function
+				if(loop_function)
 				{
-					object.loop_function(time_elapsed_in_milliseconds);
+					loop_function(time_elapsed_in_milliseconds);
 				}
 			}
-			object.last_time_in_milliseconds = time_now_in_milliseconds;
+			last_time_in_milliseconds = time_now_in_milliseconds;
+		}
+
+		/*
+		-------------------------------------------------------------------------------
+		 PUBLIC:
+		-------------------------------------------------------------------------------
+		*/
+	
+		/**
+		* Sets the current display function. The display function will be called whenever 
+		* it's necessary to display elements in the canvas.
+		* The display function should receive no parameters and return nothing.
+		* @param {function} _display_function The function to be set as the current
+		* [display function]{@link EventsHandler#display_function}.
+		* @public
+		*/
+		that.setDisplayFunction= function(_display_function)
+		{
+			display_function = _display_function;
 		}
 	
 		/**
-		* Initializes the [events]{@link webglut/gl_events} module periodic cycles.
+		* Sets the current loop function. The loop function will be called periodically.
+		* The loop function should have as parameter time_elapsed_in_milliseconds,
+		* the time elapsed since it's the loop function last call.
+		* The loop function should return no values.
+		* @param {function} _loop_function The function to be set as the current
+		* [loop function]{@link EventsHandler#loop_function}.
 		* @public
 		*/
-		object.initializeMainLoop = function()
+		that.setLoopFunction = function(_loop_function)
 		{
-			object.loopStep();
-			if(object.display_function)
-				object.display_function();
+			loop_function = _loop_function;
+		}
+	
+		/**
+		* Calls the [display function]{@link EventsHandler#display_function}.
+		* @public
+		*/
+		that.postRedisplay = function()
+		{
+			display_function();
+		}
+
+		/**
+		* Initializes the [EventsHandler]{@link EventsHandler} main loop cycle.
+		* @public
+		*/
+		that.initializeMainLoop = function()
+		{
+			loopStep();
+			if(display_function)
+				display_function();
 		}
 	}
 
