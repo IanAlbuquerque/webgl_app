@@ -6,26 +6,44 @@ define(['canvas-webgl-utility/exceptions/shader-compile-failure-exception',
 	'canvas-webgl-utility/shaders/vertex-shader'],
 function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFoundException,ShaderProgramLinkFailureException,FragmentShader,VertexShader)
 {
-
+	/**
+	* A shaders handlers.
+	* It's responsible for manipulating and creating all the buffer-related structures necessary
+	* for creating a WebGL scene. This includes the creation of the Shader Program.
+	* @class ShadersHandler
+	*/
 	var ShadersHandler = function()
+	/** @lends ShadersHandler# */
 	{
-		var object = this;
+		var that = this;
+
+		/*
+		-------------------------------------------------------------------------------
+		 PRIVATE:
+		-------------------------------------------------------------------------------
+		*/
 		
 		/**
-		* Creates a shader based on a id given.
-		* @param {string} id The id of the scripf of the shader intended to be created.
-		* @throws {Exception}
-		* @returns {Shader} The shader generated.
+		* Creates a WebGL shader based on a given shader object (containing the shader script).
+		* @param {WebGLContext} webgl_context The WebGL canvas context that will be used for creating
+		* the shader.
+		* @param {(FragmentShader|VertexShader)} shader_object The shader object that will be used
+		* to extract the shader script itself.
+		* @throws {ShaderNotFoundException}
+		* @throws {ShaderInvalidTypeException}
+		* @throws {ShaderCompileFailureException}
+		* @returns {glShader} The WebGL shader generated.
+		* @memberOf ShadersHandler#
 		* @private
 		*/
-		object.getShader = function(webgl_context,shader_object) 
+		function getShader(webgl_context,shader_object) 
 		{
 			if (!shader_object)
 			{
 			    throw new ShaderNotFoundException();
 			}
 
-			// Organizes the script content into the source code of the script
+			// Retrieves the shader script itself
 			var script_source_code = shader_object.script;
 		
 			// Creates the shader according to it's type 
@@ -54,13 +72,32 @@ function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFound
 
 			return shader;
 	   	 }
+
+		/*
+		-------------------------------------------------------------------------------
+		 PUBLIC:
+		-------------------------------------------------------------------------------
+		*/
 	
-		object.setUpShaderProgram = function(webgl_context,shader_program)
+		/**
+		* Sets up the given Shader Program, loading it with the proper WebGL fragment and
+		* vertex shaders and properly linking it with the WebGL canvas context.
+		* @param {WebGLContext} webgl_context The WebGL canvas context that will be used for 
+		* setting up the Shader Program.
+		* @param {ShaderProgram} shader_program The Shader Program that should be set up.
+		* @throws {ShaderNotFoundException}
+		* @throws {ShaderInvalidTypeException}
+		* @throws {ShaderCompileFailureException}
+		* @throws {ShaderProgramLinkFailureException}
+		* @public
+		*/
+		that.setUpShaderProgram = function(webgl_context,shader_program)
 		{
+			// Retrieves the WebGL shaders.
 			try
 			{
-				var fragment_shader = object.getShader(webgl_context,new FragmentShader());
-				var vertex_shader = object.getShader(webgl_context,new VertexShader());
+				var fragment_shader = getShader(webgl_context,new FragmentShader());
+				var vertex_shader = getShader(webgl_context,new VertexShader());
 			}
 			catch(exception)
 			{
@@ -68,8 +105,11 @@ function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFound
 				return;
 			}
 
+			// Attaches the shaders to the Shader Program.
 			webgl_context.attachShader(shader_program, vertex_shader);
 			webgl_context.attachShader(shader_program, fragment_shader);
+
+			// Links the Shader Program to the WebGL canvas context.
 			webgl_context.linkProgram(shader_program);
 
 			if (!webgl_context.getProgramParameter(shader_program, webgl_context.LINK_STATUS))
@@ -77,6 +117,7 @@ function(ShaderCompileFailureException,ShaderInvalidTypeException,ShaderNotFound
 				throw new ShaderProgramLinkFailureException();
 			}
 		
+			// Sets up the members of the shaders in the Shader Program.
 			webgl_context.useProgram(shader_program);
 
 			shader_program.vertexPositionAttribute = webgl_context.getAttribLocation(shader_program, "aVertexPosition");

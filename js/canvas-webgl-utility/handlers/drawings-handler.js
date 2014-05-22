@@ -267,7 +267,7 @@ function(ArrayWebGLBuffer)
 		}
 		
 		/**
-		* Draws the given thow dimesional vertices using the given WebGL primitive and a color
+		* Draws the given two dimesional vertices using the given WebGL primitive and a color
 		* per vertex.
 		* Note: The two dimensional vertices are actually treated as three dimensional vertices, with their third
 		* coordinate set to zero.
