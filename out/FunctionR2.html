@@ -28,7 +28,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
           <div class="span4">
-              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="Polinomio.html"><i class="icon-shield" style="color: #0186d1"></i> Polinomio</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
           </div>
 
           <div class="span8">
@@ -57,7 +57,7 @@
     
         
 <dt>
-    <h4 class="name" id="FunctionR2">new FunctionR2<span class="signature">(xMin, xMax, numPontos, fOfX)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="FunctionR2">new FunctionR2<span class="signature">(_x_min, _x_max, _function_string)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -101,7 +101,7 @@
 
         <tr>
             
-                <td class="name">xMin</td>
+                <td class="name">_x_min</td>
             
 
             <td class="type">
@@ -124,7 +124,7 @@
 
         <tr>
             
-                <td class="name">xMax</td>
+                <td class="name">_x_max</td>
             
 
             <td class="type">
@@ -147,30 +147,7 @@
 
         <tr>
             
-                <td class="name">numPontos</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The number of points to be used for the function drawing discretization.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">fOfX</td>
+                <td class="name">_function_string</td>
             
 
             <td class="type">
@@ -186,7 +163,7 @@
 
             
 
-            <td class="description last">A string containing the script that is evaluated as f(x). The x variable must be used.</td>
+            <td class="description last">A string containing the script that is evaluated as f(x).The x variable must be used.</td>
         </tr>
 
 	
@@ -236,11 +213,6 @@
     
     
     
-        <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>// Function sin(x).var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");// Draws the function.myFunction.draw();</code></pre>
-
-    
 </dd>
 
     
@@ -258,14 +230,14 @@
         <dl class="bs-docs-example bs-members">
             
 <dt>
-    <h4 class="name" id="fOfX">fOfX<span class="type-signature"></span></h4>
+    <h4 class="name" id="function_string"><span class="label label-info">private</span> function_string<span class="type-signature"> :string</span></h4>
     
     
 </dt>
 <dd>
     
     <div class="description">
-        The array containing the coefficients of the polinomio. The entry coefficients[i] corresponds to the coefficient of x^i.
+        A string containing the script that is evaluated as f(x).The x variable must be used.
     </div>
     
     
@@ -305,54 +277,7 @@
         
             
 <dt>
-    <h4 class="name" id="numPontos">numPontos<span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        The number of points to be used for the function drawing discretization.
-    </div>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="xMax">xMax<span class="type-signature"></span></h4>
+    <h4 class="name" id="x_max"><span class="label label-info">private</span> x_max<span class="type-signature"> :number</span></h4>
     
     
 </dt>
@@ -382,9 +307,6 @@
     
     
     
-    <dt class="tag-default">Default Value:</dt>
-    <dd class="tag-default"><ul class="dummy"><li>1</li></ul></dd>
-    
 
     
     
@@ -402,7 +324,7 @@
         
             
 <dt>
-    <h4 class="name" id="xMin">xMin<span class="type-signature"></span></h4>
+    <h4 class="name" id="x_min"><span class="label label-info">private</span> x_min<span class="type-signature"> :number</span></h4>
     
     
 </dt>
@@ -432,9 +354,6 @@
     
     
     
-    <dt class="tag-default">Default Value:</dt>
-    <dd class="tag-default"><ul class="dummy"><li>-1</li></ul></dd>
-    
 
     
     
@@ -458,90 +377,6 @@
         <dl class="bs-docs-example bs-methods">
             
 <dt>
-    <h4 class="name" id="calculateDrawingPoints">calculateDrawingPoints<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Draws the function in the plane XY.
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            <div class="returns">
-
-
-    
-<span class="param-type">Array.&lt;number></span>
-
-
-
-
-<span class="param-desc">
-    The list of points that represents the drawing. Every two entries represents the x and y informations of a point. The drawing should be made using gl.LINE_STRIP.
-</span>
-
-</div>
-
-        
-    
-    
-</dd>
-
-        
-            
-<dt>
     <h4 class="name" id="f">f<span class="signature">(x)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
     
@@ -551,7 +386,7 @@
     
     <div class="description">
         <p>
-        Returns the function evaluted in a point in domain.
+        Returns the value of function evaluted in a point in domain.
         </p>
     </div>
     
@@ -602,7 +437,7 @@
 
             
 
-            <td class="description last">The point in the domain to evaluate the value of the function.</td>
+            <td class="description last">The point in the domain that will be evaluated.</td>
         </tr>
 
 	
@@ -675,7 +510,140 @@
         
             
 <dt>
-    <h4 class="name" id="setDomain">setDomain<span class="signature">(xMin, xMax)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="generateDrawingVertices">generateDrawingVertices<span class="signature">(number_of_points)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Generates the vertices that represents the graphic of the discratization of thefunction given the number of points to be used for the discretization.The vertices are supposed to be drawn using the LINE_STRIP or POINTS primitives.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">number_of_points</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of points to be used for the discretization.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            <div class="returns">
+
+
+    
+<span class="param-type">Array.&lt;number></span>
+
+
+
+
+<span class="param-desc">
+    The list of vertices that represents the drawing. Every two entries represents the x and y coordinates of a vertex.
+</span>
+
+</div>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="setDomain">setDomain<span class="signature">(x_min, x_max)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -719,7 +687,7 @@
 
         <tr>
             
-                <td class="name">xMin</td>
+                <td class="name">x_min</td>
             
 
             <td class="type">
@@ -742,7 +710,7 @@
 
         <tr>
             
-                <td class="name">xMax</td>
+                <td class="name">x_max</td>
             
 
             <td class="type">
@@ -813,7 +781,7 @@
         
             
 <dt>
-    <h4 class="name" id="setF">setF<span class="signature">(fOfX)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="setFunctionString">setFunctionString<span class="signature">(_function_string)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -857,7 +825,7 @@
 
         <tr>
             
-                <td class="name">fOfX</td>
+                <td class="name">_function_string</td>
             
 
             <td class="type">
@@ -873,7 +841,7 @@
 
             
 
-            <td class="description last">A string containing the script that is evaluated as f(x). The x variable must be used.</td>
+            <td class="description last">A string containing the script that isevaluated as f(x). The x variable must be used.</td>
         </tr>
 
 	
@@ -944,7 +912,7 @@
         <br clear="both">
 
       <footer>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed May 21 2014 21:52:25 GMT-0300 (BRT)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed May 21 2014 23:07:43 GMT-0300 (BRT)
         <br>
       </footer>
       <script> prettyPrint(); </script>

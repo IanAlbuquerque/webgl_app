@@ -1,109 +1,117 @@
 define(
-/** @lends FunctionR2 */
-function(){
+function()
+{
 	
 	/**
 	* A function defined from R to R.
-	* @param {number} xMin The left bound of the domain.
-	* @param {number} xMax The right bound of the domain.
-	* @param {number} numPontos The number of points to be used for the function drawing discretization.
-	* @param {string} fOfX A string containing the script that is evaluated as f(x). The x variable must be used.
+	* @param {number} _x_min The left bound of the domain.
+	* @param {number} _x_max The right bound of the domain.
+	* @param {string} _function_string A string containing the script that is evaluated as f(x).
+	* The x variable must be used.
 	* @class FunctionR2
-	* @example
-	*	// Function sin(x).
-	*	var myFunction = new FunctionR2(-1,1,500,"Math.sin(x)");
-	*	// Draws the function.
-	*	myFunction.draw();
 	**/
-	var FunctionR2 = function(_xMin,_xMax,_numPontos,_fOfX)
+	var FunctionR2 = function(_x_min,_x_max,_function_string)
+	/** @lends FunctionR2# */
 	{
+		var that = this;
+
+		/*
+		-------------------------------------------------------------------------------
+		 PRIVATE:
+		-------------------------------------------------------------------------------
+		*/
+
 		/**
 		* The left bound of the domain.
-		* @default -1
+		* @type {number}
+		* @memberOf FunctionR2#
+		* @private
 		**/
-		if(_xMin) this.xMin = _xMin;
-		else this.xMin = -1;
+		var x_min = _x_min;
 		
 		/**
 		* The right bound of the domain.
-		* @default 1
+		* @type {number}
+		* @memberOf FunctionR2#
+		* @private
 		**/
-		if(_xMax) this.xMax = _xMax;
-		else this.xMax = 1;
+		var x_max = _x_max;
 		
 		/**
-		* The number of points to be used for the function drawing discretization.
-		* @defaulf 400
+		* A string containing the script that is evaluated as f(x).
+		* The x variable must be used.
+		* @type {string}
+		* @memberOf FunctionR2#
+		* @private
 		**/
-		if(_numPontos) this.numPontos = _numPontos;
-		else this.numPontos = 400;
-		
-		
+		var function_string = _function_string;
+
+		/*
+		-------------------------------------------------------------------------------
+		 PUBLIC:
+		-------------------------------------------------------------------------------
+		*/
+	
 		/**
-		* The array containing the coefficients of the polinomio. The entry coefficients[i] corresponds to the coefficient of x^i.
-		* @defaulf "x*x*x"
-		**/
-		if(_fOfX) this.fOfX = _fOfX;
-		else this.fOfX = "x*x*x";
-		
-		/**
-		* Returns the function evaluted in a point in domain.
-		* @param {number} x The point in the domain to evaluate the value of the function.
+		* Returns the value of function evaluted in a point in domain.
+		* @param {number} x The point in the domain that will be evaluated.
 		* @return {number} The value f(x)
 		* @public
 		*/
-		this.f = function(x)
+		that.f = function(x)
 		{
-			return eval(this.fOfX);
+			return eval(function_string);
 		}
 	
 		/**
-		* Draws the function in the plane XY.
-		* @returns {number[]} The list of points that represents the drawing. Every two entries represents the x and y informations of a point. 
-		* The drawing should be made using gl.LINE_STRIP.
+		* Generates the vertices that represents the graphic of the discratization of the
+		* function given the number of points to be used for the discretization.
+		* The vertices are supposed to be drawn using the LINE_STRIP or POINTS primitives.
+		* @param {number} number_of_points The number of points to be used for the discretization.
+		* @returns {number[]} generated_vertices The list of vertices that represents the drawing. 
+		* Every two entries represents the x and y coordinates of a vertex. 
 		* @public
 		*/
-		this.calculateDrawingPoints = function()
+		that.generateDrawingVertices = function(number_of_points)
 		{
-			var points = [];
-			var dx;
-			var x,y;
+			var generated_vertices = [];
+			var delta_x;
+			var x_coordinate,y_coordinate;
 			
-			dx = (this.xMax-this.xMin)/this.numPontos;
+			delta_x = (x_max-x_min)/number_of_points;
 			
-			x=this.xMin;
-			for(var i=0;i<this.numPontos;i++)
+			for(var i=0;i<number_of_points;i++)
 			{
-				y=this.f(x);
+				x_coordinate=x_min+i*delta_x;
+				y_coordinate=that.f(x_coordinate);
 
-				points.push(x);
-				points.push(y);
-				
-				x+=dx;
+				generated_vertices.push(x_coordinate);
+				generated_vertices.push(y_coordinate);
 			}
-			return points;
+			return generated_vertices;
 		}
 	
 		/**
 		* Sets the string that will be evaluated as f(x).
-		* @param {string} fOfX A string containing the script that is evaluated as f(x). The x variable must be used.
+		* @param {string} _function_string A string containing the script that is
+		* evaluated as f(x). The x variable must be used.
 		* @public
 		*/
-		this.setF = function(_fOfX)
+		that.setFunctionString = function(_function_string)
 		{
-			this.fOfX = _fOfX;
+			function_string = _function_string;
 		}
 	
 		/**
 		* Sets domain of the function.
-		* @param {number} xMin The left bound of the domain.
-		* @param {number} xMax The right bound of the domain.
+		* @param {number} x_min The left bound of the domain.
+		* @param {number} x_max The right bound of the domain.
 		* @public
 		*/
-		this.setDomain = function(_xMin,_xMax)
+		that.setDomain = function(_x_min,_x_max)
 		{
-			this.xMin = _xMin;
-			this.xMax = _xMax;
+			x_min = _x_min;
+			x_max = _x_max;
 		}
 
 	}
