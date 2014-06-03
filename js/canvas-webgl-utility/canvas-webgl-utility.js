@@ -10,7 +10,7 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 	function CanvasWebGLUtility(_canvas)
 	{
 		var that = this;
-		
+
 		that.canvas = _canvas;
 		
 		that.viewport = new Viewport(that.canvas);
@@ -39,8 +39,9 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		}
 		
 		that.drawings_handler = new DrawingsHandler();
-		that.events_handler = new EventsHandler();
+		that.events_handler = new EventsHandler(that.viewport);
 		that.matrices_handler = new MatricesHandler();
+
 		that.pushVertex2d = that.drawings_handler.pushVertex2d;
 		that.pushVertex3d = that.drawings_handler.pushVertex3d;
 		that.setDrawingColor = that.drawings_handler.setDrawingColor;
@@ -88,6 +89,15 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		that.setLoopFunction = that.events_handler.setLoopFunction;
 		that.postRedisplay = that.events_handler.postRedisplay;
 		that.initializeMainLoop = that.events_handler.initializeMainLoop;
+		that.setMouseButtonDownFunction = function(_mouse_button_down_function)
+		{
+			that.events_handler.setMouseButtonDownFunction(that.canvas,_mouse_button_down_function);
+		}
+		that.setMouseButtonUpFunction = that.events_handler.setMouseButtonUpFunction;
+		that.setMouseMoveFunction = function(_mouse_move_function)
+		{
+			that.events_handler.setMouseMoveFunction(that.canvas,_mouse_move_function);
+		}
 		
 		that.COLOR_BUFFER_BIT = that.webgl_context.COLOR_BUFFER_BIT;
 		that.DEPTH_BUFFER_BIT = that.webgl_context.DEPTH_BUFFER_BIT;

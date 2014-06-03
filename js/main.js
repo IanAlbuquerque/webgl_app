@@ -87,9 +87,13 @@ function(CanvasWebGLUtility,FunctionR2,ImplicitCurve)
 		screen.postRedisplay();
 	}
 	
+	function primary_mouse_down(button,x_percentage,y_percentage)
+	{
+		alert(x_percentage+" "+y_percentage);
+	}
+
 	function main()
 	{
-	
 		try
 		{
 			var primary_canvas = document.getElementById("primary-canvas");
@@ -104,6 +108,7 @@ function(CanvasWebGLUtility,FunctionR2,ImplicitCurve)
 		}
 
 		primary_screen.setDisplayFunction(primary_display);
+		primary_screen.setMouseButtonDownFunction(primary_mouse_down);
 		primary_screen.initializeMainLoop();
 
 		secondary_screen.setDisplayFunction(secondary_display);

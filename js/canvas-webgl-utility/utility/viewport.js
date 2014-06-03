@@ -3,17 +3,38 @@ function()
 {
 	function Viewport(canvas)
 	{
-		var object = this;
+		var that = this;
 		
-		object.width = canvas.width;
-		object.height = canvas.height;
+		that.width = canvas.width;
+		that.height = canvas.height;
 		
 		var canvasBoundingRectangle = canvas.getBoundingClientRect();
 		
-		object.top = canvasBoundingRectangle.top;
-		object.bottom = canvasBoundingRectangle.bottom;
-		object.left = canvasBoundingRectangle.left;
-		object.right = canvasBoundingRectangle.right;
+		that.top = canvasBoundingRectangle.top;
+		that.bottom = canvasBoundingRectangle.bottom;
+		that.left = canvasBoundingRectangle.left;
+		that.right = canvasBoundingRectangle.right;
+
+		that.DIRECTION_HORIZONTAL = 0;
+		that.DIRECTION_VERTICAL = 1;
+
+		that.convertToPercentage = function(direction,value)
+		{
+			if(direction == that.DIRECTION_HORIZONTAL)
+			{
+				return (value-that.left)/that.width;
+			}
+			else if(direction == that.DIRECTION_VERTICAL)
+			{
+				return (value-that.top)/that.height;
+			}
+			else
+			{
+				// throw exception??
+				return 0;
+			}
+
+		}
 	}
 	return Viewport;	
 });

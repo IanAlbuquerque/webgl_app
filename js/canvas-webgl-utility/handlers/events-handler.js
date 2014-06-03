@@ -7,7 +7,7 @@ function()
 	* as keeping track of important functions such as the display function.
 	* @class EventsHandler
 	*/
-	var EventsHandler = function()
+	var EventsHandler = function(_viewport)
 	/** @lends EventsHandler# */
 	{
 		var that = this;
@@ -17,6 +17,8 @@ function()
 		 PRIVATE:
 		-------------------------------------------------------------------------------
 		*/
+
+		var viewport = _viewport;
 
 		/**
 		* The display function that will be called whenever it's necessary to display elements
@@ -37,6 +39,41 @@ function()
 		* @private
 		*/
 		var loop_function;
+
+		/**
+		* The mouse function that will be called whenever a button is pressed with the mouse
+		* on the canvas.
+		* This function should receive as parameters 'button', 'x' and 'y': the button pressed,
+		* and the coordinates (in porcentage) of the mouse pointer.
+		* This functions should not return any value.
+		* @type {function}
+		* @memberOf EventsHandler#
+		* @private
+		*/
+		var mouse_button_down_function;
+
+		/**
+		* The mouse function that will be called whenever a button is released with the mouse
+		* on the web page.
+		* This function should receive as parameters 'button', 'x' and 'y': the button released,
+		* and the coordinates (in porcentage) of the mouse pointer.
+		* This functions should not return any value.
+		* @type {function}
+		* @memberOf EventsHandler#
+		* @private
+		*/
+		var mouse_button_up_function;
+
+		/**
+		* The mouse function that will be called whenever the mouse is moved.
+		* This function should receive as parameters 'x' and 'y':
+		* the coordinates (in porcentage) of the mouse pointer.
+		* This functions should not return any value.
+		* @type {function}
+		* @memberOf EventsHandler#
+		* @private
+		*/
+		var mouse_move_function;
 
 		/**
 		* When, in milliseconds, the last event loop happened.
@@ -77,11 +114,38 @@ function()
 			last_time_in_milliseconds = time_now_in_milliseconds;
 		}
 
+		function mouseButtonDownHandler(event)
+		{
+			var x_percentage = viewport.convertToPercentage(viewport.DIRECTION_HORIZONTAL,event.pageX);
+			var y_percentage = viewport.convertToPercentage(viewport.DIRECTION_VERTICAL,event.pageY);
+			var button = event.button;
+			mouse_button_down_function(button,x_percentage,y_percentage);
+		}
+
+		function mouseButtonUpHandler(event)
+		{
+			var x_percentage = viewport.convertToPercentage(viewport.DIRECTION_HORIZONTAL,event.pageX);
+			var y_percentage = viewport.convertToPercentage(viewport.DIRECTION_VERTICAL,event.pageY);
+			var button = event.button;
+			mouse_button_up_function(button,x_percentage,y_percentage);
+		}
+
+		function mouseMoveHandler(event)
+		{
+			var x_percentage = viewport.convertToPercentage(viewport.DIRECTION_HORIZONTAL,event.pageX);
+			var y_percentage = viewport.convertToPercentage(viewport.DIRECTION_VERTICAL,event.pageY);
+			mouse_move_function(x_percentage,y_percentage);
+		}
+
 		/*
 		-------------------------------------------------------------------------------
 		 PUBLIC:
 		-------------------------------------------------------------------------------
 		*/
+
+		that.MOUSE_LEFT_BUTTON = 0;
+		that.MOUSE_MIDDLE_BUTTON = 1;
+		that.MOUSE_RIGHT_BUTTON = 2;
 	
 		/**
 		* Sets the current display function. The display function will be called whenever 
@@ -94,6 +158,36 @@ function()
 		that.setDisplayFunction= function(_display_function)
 		{
 			display_function = _display_function;
+		}
+
+		that.setMouseButtonDownFunction = function(canvas,_mouse_button_down_function)
+		{
+			if(mouse_button_down_function)
+			{
+				canvas.removeEventListener('mousedown', mouseButtonDownHandler);
+			}
+			mouse_button_down_function = _mouse_button_down_function;
+			canvas.addEventListener('mousedown', mouseButtonDownHandler,false);
+		}
+
+		that.setMouseButtonUpFunction = function(_mouse_button_up_function)
+		{
+			if(mouse_button_up_function)
+			{
+				document.removeEventListener('mouseup', mouseButtonUpHandler);
+			}
+			mouse_button_up_function = _mouse_button_up_function;
+			document.addEventListener('mouseup', mouseButtonUpHandler);
+		}
+
+		that.setMouseMoveFunction = function(canvas,_mouse_move_function)
+		{
+			if(mouse_move_function)
+			{
+				canvas.removeEventListener('mousemove', mouseMoveHandler);
+			}
+			mouse_move_function = _mouse_move_function;
+			canvas.addEventListener('mousemove', mouseMoveHandler);
 		}
 	
 		/**
