@@ -47,7 +47,7 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		that.setDrawingColor = that.drawings_handler.setDrawingColor;
 		that.beginDrawing = function(primitive)
 		{
-			that.drawings_handler.setDrawingColor(that.webgl_context,that.shader_program,primitive);
+			that.drawings_handler.beginDrawing(that.webgl_context,that.shader_program,primitive);
 		}
 		that.endDrawing = function()
 		{
@@ -85,6 +85,10 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		that.mvRotate = that.matrices_handler.mvRotate;
 		that.pOrtho = that.matrices_handler.pOrtho;
 		
+
+		that.MOUSE_LEFT_BUTTON = that.events_handler.MOUSE_LEFT_BUTTON;
+		that.MOUSE_MIDDLE_BUTTON = that.events_handler.MOUSE_MIDDLE_BUTTON;
+		that.MOUSE_RIGHT_BUTTON = that.events_handler.MOUSE_RIGHT_BUTTON;
 		that.setDisplayFunction = that.events_handler.setDisplayFunction;
 		that.setLoopFunction = that.events_handler.setLoopFunction;
 		that.postRedisplay = that.events_handler.postRedisplay;
@@ -111,6 +115,7 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		}
 		that.LINES = that.webgl_context.LINES;
 		that.LINE_STRIP = that.webgl_context.LINE_STRIP;
+		that.LINE_LOOP = that.webgl_context.LINE_LOOP;
 		that.POINTS = that.webgl_context.POINTS;
 	}
 	

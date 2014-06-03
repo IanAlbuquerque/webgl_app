@@ -31,6 +31,7 @@ function()
 			else
 			{
 				// throw exception??
+				// retur null??
 				return 0;
 			}
 
