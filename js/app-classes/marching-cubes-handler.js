@@ -4,7 +4,7 @@ function()
 	var MarchingCubesHandler = function()
 	{
 		var that = this;
-		var num_points = 50;
+		var num_points = 30;
 		var x_min = -2;
 		var x_max = 2;
 		var y_min = -2;
@@ -74,12 +74,13 @@ function()
 			}
 
 			computeEdge(0,1);
-			computeEdge(1,2);
-			computeEdge(2,0);
+			computeEdge(0,2);
 			computeEdge(0,3);
-			computeEdge(3,2);
-			computeEdge(3,1);
+			computeEdge(1,2);
+			computeEdge(1,3);
+			computeEdge(2,3);
 
+			//LINES
 			if(insertedPoints==3)
 			{
 				points.push(points[0]);
@@ -107,6 +108,20 @@ function()
 				points.push(points[4]);
 				points.push(points[5]);
 			}
+
+			//TRIANGLES
+			/*
+			if(insertedPoints==4)
+			{
+				points.push(points[6]);
+				points.push(points[7]);
+				points.push(points[8]);
+				points.push(points[0]);
+				points.push(points[1]);
+				points.push(points[2]);
+			}
+			*/
+
 			if(insertedPoints!=3 && insertedPoints!=4 && insertedPoints!=0)
 			{
 				points = [];

@@ -6,11 +6,9 @@ function(CanvasWebGLUtility,MarchingCubesHandler)
 	function evaluationFunction(x,y,z)
 	{
 		//TORO:
-		var LHS = x*x+y*y+z*z+1-0.2;
-		LHS*=LHS;
-		return LHS-4*x*x-4*y*y;
+		//var LHS = x*x+y*y+z*z+1-0.2;LHS*=LHS;return LHS-4*x*x-4*y*y;
 		
-		//return x*x+y*y+z*z-1;
+		return x*x-y*y+z*z-1;
 		//return x*x+y*y-z*z-1;
 		//return x*x-y*y-z;
 	}
@@ -114,7 +112,7 @@ function(CanvasWebGLUtility,MarchingCubesHandler)
 	{
 		scene.pSetPerspective(45,scene.viewport.width/scene.viewport.height,1,50);
 		scene.mvLoadIdentity();
-		scene.mvTranslate([0,0,-8]);
+		scene.mvTranslate([0,0,-10]);
 		scene.mvPushMatrix();
 			scene.mvRotate(third_angle,[0,0,1]);
 			scene.mvRotate(second_angle,[0,1,0]);
