@@ -120,6 +120,8 @@ function(CanvasWebGLUtility,FunctionR2,ImplicitCurve)
 		screen.mvPopMatrix();	
 	}
 
+	var angle_x=0;
+	var angle_y=0;
 	function third_display()
 	{
 		var screen = third_screen;
@@ -128,15 +130,15 @@ function(CanvasWebGLUtility,FunctionR2,ImplicitCurve)
 		screen.mvLoadIdentity();
 		screen.mvTranslate([0,0,-5]);
 		screen.mvPushMatrix();
-			screen.mvRotate(secondary_screen_angle,[0,1,0]);
-			screen.mvRotate(secondary_screen_angle,[0,0,1]);
-			screen.mvRotate(secondary_screen_angle,[0,1,0]);
+			screen.mvRotate(angle_y,[1,0,0]);
+			screen.mvRotate(angle_x,[0,0,1]);
+			screen.mvRotate(angle_y,[1,0,0]);
 			drawCube(screen);
 		screen.mvPopMatrix();
 		screen.mvPushMatrix();
-			screen.mvRotate(-secondary_screen_angle,[0,1,0]);
-			screen.mvRotate(-secondary_screen_angle,[0,0,1]);
-			screen.mvRotate(-secondary_screen_angle,[0,1,0]);
+			screen.mvRotate(angle_y,[1,0,0]);
+			screen.mvRotate(angle_x,[0,0,1]);
+			screen.mvRotate(angle_y,[1,0,0]);
 			drawAxis(screen);
 			drawSphere(screen);
 		screen.mvPopMatrix();	
@@ -154,6 +156,14 @@ function(CanvasWebGLUtility,FunctionR2,ImplicitCurve)
 	function third_loop(time_elapsed_in_milliseconds)
 	{
 		var screen = third_screen;
+		if(!is_button_pressed_3rd_screen)
+		{
+			var angular_speed = Math.PI/4; // Radians per second.
+			angle_x += angular_speed*time_elapsed_in_milliseconds/1000; 
+			angle_x = (angle_x)%(2*Math.PI);
+			angle_y += angular_speed*time_elapsed_in_milliseconds/1000; 
+			angle_y = (angle_y)%(2*Math.PI);
+		}
 		screen.postRedisplay();
 	}
 	
@@ -175,6 +185,32 @@ function(CanvasWebGLUtility,FunctionR2,ImplicitCurve)
 				alert(x_percentage+" "+y_percentage+" ???");
 				break;	
 		}
+	}
+	
+	var is_button_pressed_3rd_screen = false;
+	var last_x_position;
+	var last_y_position;
+	function third_mouse_down(button,x_percentage,y_percentage)
+	{
+		last_x_position = x_percentage;
+		last_y_position = y_percentage;
+		is_button_pressed_3rd_screen = true;
+	}
+	
+	function third_mouse_up(button,x_percentage,y_percentage)
+	{
+		is_button_pressed_3rd_screen = false;
+	}
+	
+	function third_mouse_move(x_percentage,y_percentage)
+	{
+		if(is_button_pressed_3rd_screen)
+		{
+			angle_y += (y_percentage-last_y_position)*2*Math.PI;
+			angle_x += (x_percentage-last_x_position)*2*Math.PI;
+		}
+		last_x_position = x_percentage;
+		last_y_position = y_percentage;
 	}
 
 	function main()
@@ -205,6 +241,9 @@ function(CanvasWebGLUtility,FunctionR2,ImplicitCurve)
 
 		third_screen.setDisplayFunction(third_display);
 		third_screen.setLoopFunction(third_loop);
+		third_screen.setMouseButtonDownFunction(third_mouse_down);
+		third_screen.setMouseButtonUpFunction(third_mouse_up);
+		third_screen.setMouseMoveFunction(third_mouse_move);
 		third_screen.initializeMainLoop();
 	}
 	
