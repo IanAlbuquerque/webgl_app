@@ -109,6 +109,10 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		{
 			that.webgl_context.clear(clear_elements);
 		}
+		that.enable = function(enable_elements)
+		{
+			that.webgl_context.enable(enable_elements);
+		}
 		that.clearColor = function(color)
 		{
 			that.webgl_context.clearColor(color[0],color[1],color[2],color[3]);
@@ -117,6 +121,9 @@ function(DrawingsHandler,EventsHandler,MatricesHandler,ShandersHandler,CanvasWeb
 		that.LINE_STRIP = that.webgl_context.LINE_STRIP;
 		that.LINE_LOOP = that.webgl_context.LINE_LOOP;
 		that.POINTS = that.webgl_context.POINTS;
+		that.TRIANGLES = that.webgl_context.TRIANGLES;
+		that.TRIANGLE_STRIP = that.webgl_context.TRIANGLE_STRIP;
+		that.DEPTH_TEST = that.webgl_context.DEPTH_TEST;
 	}
 	
 	return CanvasWebGLUtility;
