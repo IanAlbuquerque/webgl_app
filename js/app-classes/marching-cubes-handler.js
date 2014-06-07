@@ -4,7 +4,7 @@ function()
 	var MarchingCubesHandler = function()
 	{
 		var that = this;
-		var num_points = 30;
+		var num_points = 10;
 		var x_min = -2;
 		var x_max = 2;
 		var y_min = -2;
@@ -12,25 +12,18 @@ function()
 		var z_min = -2;
 		var z_max = 2;
 
+		var cube_x = [];
+		var cube_y = [];
+		var cube_z = [];
 
 		that.marchingCubes = function(evaluate_function)
 		{
 
 		}
 
-		var cube_x = [];
-		var cube_y = [];
-		var cube_z = [];
-
-		function add_vertex_to_cube(x,y,z)
-		{
-			cube_x.push(x);
-			cube_y.push(y);
-			cube_z.push(z);
-		}
-
 		function generateTetrahedron(evaluate_function,v1i,v2i,v3i,v4i)
 		{
+			return [];
 			var points = [];
 			var evaluation = [];
 			var coord_x = [];
@@ -142,6 +135,11 @@ function()
 			return points;
 		}
 
+		function concat(array_1,array_2)
+		{
+
+		}
+
 		that.marchingTetrahedron = function(evaluate_function)
 		{
 			var points = [];
@@ -161,19 +159,105 @@ function()
 						var zb = z_min + iz*dz;
 						var vertices_of_tetrahedron = [];
 
-						cube_x = [];
-						cube_y = [];
-						cube_z = [];
+						cube_x = [xb,xb+dx,xb+dx,xb,xb,xb+dx,xb+dx,xb];
+						cube_y = [yb,yb,yb+dy,yb+dy,yb,yb,yb+dy,yb+dy];
+						cube_z = [zb,zb,zb,zb,zb+dz,zb+dz,zb+dz,zb+dz];
 
-						add_vertex_to_cube(xb,yb,zb);
-						add_vertex_to_cube(xb+dx,yb,zb);
-						add_vertex_to_cube(xb+dx,yb+dy,zb);
-						add_vertex_to_cube(xb,yb+dy,zb);
-
-						add_vertex_to_cube(xb,yb,zb+dz);
-						add_vertex_to_cube(xb+dx,yb,zb+dz);
-						add_vertex_to_cube(xb+dx,yb+dy,zb+dz);
-						add_vertex_to_cube(xb,yb+dy,zb+dz);
+						//for(var i=0;i<8;i++) alert(cube_x[i]+" "+cube_y[i]+" "+cube_z[i]);
+						var vertice_um;
+						var vertice_dois;
+						vertice_um=0;
+						vertice_dois=1;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=1;vertice_dois=2;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=2;vertice_dois=3;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=3;vertice_dois=0;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=4;vertice_dois=5;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=5;vertice_dois=6;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=6;vertice_dois=7;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=7;vertice_dois=4;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=0;vertice_dois=4;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=1;vertice_dois=5;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=2;vertice_dois=6;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=3;vertice_dois=7;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
+						vertice_um=0;vertice_dois=6;
+						points.push(cube_x[vertice_um]);
+						points.push(cube_y[vertice_um]);
+						points.push(cube_z[vertice_um]);
+						points.push(cube_x[vertice_dois]);
+						points.push(cube_y[vertice_dois]);
+						points.push(cube_z[vertice_dois]);
 
 						vertices_of_tetrahedron = generateTetrahedron(evaluate_function,0,1,5,6);
 						for(var i=0;i<vertices_of_tetrahedron.length;i++)
@@ -210,7 +294,6 @@ function()
 						{
 							points.push(vertices_of_tetrahedron[i]);
 						}
-						
 					}	
 				}
 			}
