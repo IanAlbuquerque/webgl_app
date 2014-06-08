@@ -8,7 +8,8 @@ function(CanvasWebGLUtility,MarchingCubesHandler)
 		//TORO:
 		//var LHS = x*x+y*y+z*z+1-0.2;LHS*=LHS;return LHS-4*x*x-4*y*y;
 		
-		return x*x+y*y+z*z-2;
+		//return z-x*x;
+		return x*x-y*y+z*z-1;
 		//return x*x+y*y-z*z-1;
 		//return x*x-y*y-z;
 	}
@@ -26,13 +27,13 @@ function(CanvasWebGLUtility,MarchingCubesHandler)
 	function drawAxis()
 	{
 		scene.setDrawingColor([1,0,0,1]);
-		scene.drawVertices3d(scene.LINES,[-9.5,0,0,9.5,0,0],2);
+		scene.drawVertices3d(scene.LINES,[-1.5,0,0,1.5,0,0],2);
 		
 		scene.setDrawingColor([0,1,0,1]);
-		scene.drawVertices3d(scene.LINES,[0,-9.5,0,0,9.5,0],2);
+		scene.drawVertices3d(scene.LINES,[0,-1.5,0,0,1.5,0],2);
 
 		scene.setDrawingColor([0,0,1,1]);
-		scene.drawVertices3d(scene.LINES,[0,0,-9.5,0,0,9.5],2);
+		scene.drawVertices3d(scene.LINES,[0,0,-1.5,0,0,1.5],2);
 	}
 
 	function drawCube()
