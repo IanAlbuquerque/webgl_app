@@ -8,14 +8,16 @@ function(CanvasWebGLUtility,MarchingCubesHandler)
 		//TORO:
 		//var LHS = x*x+y*y+z*z+1-0.2;LHS*=LHS;return LHS-4*x*x-4*y*y;
 		
-		//return z-x*x;
-		return x*x-y*y+z*z-1;
+		//return x; 
+		return Math.sin(x*y + x*z + y*z) + Math.sin(x*y) + Math.sinh(y*z) + Math.sinh(x*z) - 1;
+		//return (x-2)*2*(x+2)*2+(y-2)*2*(y+2)*2+(z-2)*2*(z+2)*2+3*(x*x*y*y+x*x*z*z+y*y*z*z)+6*x*y*z-10*(x*x+y*y+z*z)-10;
+		//return x*x+y*y+z*z-1;
 		//return x*x+y*y-z*z-1;
 		//return x*x-y*y-z;
 	}
 
 	var marching_cubes_handler = new MarchingCubesHandler();
-	var surface = marching_cubes_handler.marchingTetrahedron(evaluationFunction);
+	var surface = marching_cubes_handler.marchingCubes(evaluationFunction);
 
 	function drawSurface()
 	{
@@ -113,7 +115,7 @@ function(CanvasWebGLUtility,MarchingCubesHandler)
 	{
 		scene.pSetPerspective(45,scene.viewport.width/scene.viewport.height,1,50);
 		scene.mvLoadIdentity();
-		scene.mvTranslate([0,0,-10]);
+		scene.mvTranslate([0,0,-20]);
 		scene.mvPushMatrix();
 			scene.mvRotate(third_angle,[0,0,1]);
 			scene.mvRotate(second_angle,[0,1,0]);
