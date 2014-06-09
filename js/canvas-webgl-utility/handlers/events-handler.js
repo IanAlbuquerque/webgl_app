@@ -165,9 +165,11 @@ function()
 			if(mouse_button_down_function)
 			{
 				canvas.removeEventListener('mousedown', mouseButtonDownHandler);
+				canvas.removeEventListener('touchstart', mouseButtonDownHandler);
 			}
 			mouse_button_down_function = _mouse_button_down_function;
 			canvas.addEventListener('mousedown', mouseButtonDownHandler,false);
+			canvas.addEventListener('touchstart', mouseButtonDownHandler,false);
 		}
 
 		that.setMouseButtonUpFunction = function(_mouse_button_up_function)
@@ -175,9 +177,13 @@ function()
 			if(mouse_button_up_function)
 			{
 				document.removeEventListener('mouseup', mouseButtonUpHandler);
+				document.removeEventListener('touchend', mouseButtonDownHandler);
+				document.removeEventListener('touchcancel', mouseButtonDownHandler);
 			}
 			mouse_button_up_function = _mouse_button_up_function;
 			document.addEventListener('mouseup', mouseButtonUpHandler);
+			document.addEventListener('touchend', mouseButtonDownHandler);
+			document.addEventListener('touchcancel', mouseButtonDownHandler);
 		}
 
 		that.setMouseMoveFunction = function(canvas,_mouse_move_function)
@@ -185,9 +191,11 @@ function()
 			if(mouse_move_function)
 			{
 				canvas.removeEventListener('mousemove', mouseMoveHandler);
+				canvas.removeEventListener('touchmove', mouseMoveHandler);
 			}
 			mouse_move_function = _mouse_move_function;
 			canvas.addEventListener('mousemove', mouseMoveHandler);
+			canvas.addEventListener('touchmove', mouseMoveHandler);
 		}
 	
 		/**
