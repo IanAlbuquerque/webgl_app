@@ -7,15 +7,27 @@
         <title>Applications with WebGL</title>
     </head>
     <body>
-        <h1>Applications with WebGL</h1>
+        <h1>WebGL Marching Cubes (Client Side)</h1>
 
         <!-- The canvas elements used for the drawings-->
 		<canvas id="marching_cube_canvas" style="border: none;" width="500" height="500"></canvas>
 		<br/>
 
+		Zoom: <input type="range" id="zoom_bar" min="2" max="50" value="10"></input>
+		<br/>
+
+		Implicit Surface Equation:
+		<input type="text" id="surface_string_equation" value="x*x+y*y+z*z-1"/>=0 
+		<br/>
+		Number of Points: <input type="number" id="n_points" min="1" value="15"/>
+		<br/>
+
+		<input type="button" id="marching_cubes_button" value="Run Marching Cubes!" onClick="">
+		<br/>
+
 		<hr/>
 		
-		<a href="out/index.html">Documentation</a> (Still Under Construction)
+		<a href="out/index.html">Documentation</a>
 		<br/>
 		
 		<hr/>

@@ -4,14 +4,15 @@ function()
 	var MarchingCubesHandler = function()
 	{
 		var that = this;
-		var num_points = 20;
-		var x_min = -5;
-		var x_max = 5;
-		var y_min = -5;
-		var y_max = 5;
-		var z_min = -5;
-		var z_max = 5;
 
+		var x_min = -2;
+		var x_max = 2;
+		var y_min = -2;
+		var y_max = 2;
+		var z_min = -2;
+		var z_max = 2;
+
+		// Marching Cubes Reference: http://fab.cba.mit.edu/classes/S62.12/docs/Lorensen_marching_cubes.pdf
 		// Table obtained in the following link:
 		// http://graphics.stanford.edu/~mdfisher/MarchingCubes.html
 		var edge_table=[	0x0  , 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c,
@@ -47,6 +48,8 @@ function()
 							0xf00, 0xe09, 0xd03, 0xc0a, 0xb06, 0xa0f, 0x905, 0x80c,
 							0x70c, 0x605, 0x50f, 0x406, 0x30a, 0x203, 0x109, 0x0 ];
 
+		// Table obtained in the following link:
+		// http://graphics.stanford.edu/~mdfisher/MarchingCubes.html
 		var edges_triangle_table = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 		[0, 8, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 		[0, 1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -303,113 +306,12 @@ function()
 		[0, 9, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 		[0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 		[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]];
-/*
-		int Polygonise(GRIDCELL &Grid, TriMeshFace *Triangles, int &NewVertexCount, Vec3f *Vertices)
-		{
-		    int TriangleCount;
-		    int CubeIndex;
-
-		    Vec3f VertexList[12];
-		    Vec3f NewVertexList[12];
-		    char LocalRemap[12];
-		    
-		    //Determine the index into the edge table which
-		    //tells us which vertices are inside of the surface
-		    CubeIndex = 0;
-		    if (Grid.val[0] < 0.0f) CubeIndex |= 1;
-		    if (Grid.val[1] < 0.0f) CubeIndex |= 2;
-		    if (Grid.val[2] < 0.0f) CubeIndex |= 4;
-		    if (Grid.val[3] < 0.0f) CubeIndex |= 8;
-		    if (Grid.val[4] < 0.0f) CubeIndex |= 16;
-		    if (Grid.val[5] < 0.0f) CubeIndex |= 32;
-		    if (Grid.val[6] < 0.0f) CubeIndex |= 64;
-		    if (Grid.val[7] < 0.0f) CubeIndex |= 128;
-
-		    //Cube is entirely in/out of the surface
-		    if (edgeTable[CubeIndex] == 0)
-		        return(0);
-
-		    //Find the vertices where the surface intersects the cube
-		    if (edgeTable[CubeIndex] & 1)
-		        VertexList[0] =
-		            vertex_interpolation(Grid.p[0],Grid.p[1],Grid.val[0],Grid.val[1]);
-		    if (edgeTable[CubeIndex] & 2)
-		        VertexList[1] =
-		            vertex_interpolation(Grid.p[1],Grid.p[2],Grid.val[1],Grid.val[2]);
-		    if (edgeTable[CubeIndex] & 4)
-		        VertexList[2] =
-		            vertex_interpolation(Grid.p[2],Grid.p[3],Grid.val[2],Grid.val[3]);
-		    if (edgeTable[CubeIndex] & 8)
-		        VertexList[3] =
-		            vertex_interpolation(Grid.p[3],Grid.p[0],Grid.val[3],Grid.val[0]);
-		    if (edgeTable[CubeIndex] & 16)
-		        VertexList[4] =
-		            vertex_interpolation(Grid.p[4],Grid.p[5],Grid.val[4],Grid.val[5]);
-		    if (edgeTable[CubeIndex] & 32)
-		        VertexList[5] =
-		            vertex_interpolation(Grid.p[5],Grid.p[6],Grid.val[5],Grid.val[6]);
-		    if (edgeTable[CubeIndex] & 64)
-		        VertexList[6] =
-		            vertex_interpolation(Grid.p[6],Grid.p[7],Grid.val[6],Grid.val[7]);
-		    if (edgeTable[CubeIndex] & 128)
-		        VertexList[7] =
-		            vertex_interpolation(Grid.p[7],Grid.p[4],Grid.val[7],Grid.val[4]);
-		    if (edgeTable[CubeIndex] & 256)
-		        VertexList[8] =
-		            vertex_interpolation(Grid.p[0],Grid.p[4],Grid.val[0],Grid.val[4]);
-		    if (edgeTable[CubeIndex] & 512)
-		        VertexList[9] =
-		            vertex_interpolation(Grid.p[1],Grid.p[5],Grid.val[1],Grid.val[5]);
-		    if (edgeTable[CubeIndex] & 1024)
-		        VertexList[10] =
-		            vertex_interpolation(Grid.p[2],Grid.p[6],Grid.val[2],Grid.val[6]);
-		    if (edgeTable[CubeIndex] & 2048)
-		        VertexList[11] =
-		            vertex_interpolation(Grid.p[3],Grid.p[7],Grid.val[3],Grid.val[7]);
-
-		    NewVertexCount=0;
-		    for (UINT i=0;i<12;i++)
-		        LocalRemap[i] = -1;
-
-		    for (UINT i=0;edges_triangle_table[CubeIndex][i]!=-1;i++)
-		    {
-		        if(LocalRemap[edges_triangle_table[CubeIndex][i]] == -1)
-		        {
-		            NewVertexList[NewVertexCount] = VertexList[edges_triangle_table[CubeIndex][i]];
-		            LocalRemap[edges_triangle_table[CubeIndex][i]] = NewVertexCount;
-		            NewVertexCount++;
-		        }
-		    }
-
-		    for (int i=0;i<NewVertexCount;i++) {
-		        Vertices[i] = NewVertexList[i];
-		    }
-
-		    TriangleCount = 0;
-		    for (UINT i=0;edges_triangle_table[CubeIndex][i]!=-1;i+=3) {
-		        Triangles[TriangleCount].I[0] = LocalRemap[edges_triangle_table[CubeIndex][i+0]];
-		        Triangles[TriangleCount].I[1] = LocalRemap[edges_triangle_table[CubeIndex][i+1]];
-		        Triangles[TriangleCount].I[2] = LocalRemap[edges_triangle_table[CubeIndex][i+2]];
-		        TriangleCount++;
-		    }
-
-		    return(TriangleCount);
-		}
-*/
 
 		function vertex_interpolation(p1,p2,value1,value2)
 		{
 			var t;
 			var point=[];
-			if(value1==value2)
-			{
-				//alert("entrou aqui");
-				t=0.5;
-			}
-			else
-			{
-				t = -value1 / (value2 - value1);
-			}
+			t = -value1 / (value2 - value1);
 			for(var i=0;i<3;i++)
 			{
 		    	point.push(p1[i] + t * (p2[i] - p1[i]));
@@ -475,6 +377,21 @@ function()
 			for(var i=0;i<8;i++)
 			{
 				if(!vertices_to_draw[i*3].length) break;
+				/*
+				for(var j=0;j<3;j++)
+				{
+					points.push(vertices_to_draw[i*3][j]);
+				}
+				for(var j=0;j<3;j++)
+				{
+					points.push(vertices_to_draw[i*3+1][j]);
+				}
+				for(var j=0;j<3;j++)
+				{
+					points.push(vertices_to_draw[i*3+2][j]);
+				}
+				*/
+				
 				for(var j=0;j<3;j++)
 				{
 					points.push(vertices_to_draw[i*3][j]);
@@ -499,6 +416,7 @@ function()
 				{
 					points.push(vertices_to_draw[i*3][j]);
 				}
+				
 			}
 			/*
 			if(!(cube_case&0x80==0))
@@ -511,15 +429,16 @@ function()
 			return points;
 		}
 
-		that.marchingCubes = function(evaluate_function)
+		that.marchingCubes = function(evaluate_function,num_points)
 		{
 			var points = [];
-
 			var dx = (x_max - x_min)/num_points;
 			var dy = (y_max - y_min)/num_points;
 			var dz = (z_max - z_min)/num_points;
 
-			var xb,yb,zb;
+			var xb;
+			var yb;
+			var zb;
 			var vertices_returned_from_cube = [];
 			var cube_vertices;
 			for(var ix=0;ix<num_points;ix++)
@@ -528,9 +447,9 @@ function()
 				{
 					for(var iz=0;iz<num_points;iz++)
 					{
-						xb = x_min + ix*dx;
-						yb = y_min + iy*dy;
-						zb = z_min + iz*dz;
+						xb = x_min + (ix*dx);
+						yb = y_min + (iy*dy);
+						zb = z_min + (iz*dz);
 
 						cube_vertices = [	[xb,		yb,		zb],
 											[xb+dx,		yb,		zb],
