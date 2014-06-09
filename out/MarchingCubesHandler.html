@@ -32,7 +32,7 @@
           </div>
 
           <div class="span8">
-              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> MatricesHandler</h1>
+              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> MarchingCubesHandler</h1>
               
 
 
@@ -41,7 +41,7 @@
     
 <header>
     <h2>
-    MatricesHandler
+    MarchingCubesHandler
     </h2>
     
 </header>  
@@ -57,7 +57,7 @@
     
         
 <dt>
-    <h4 class="name" id="MatricesHandler">new MatricesHandler<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="MarchingCubesHandler">new MarchingCubesHandler<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -66,9 +66,8 @@
     
     <div class="description">
         <p>
-        A matrices operations handler.
-It's responsible for managing all the transformations and matrices-related
-operations of a WebGL application.
+        The handler of the Marching Cubes' algorithm.
+Contains the methods necessary for running the algorithm.
         </p>
     </div>
     
@@ -137,15 +136,19 @@ operations of a WebGL application.
         <dl class="bs-docs-example bs-members">
             
 <dt>
-    <h4 class="name" id="current_model_view_matrix"><span class="label label-info">private</span> current_model_view_matrix<span class="type-signature"> :glMatrixArrayType</span></h4>
+    <h4 class="name" id="edges_triangle_table"><span class="label label-info">private</span> edges_triangle_table<span class="type-signature"> :Array.&lt;number></span></h4>
     
     
 </dt>
 <dd>
     
     <div class="description">
-        The current model view matrix. It's responsible for storing all the positioning
-transformations that should be applied to vertices being drawn.
+        Marching Cubes Reference: http://fab.cba.mit.edu/classes/S62.12/docs/Lorensen_marching_cubes.pdf
+Table obtained in the following link:
+http://graphics.stanford.edu/~mdfisher/MarchingCubes.html
+Table containing the edges that will compose each triangle of all the 256 marching cube cases.
+Every 3 values represents a triangle.
+Edges are numbered from 0 to 11.
     </div>
     
     
@@ -185,15 +188,14 @@ transformations that should be applied to vertices being drawn.
         
             
 <dt>
-    <h4 class="name" id="current_projection_matrix"><span class="label label-info">private</span> current_projection_matrix<span class="type-signature"> :glMatrixArrayType</span></h4>
+    <h4 class="name" id="x_max"><span class="label label-info">private</span> x_max<span class="type-signature"> :number</span></h4>
     
     
 </dt>
 <dd>
     
     <div class="description">
-        The current projection matrix. It's responsible for storing the projection 
-transformations that will be applied to the scene.
+        The maximum x bound of Marching Cubes algorithm.
     </div>
     
     
@@ -233,16 +235,202 @@ transformations that will be applied to the scene.
         
             
 <dt>
-    <h4 class="name" id="model_view_matrix_stack"><span class="label label-info">private</span> model_view_matrix_stack<span class="type-signature"> :Array.&lt;glMatrixArrayType></span></h4>
+    <h4 class="name" id="x_min"><span class="label label-info">private</span> x_min<span class="type-signature"> :number</span></h4>
     
     
 </dt>
 <dd>
     
     <div class="description">
-        The model view matrix stack.
-It's responsible for holding several model view matrices in order to deal with 
-scenes that require storing different model view matrices.
+        The minimum x bound of Marching Cubes algorithm.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="y_max"><span class="label label-info">private</span> y_max<span class="type-signature"> :number</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The maximum y bound of Marching Cubes algorithm.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="y_min"><span class="label label-info">private</span> y_min<span class="type-signature"> :number</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The minimum y bound of Marching Cubes algorithm.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="z_max"><span class="label label-info">private</span> z_max<span class="type-signature"> :number</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The maximum z bound of Marching Cubes algorithm.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="z_min"><span class="label label-info">private</span> z_min<span class="type-signature"> :number</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The minimum z bound of Marching Cubes algorithm.
     </div>
     
     
@@ -288,7 +476,7 @@ scenes that require storing different model view matrices.
         <dl class="bs-docs-example bs-methods">
             
 <dt>
-    <h4 class="name" id="mvLoadIdentity">mvLoadIdentity<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="generateCube"><span class="label label-info">private</span> generateCube<span class="signature">(evaluate_function, cube_vertices)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
     
     
 </dt>
@@ -297,232 +485,8 @@ scenes that require storing different model view matrices.
     
     <div class="description">
         <p>
-        Sets the <a href="MatricesHandler.html#current_model_view_matrix">current model view matrix</a>
-to the identity matrix. Overides any matrix values previously stored.
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="mvPopMatrix">mvPopMatrix<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Deletes the <a href="MatricesHandler.html#current_model_view_matrix">current model view matrix</a>
-and pops the last pushed matrix from the
-<a href="MatricesHandler.html#model_view_matrix_stack">model view matrix stack</a>, copying it
-as the new <a href="MatricesHandler.html#current_model_view_matrix">current model view matrix</a>.
-Is expected to be used together with the method <a href="MatricesHandler.html#mvPushMatrix">mvPushMatrix</a>.
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    <h5>Throws:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">MatrixStackEmptyException</span>
-
-
-	</dd>
-</dl>
-
-        
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="mvPushMatrix">mvPushMatrix<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Pushes a copy of the <a href="MatricesHandler.html#current_model_view_matrix">current model view matrix</a> 
-into the <a href="MatricesHandler.html#model_view_matrix_stack">model view matrix stack</a>, preserving
-it for future uses.
-Is expected to be used together with the method <a href="MatricesHandler.html#mvPopMatrix">mvPopMatrix</a>
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="mvRotate">mvRotate<span class="signature">(angle_in_radians, axe)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Multiplies (applies) a rotation matrix to the
-<a href="MatricesHandler.html#current_model_view_matrix">current model view matrix</a>.
+        Calculates the vertices that should be drawn in the given cube
+using the Marching Cubes Algorithm.
         </p>
     </div>
     
@@ -557,13 +521,13 @@ Is expected to be used together with the method <a href="MatricesHandler.html#mv
 
         <tr>
             
-                <td class="name">angle_in_radians</td>
+                <td class="name">evaluate_function</td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">function</span>
 
 
             
@@ -573,14 +537,14 @@ Is expected to be used together with the method <a href="MatricesHandler.html#mv
 
             
 
-            <td class="description last">Angle, in radians, of the rotation.</td>
+            <td class="description last">The function that evaluates vertices (x,y,z).</td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name">axe</td>
+                <td class="name">cube_vertices</td>
             
 
             <td class="type">
@@ -596,9 +560,7 @@ Is expected to be used together with the method <a href="MatricesHandler.html#mv
 
             
 
-            <td class="description last">Axe to be used for the rotation. The matrix multiplied
-will be a rotation around this axe.
-Expects an array [x,y,z] with three entries.</td>
+            <td class="description last">The coordinates of the vertices of the cube.</td>
         </tr>
 
 	
@@ -646,6 +608,24 @@ Expects an array [x,y,z] with three entries.</td>
     
     
     
+    <h5>Returns:</h5>
+    
+            <div class="returns">
+
+
+    
+<span class="param-type">Array.&lt;number></span>
+
+
+
+
+<span class="param-desc">
+    The vertices that should be drawn.
+</span>
+
+</div>
+
+        
     
     
 </dd>
@@ -653,7 +633,7 @@ Expects an array [x,y,z] with three entries.</td>
         
             
 <dt>
-    <h4 class="name" id="mvScale">mvScale<span class="signature">(ratio)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="generateTetrahedron"><span class="label label-info">private</span> generateTetrahedron<span class="signature">(evaluate_function, vertices_of_tetrahedron)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
     
     
 </dt>
@@ -662,8 +642,8 @@ Expects an array [x,y,z] with three entries.</td>
     
     <div class="description">
         <p>
-        Multiplies (applies) a scale matrix to the
-<a href="MatricesHandler.html#current_model_view_matrix">current model view matrix</a>.
+        Calculates the vertices that should be drawn in the given cube
+using the Marching Tetrahedron Algorithm.
         </p>
     </div>
     
@@ -698,7 +678,30 @@ Expects an array [x,y,z] with three entries.</td>
 
         <tr>
             
-                <td class="name">ratio</td>
+                <td class="name">evaluate_function</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The function that evaluates vertices (x,y,z).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">vertices_of_tetrahedron</td>
             
 
             <td class="type">
@@ -714,9 +717,7 @@ Expects an array [x,y,z] with three entries.</td>
 
             
 
-            <td class="description last">The [x,y,z] scale ratio of the scene.
-Expects an array with three entries.
-Use the third coordinate as one if drawing 2d scenes.</td>
+            <td class="description last">The coordinates of the tetrahedron.</td>
         </tr>
 
 	
@@ -764,6 +765,24 @@ Use the third coordinate as one if drawing 2d scenes.</td>
     
     
     
+    <h5>Returns:</h5>
+    
+            <div class="returns">
+
+
+    
+<span class="param-type">Array.&lt;number></span>
+
+
+
+
+<span class="param-desc">
+    The vertices that should be drawn.
+</span>
+
+</div>
+
+        
     
     
 </dd>
@@ -771,7 +790,7 @@ Use the third coordinate as one if drawing 2d scenes.</td>
         
             
 <dt>
-    <h4 class="name" id="mvTranslate">mvTranslate<span class="signature">(vector)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="marchingCubes">marchingCubes<span class="signature">(evaluate_function, num_points)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
     
     
 </dt>
@@ -780,8 +799,7 @@ Use the third coordinate as one if drawing 2d scenes.</td>
     
     <div class="description">
         <p>
-        Multiplies (applies) a translation matrix to the
-<a href="MatricesHandler.html#current_model_view_matrix">current model view matrix</a>.
+        Runs the Marching Cubes Algorithm.
         </p>
     </div>
     
@@ -816,7 +834,320 @@ Use the third coordinate as one if drawing 2d scenes.</td>
 
         <tr>
             
-                <td class="name">vector</td>
+                <td class="name">evaluate_function</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The function that evaluates vertices (x,y,z).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">num_points</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of points that should be used for the discretization.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            <div class="returns">
+
+
+    
+<span class="param-type">Array.&lt;number></span>
+
+
+
+
+<span class="param-desc">
+    The coordinates of the vertices that should be drawn.
+</span>
+
+</div>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="marchingTetrahedron">marchingTetrahedron<span class="signature">(evaluate_function, num_points)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Runs the Marching Tetrahedron Algorithm.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">evaluate_function</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The function that evaluates vertices (x,y,z).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">num_points</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of points that should be used for the discretization.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            <div class="returns">
+
+
+    
+<span class="param-type">Array.&lt;number></span>
+
+
+
+
+<span class="param-desc">
+    The coordinates of the vertices that should be drawn.
+</span>
+
+</div>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="tetrahedronVertices"><span class="label label-info">private</span> tetrahedronVertices<span class="signature">(cube_vertices, vertices_index)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Retrieves the vertices of the tetrahedron from the cube vertices' array,
+given the indexes of the tetrahedron vertices.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">cube_vertices</td>
             
 
             <td class="type">
@@ -832,9 +1163,30 @@ Use the third coordinate as one if drawing 2d scenes.</td>
 
             
 
-            <td class="description last">The [x,y,z] vector to translate the scene. 
-Expects an array with three entries.
-Use the third coordinate as zero if drawing 2d scenes.</td>
+            <td class="description last">The coordinates of the cube vertices.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">vertices_index</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;number></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The indexes of the corresponding tetrahedron vertices.</td>
         </tr>
 
 	
@@ -882,6 +1234,24 @@ Use the third coordinate as zero if drawing 2d scenes.</td>
     
     
     
+    <h5>Returns:</h5>
+    
+            <div class="returns">
+
+
+    
+<span class="param-type">Array.&lt;number></span>
+
+
+
+
+<span class="param-desc">
+    The coordinates of the tetrahedron vertices.
+</span>
+
+</div>
+
+        
     
     
 </dd>
@@ -889,7 +1259,7 @@ Use the third coordinate as zero if drawing 2d scenes.</td>
         
             
 <dt>
-    <h4 class="name" id="pLoadIdentity">pLoadIdentity<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="vertex_interpolation"><span class="label label-info">private</span> vertex_interpolation<span class="signature">(p1, p2, value1, value2)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
     
     
 </dt>
@@ -898,78 +1268,7 @@ Use the third coordinate as zero if drawing 2d scenes.</td>
     
     <div class="description">
         <p>
-        Sets the <a href="MatricesHandler.html#current_projection_matrix">current projection matrix</a>
-as the identity matrix. Overides any matrix values previously stored.
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="pOrtho">pOrtho<span class="signature">(left, right, bottom, top, near, far)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Sets the <a href="MatricesHandler.html#current_projection_matrix">current projection matrix</a>
-as a orthographic, given the necessary parameters.
-When using this kind of projection, further objects in the screne will appear as big
-as closer objects. This projection should be used for thow dimensional
-drawings.
+        Uses a linear interpolation in two given vertices.
         </p>
     </div>
     
@@ -1004,13 +1303,13 @@ drawings.
 
         <tr>
             
-                <td class="name">left</td>
+                <td class="name">p1</td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Array.&lt;number></span>
 
 
             
@@ -1020,20 +1319,20 @@ drawings.
 
             
 
-            <td class="description last">The left bound of the points of the scene.</td>
+            <td class="description last">The first vertex of the interpolation.</td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name">right</td>
+                <td class="name">p2</td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Array.&lt;number></span>
 
 
             
@@ -1043,14 +1342,14 @@ drawings.
 
             
 
-            <td class="description last">The right bound of the points of the scene.</td>
+            <td class="description last">The second vertex of the interpolation.</td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name">bottom</td>
+                <td class="name">value1</td>
             
 
             <td class="type">
@@ -1066,14 +1365,14 @@ drawings.
 
             
 
-            <td class="description last">The bottom bound of the points of the scene.</td>
+            <td class="description last">The function evaluation in the first vertex.</td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name">top</td>
+                <td class="name">value2</td>
             
 
             <td class="type">
@@ -1089,53 +1388,7 @@ drawings.
 
             
 
-            <td class="description last">The top bound of the points of the scene.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">near</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">How close objects will still be rendered.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">far</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">How far objects will still be rendered.</td>
+            <td class="description last">The function evaluation in the second vertex.</td>
         </tr>
 
 	
@@ -1183,335 +1436,24 @@ drawings.
     
     
     
+    <h5>Returns:</h5>
     
+            <div class="returns">
+
+
     
-</dd>
+<span class="param-type">Array.&lt;number></span>
+
+
+
+
+<span class="param-desc">
+    The resulting vertex of the interpolation.
+</span>
+
+</div>
 
         
-            
-<dt>
-    <h4 class="name" id="pSetPerspective">pSetPerspective<span class="signature">(fovy, aspect, near, far)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Sets the <a href="MatricesHandler.html#current_projection_matrix">current projection matrix</a>
-as a three dimensional perspective projection, given the necessary parameters.
-When using this kind of projection, further objects in the screne will appear smaller
-than closer objects.
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-bordered table-condensed">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name">fovy</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The fovy aspect of the projection. (The angle of view).</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">aspect</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The aspect ratio of the projection. (The ratio between the viewport width and height).</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">near</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">How close objects will still be rendered.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">far</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">How far objects will still be rendered.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="setMatrixUniforms">setMatrixUniforms<span class="signature">(webgl_context, shader_program)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Loads the <a href="MatricesHandler.html#current_model_view_matrix">current model view matrix</a>
-and the <a href="MatricesHandler.html#current_projection_matrix">current projection matrix</a> into
-the given WebGL canvas context and Shader Program.
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-bordered table-condensed">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name">webgl_context</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">WebGLContext</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The WebGL canvas context that will be used for 
-loading the matrices.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">shader_program</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">ShaderProgram</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The Shader Program that will be used for 
-loading the matrices.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
     
     
 </dd>
@@ -1535,7 +1477,7 @@ loading the matrices.</td>
         <br clear="both">
 
       <footer>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jun 09 2014 11:37:28 GMT-0300 (BRT)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jun 09 2014 11:37:27 GMT-0300 (BRT)
         <br>
       </footer>
       <script> prettyPrint(); </script>

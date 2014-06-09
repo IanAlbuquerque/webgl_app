@@ -1,4 +1,45 @@
-define(
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/docs.css" rel="stylesheet">
+    <link href="styles/bootstrap-custom.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="header navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Documentation</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4">
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="CanvasWebGLUtility.html"><i class="icon-shield" style="color: #0186d1"></i> CanvasWebGLUtility</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MarchingCubesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MarchingCubesHandler</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
+          </div>
+
+          <div class="span8">
+              <h1 class="page-header">Source: app-classes/marching-cubes-handler.js</h1>
+              
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>define(
 function()
 {	
 	/**
@@ -345,7 +386,7 @@ function()
 			var t;
 			var point=[];
 			t = -value1 / (value2 - value1);
-			for(var i=0;i<3;i++)
+			for(var i=0;i&lt;3;i++)
 			{
 		    	point.push(p1[i] + t * (p2[i] - p1[i]));
 		    }
@@ -383,13 +424,13 @@ function()
 							[2,	6],
 							[3,	7]];
 
-			for(var i=0;i<8;i++)
+			for(var i=0;i&lt;8;i++)
 			{
 				evaluation_value = evaluate_function(	cube_vertices[i][0],
 														cube_vertices[i][1],
 														cube_vertices[i][2]);
 				evaluation.push(evaluation_value);
-				if(evaluation_value<0)
+				if(evaluation_value&lt;0)
 				{
 					cube_case+=Math.pow(2,i);
 				}
@@ -399,7 +440,7 @@ function()
 			edges_to_draw = edges_triangle_table[cube_case];
 			var vertices_to_draw = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
 
-			for(var i=0;i<16;i++)
+			for(var i=0;i&lt;16;i++)
 			{
 				if(edges_to_draw[i]==-1)
 				{
@@ -415,14 +456,14 @@ function()
 																evaluation[second_vertex_index]);
 				}
 			}
-			for(var i=0;i<8;i++)
+			for(var i=0;i&lt;8;i++)
 			{
 				if(!vertices_to_draw[i*3].length) break;
 				var vertices = [0,1,1,2,2,0];
 
-				for(var k=0;k<6;k++)
+				for(var k=0;k&lt;6;k++)
 				{
-					for(var j=0;j<3;j++)
+					for(var j=0;j&lt;3;j++)
 					{
 						points.push(vertices_to_draw[i*3+vertices[k]][j]);
 					}
@@ -455,7 +496,7 @@ function()
 
 			var insertedPoints = 0;
 
-			for(var i=0;i<4;i++)
+			for(var i=0;i&lt;4;i++)
 			{
 				evaluation.push(evaluate_function(	vertices_of_tetrahedron[i*3],
 													vertices_of_tetrahedron[i*3+1],
@@ -463,13 +504,13 @@ function()
 			}
 
 			var t;
-			for(var i=0;i<6;i++)
+			for(var i=0;i&lt;6;i++)
 			{
-				if(evaluation[edges[i*2]]*evaluation[edges[i*2+1]]<0)
+				if(evaluation[edges[i*2]]*evaluation[edges[i*2+1]]&lt;0)
 				{
 					t = -evaluation[edges[i*2]]/(evaluation[edges[i*2+1]]-evaluation[edges[i*2]]);
 
-					for(var j=0;j<3;j++)
+					for(var j=0;j&lt;3;j++)
 					{
 						points.push(vertices_of_tetrahedron[edges[i*2]*3+j] + t * (vertices_of_tetrahedron[edges[i*2+1]*3+j]-vertices_of_tetrahedron[edges[i*2]*3+j]));
 					}
@@ -511,7 +552,7 @@ function()
 				points.push(points[5]);
 			}
 
-			if(insertedPoints!=3 && insertedPoints!=4 && insertedPoints!=0)
+			if(insertedPoints!=3 &amp;&amp; insertedPoints!=4 &amp;&amp; insertedPoints!=0)
 			{
 				points = [];
 			}
@@ -531,9 +572,9 @@ function()
 		function tetrahedronVertices(cube_vertices,vertices_index)
 		{
 			var points = [];
-			for(var i=0;i<vertices_index.length;i++)
+			for(var i=0;i&lt;vertices_index.length;i++)
 			{
-				for(var j=0;j<3;j++)
+				for(var j=0;j&lt;3;j++)
 				{
 					points.push(cube_vertices[vertices_index[i]*3+j]);
 				}
@@ -567,11 +608,11 @@ function()
 			var vertices_of_tetrahedron = [];
 			var cube_vertices;
 			var thetrahedron_vertices_index;
-			for(var ix=0;ix<num_points;ix++)
+			for(var ix=0;ix&lt;num_points;ix++)
 			{
-				for(var iy=0;iy<num_points;iy++)
+				for(var iy=0;iy&lt;num_points;iy++)
 				{
-					for(var iz=0;iz<num_points;iz++)
+					for(var iz=0;iz&lt;num_points;iz++)
 					{
 						xb = x_min + ix*dx;
 						yb = y_min + iy*dy;
@@ -593,7 +634,7 @@ function()
 														0, 4, 7, 6,
 														0, 3, 7, 6  ];
 
-						for(var i=0;i<6;i++)
+						for(var i=0;i&lt;6;i++)
 						{
 							vertices_of_tetrahedron = tetrahedronVertices(cube_vertices,[	thetrahedron_vertices_index[i*4],
 																							thetrahedron_vertices_index[i*4+1],
@@ -628,11 +669,11 @@ function()
 			var zb;
 			var vertices_returned_from_cube = [];
 			var cube_vertices;
-			for(var ix=0;ix<num_points;ix++)
+			for(var ix=0;ix&lt;num_points;ix++)
 			{
-				for(var iy=0;iy<num_points;iy++)
+				for(var iy=0;iy&lt;num_points;iy++)
 				{
-					for(var iz=0;iz<num_points;iz++)
+					for(var iz=0;iz&lt;num_points;iz++)
 					{
 						xb = x_min + (ix*dx);
 						yb = y_min + (iy*dy);
@@ -658,3 +699,23 @@ function()
 	}
 	return MarchingCubesHandler;	
 });
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+          </div>
+      </div>
+
+        <br clear="both">
+
+      <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jun 09 2014 11:37:26 GMT-0300 (BRT)
+        <br>
+      </footer>
+      <script> prettyPrint(); </script>
+    </div>
+  </body>
+</html>

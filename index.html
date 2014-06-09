@@ -4,26 +4,40 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Run require.js starting it's execution with require-config.js -->
         <script data-main="js/require-config.js" src="js/require.js"></script>
-        <title>Applications with WebGL</title>
+        <title>Marching Cubes</title>
+		<style>
+			#marching_cube_canvas
+			{
+				touch-action: none;
+			}
+		</style>
     </head>
     <body>
         <h1>WebGL Marching Cubes (Client Side)</h1>
 
         <!-- The canvas elements used for the drawings-->
-		<canvas id="marching_cube_canvas" style="border: none;" width="500" height="500"></canvas>
+		<canvas id="marching_cube_canvas" style="border: none;" width="600" height="600"></canvas>
 		<br/>
 
-		Zoom: <input type="range" id="zoom_bar" min="2" max="50" value="10"></input>
+		Zoom: <input type="range" id="zoom_bar" min="100" max="3000" value="1000"></input>
 		<br/>
 
 		Implicit Surface Equation:
 		<input type="text" id="surface_string_equation" value="x*x+y*y+z*z-1"/>=0 
 		<br/>
-		Number of Points: <input type="number" id="n_points" min="1" value="15"/>
+		Number of Points: <input type="number" id="num_points_input" min="1" value="15"/>
 		<br/>
 
 		<input type="button" id="marching_cubes_button" value="Run Marching Cubes!" onClick="">
 		<br/>
+
+		<hr/>
+
+		<p>
+			Use your mouse to rotate the scene.
+			<br/>
+			Cube and colored basis added in ordert to improve the viewer's sense of direction.
+		</p>
 
 		<hr/>
 		

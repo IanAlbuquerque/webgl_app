@@ -3,11 +3,29 @@ define(['canvas-webgl-utility/canvas-webgl-utility',
 		'app-classes/implicit-curve'],
 function(CanvasWebGLUtility,MarchingCubesHandler,ImplicitCurve)
 {
+	// The CanvasWebGLUtility element that will handle the scene.
 	var scene;
 
 	var marching_cubes_handler = new MarchingCubesHandler();
+
+	//The vertices output of the Marching Cubes' algorithm.
 	var surface;
+
+	// The distance from the camera to the center.
 	var distance = 10;
+
+	// View Angles (using the zyz rotations)
+	var first_angle=0;
+	var second_angle=Math.PI/3;
+	var third_angle=Math.PI/2;
+
+	// Angular Speed of the default animation
+	var angular_speed = Math.PI/8; // Radians per second.
+
+	var is_mouse_pressed = false;
+
+	var mouse_last_x;
+	var mouse_last_y;
 
 	function evaluationFunction(x,y,z)
 	{
@@ -16,7 +34,7 @@ function(CanvasWebGLUtility,MarchingCubesHandler,ImplicitCurve)
 
 	function runMarchingCubes()
 	{
-		var num_points = document.getElementById("n_points").value;
+		var num_points = document.getElementById("num_points_input").value;
 		if(num_points>=20)
 		{
 			var window_confirmation = confirm("Your choice of "+num_points+" points will\nresult in "+num_points*num_points*num_points+" cubes.\nAre you sure?");
@@ -81,9 +99,6 @@ function(CanvasWebGLUtility,MarchingCubesHandler,ImplicitCurve)
         scene.clear(scene.COLOR_BUFFER_BIT | scene.DEPTH_BUFFER_BIT);
 	}
 
-	var first_angle=0;
-	var second_angle=Math.PI/3;
-	var third_angle=Math.PI/2;
 	function display()
 	{
 		clearScreen();
@@ -103,17 +118,12 @@ function(CanvasWebGLUtility,MarchingCubesHandler,ImplicitCurve)
 	{
 		if(!is_mouse_pressed)
 		{
-			var angular_speed = Math.PI/8; // Radians per second.
-
 			first_angle += angular_speed*time_elapsedn_milliseconds/1000; 
 			first_angle = (first_angle)%(2*Math.PI);
 		}
 		scene.postRedisplay();
 	}
 
-	var is_mouse_pressed = false;
-	var mouse_last_x;
-	var mouse_last_y;
 	function mouseDown(button,x_percentage,y_percentage)
 	{
 		mouse_last_x = x_percentage;
@@ -129,10 +139,12 @@ function(CanvasWebGLUtility,MarchingCubesHandler,ImplicitCurve)
 	
 	function mouseMove(x_percentage,y_percentage)
 	{
+		var delta_x = x_percentage-mouse_last_x;
+		var delta_y = y_percentage-mouse_last_y;
 		if(is_mouse_pressed)
 		{
-			first_angle += (x_percentage-mouse_last_x)*2*Math.PI;
-			second_angle += -(y_percentage-mouse_last_y)*2*Math.PI;
+			first_angle += delta_x*2*Math.PI;
+			second_angle += -delta_y*2*Math.PI;
 		}
 		mouse_last_x = x_percentage;
 		mouse_last_y = y_percentage;
@@ -144,15 +156,16 @@ function(CanvasWebGLUtility,MarchingCubesHandler,ImplicitCurve)
 		{
 			scene = new CanvasWebGLUtility(document.getElementById("marching_cube_canvas"));
 		}
-		catch(e)
+		catch(exception)
 		{
-			alert(e.name + " : " + e.message);
+			alert(exception.name + " : " + exception.message);
 		}
 
+		// Sets up the user input interface
 		document.getElementById("marching_cubes_button").onclick = runMarchingCubes;
-		document.getElementById("surface_string_equation").onkeydown=function(e){if(e.keyCode==13){runMarchingCubes();}};
-		document.getElementById("n_points").onkeydown=function(e){if(e.keyCode==13){runMarchingCubes();}};
-		document.getElementById("zoom_bar").oninput=function(){distance =  Math.abs(document.getElementById("zoom_bar").value);};
+		document.getElementById("surface_string_equation").onkeydown=function(event){if(event.keyCode==13){runMarchingCubes();}};
+		document.getElementById("num_points_input").onkeydown=function(event){if(event.keyCode==13){runMarchingCubes();}};
+		document.getElementById("zoom_bar").oninput=function(){distance =  Math.abs(document.getElementById("zoom_bar").value/100);};
 		runMarchingCubes();
 
 		scene.enable(scene.DEPTH_TEST);

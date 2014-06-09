@@ -28,7 +28,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
           <div class="span4">
-              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="CanvasWebGLUtility.html"><i class="icon-shield" style="color: #0186d1"></i> CanvasWebGLUtility</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MarchingCubesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MarchingCubesHandler</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
           </div>
 
           <div class="span8">
@@ -209,7 +209,10 @@
 
             
 
-            <td class="description last">A string containing the script that is evaluated asthe expression of the implicit curve. The associated equation of the implicit curve willbe considered as "implicit_curve_expression=0".The x and y variables must be used.</td>
+            <td class="description last">A string containing the script that is evaluated as
+the expression of the implicit curve. The associated equation of the implicit curve will
+be considered as "implicit_curve_expression=0".
+The x and y variables must be used.</td>
         </tr>
 
 	
@@ -283,7 +286,9 @@
 <dd>
     
     <div class="description">
-        The string containing the script that is evaluated as the expression of the implicit curve.The associated equation of the implicit curve will beconsidered as "implicit_curve_expression=0".
+        The string containing the script that is evaluated as the expression of the implicit curve.
+The associated equation of the implicit curve will be
+considered as "implicit_curve_expression=0".
     </div>
     
     
@@ -517,139 +522,6 @@
         <dl class="bs-docs-example bs-methods">
             
 <dt>
-    <h4 class="name" id="calculateDrawingPoints">calculateDrawingPoints<span class="signature">(number_of_points)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>
-        Draws the implicit curve in the plane XY using the algorithm "Marching Triangles"
-        </p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-bordered table-condensed">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name">number_of_points</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The number of points to be used for the discretization.</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            <div class="returns">
-
-
-    
-<span class="param-type">Array.&lt;number></span>
-
-
-
-
-<span class="param-desc">
-    The list of points that represents the drawing. Every two entries represents the x and y informations of a point. The drawing should be made using gl.LINES.
-</span>
-
-</div>
-
-        
-    
-    
-</dd>
-
-        
-            
-<dt>
     <h4 class="name" id="evaluate">evaluate<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
     
@@ -806,6 +678,167 @@
         
             
 <dt>
+    <h4 class="name" id="generateDrawingVertices">generateDrawingVertices<span class="signature">(number_of_points_x, number_of_points_y)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>
+        Generates the vertices of the implicit curve discretization in the plane XY using 
+the algorithm "Marching Triangles"
+The vertices are supposed to be drawn using the LINES primitive.
+        </p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">number_of_points_x</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of points to be used for 
+the first coordinate discretization.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">number_of_points_y</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of points to be used for 
+the second coordinate discretization.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            <div class="returns">
+
+
+    
+<span class="param-type">Array.&lt;number></span>
+
+
+
+
+<span class="param-desc">
+    generated_vertices The list of points that represents the drawing. 
+Every two entries represents the x and y coordinates of a vertex.
+</span>
+
+</div>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="setDomain">setDomain<span class="signature">(x_min, x_max, y_min, y_max)</span><span class="type-signature"></span></h4>
     
     
@@ -815,7 +848,7 @@
     
     <div class="description">
         <p>
-        Sets domain where the curve is defined.
+        Sets the domain where the curve is defined.
         </p>
     </div>
     
@@ -1050,7 +1083,10 @@
 
             
 
-            <td class="description last">A string containing the script that is evaluated asthe expression of the implicit curve. The associated equation of the implicit curve willbe considered as "implicit_curve_expression=0".The x and y variables must be used.</td>
+            <td class="description last">A string containing the script that is evaluated as
+the expression of the implicit curve. The associated equation of the implicit curve will
+be considered as "implicit_curve_expression=0".
+The x and y variables must be used.</td>
         </tr>
 
 	
@@ -1121,7 +1157,7 @@
         <br clear="both">
 
       <footer>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed May 21 2014 23:07:43 GMT-0300 (BRT)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jun 09 2014 11:37:27 GMT-0300 (BRT)
         <br>
       </footer>
       <script> prettyPrint(); </script>

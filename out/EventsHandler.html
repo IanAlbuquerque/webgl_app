@@ -28,7 +28,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
           <div class="span4">
-              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="CanvasWebGLUtility.html"><i class="icon-shield" style="color: #0186d1"></i> CanvasWebGLUtility</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MarchingCubesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MarchingCubesHandler</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
           </div>
 
           <div class="span8">
@@ -66,7 +66,9 @@
     
     <div class="description">
         <p>
-        A Events handler.It's responsible for managing the events that happen in the canvas scene, as wellas keeping track of important functions such as the display function.
+        A Events handler.
+It's responsible for managing the events that happen in the canvas scene, as well
+as keeping track of important functions such as the display function.
         </p>
     </div>
     
@@ -142,7 +144,8 @@
 <dd>
     
     <div class="description">
-        The display function that will be called whenever it's necessary to display elementsin the canvas. This function should receive no parameters and return nothing.
+        The display function that will be called whenever it's necessary to display elements
+in the canvas. This function should receive no parameters and return nothing.
     </div>
     
     
@@ -189,7 +192,9 @@
 <dd>
     
     <div class="description">
-        When, in milliseconds, the last event loop happened.This value is used to allow evaluating how long it has been sincethe last event loop happened.
+        When, in milliseconds, the last event loop happened.
+This value is used to allow evaluating how long it has been since
+the last event loop happened.
     </div>
     
     
@@ -239,7 +244,162 @@
 <dd>
     
     <div class="description">
-        The loop function that will be called whenever a complete event loop is completed.This function will be called periodically and should receive as parameter time_elapsed_in_milliseconds, the time elapsed since it's function last call.This functions should not return any value.
+        The loop function that will be called whenever a complete event loop is completed.
+This function will be called periodically and should receive as parameter 
+time_elapsed_in_milliseconds, the time elapsed since it's function last call.
+This functions should not return any value.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mouse_button_down_function"><span class="label label-info">private</span> mouse_button_down_function<span class="type-signature"> :function</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The mouse function that will be called whenever a button is pressed with the mouse
+on the canvas.
+This function should receive as parameters 'button', 'x' and 'y': the button pressed,
+and the coordinates (in porcentage) of the mouse pointer.
+This functions should not return any value.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mouse_button_up_function"><span class="label label-info">private</span> mouse_button_up_function<span class="type-signature"> :function</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The mouse function that will be called whenever a button is released with the mouse
+on the web page.
+This function should receive as parameters 'button', 'x' and 'y': the button released,
+and the coordinates (in porcentage) of the mouse pointer.
+This functions should not return any value.
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="mouse_move_function"><span class="label label-info">private</span> mouse_move_function<span class="type-signature"> :function</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The mouse function that will be called whenever the mouse is moved.
+This function should receive as parameters 'x' and 'y':
+the coordinates (in porcentage) of the mouse pointer.
+This functions should not return any value.
     </div>
     
     
@@ -360,7 +520,10 @@
     
     <div class="description">
         <p>
-        The main loop function called periodically in the <a href="EventsHandler.html">EventsHandler</a>events cycle.Is responsible for the periodic functions calls, such as the<a href="EventsHandler.html#loop_function">loop function</a>.
+        The main loop function called periodically in the <a href="EventsHandler.html">EventsHandler</a>
+events cycle.
+Is responsible for the periodic functions calls, such as the
+<a href="EventsHandler.html#loop_function">loop function</a>.
         </p>
     </div>
     
@@ -492,7 +655,9 @@
     
     <div class="description">
         <p>
-        Sets the current display function. The display function will be called whenever it's necessary to display elements in the canvas.The display function should receive no parameters and return nothing.
+        Sets the current display function. The display function will be called whenever 
+it's necessary to display elements in the canvas.
+The display function should receive no parameters and return nothing.
         </p>
     </div>
     
@@ -543,7 +708,8 @@
 
             
 
-            <td class="description last">The function to be set as the current<a href="EventsHandler.html#display_function">display function</a>.</td>
+            <td class="description last">The function to be set as the current
+<a href="EventsHandler.html#display_function">display function</a>.</td>
         </tr>
 
 	
@@ -607,7 +773,10 @@
     
     <div class="description">
         <p>
-        Sets the current loop function. The loop function will be called periodically.The loop function should have as parameter time_elapsed_in_milliseconds,the time elapsed since it's the loop function last call.The loop function should return no values.
+        Sets the current loop function. The loop function will be called periodically.
+The loop function should have as parameter time_elapsed_in_milliseconds,
+the time elapsed since it's the loop function last call.
+The loop function should return no values.
         </p>
     </div>
     
@@ -658,7 +827,8 @@
 
             
 
-            <td class="description last">The function to be set as the current<a href="EventsHandler.html#loop_function">loop function</a>.</td>
+            <td class="description last">The function to be set as the current
+<a href="EventsHandler.html#loop_function">loop function</a>.</td>
         </tr>
 
 	
@@ -729,7 +899,7 @@
         <br clear="both">
 
       <footer>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed May 21 2014 23:07:43 GMT-0300 (BRT)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jun 09 2014 11:37:27 GMT-0300 (BRT)
         <br>
       </footer>
       <script> prettyPrint(); </script>

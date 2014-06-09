@@ -28,7 +28,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
           <div class="span4">
-              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
+              <h2><a href="index.html">Index</a></h2><div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li><li><a href="ArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ArrayWebGLBuffer</a></li><li><a href="CanvasWebGLUtility.html"><i class="icon-shield" style="color: #0186d1"></i> CanvasWebGLUtility</a></li><li><a href="DrawingsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> DrawingsHandler</a></li><li><a href="ElementArrayWebGLBuffer.html"><i class="icon-shield" style="color: #0186d1"></i> ElementArrayWebGLBuffer</a></li><li><a href="EventsHandler.html"><i class="icon-shield" style="color: #0186d1"></i> EventsHandler</a></li><li><a href="FunctionR2.html"><i class="icon-shield" style="color: #0186d1"></i> FunctionR2</a></li><li><a href="ImplicitCurve.html"><i class="icon-shield" style="color: #0186d1"></i> ImplicitCurve</a></li><li><a href="MarchingCubesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MarchingCubesHandler</a></li><li><a href="MatricesHandler.html"><i class="icon-shield" style="color: #0186d1"></i> MatricesHandler</a></li><li><a href="ShadersHandler.html"><i class="icon-shield" style="color: #0186d1"></i> ShadersHandler</a></li></ul></div>
           </div>
 
           <div class="span8">
@@ -66,7 +66,8 @@
     
     <div class="description">
         <p>
-        A canvas drawings handler.It's responsible for creating all the buffers and methods related to drawing a WebGL scene.
+        A canvas drawings handler.
+It's responsible for creating all the buffers and methods related to drawing a WebGL scene.
         </p>
     </div>
     
@@ -380,7 +381,8 @@
 <dd>
     
     <div class="description">
-        The entries of the vertices being buffered until drawn.Three entries per vertex are stored.
+        The entries of the vertices being buffered until drawn.
+Three entries per vertex are stored.
     </div>
     
     
@@ -435,7 +437,11 @@
     
     <div class="description">
         <p>
-        Begin buffering the vertices that will be drawn.It's expected to be followed by sequences of<a href="DrawingsHandler.html#pushVertex2d">pushVertex2d</a> or<a href="DrawingsHandler.html#pushVertex3d">pushVertex3d</a>,followed by <a href="DrawingsHandler.html#endDrawing">endDrawing</a>.
+        Begin buffering the vertices that will be drawn.
+It's expected to be followed by sequences of
+<a href="DrawingsHandler.html#pushVertex2d">pushVertex2d</a> or
+<a href="DrawingsHandler.html#pushVertex3d">pushVertex3d</a>,
+followed by <a href="DrawingsHandler.html#endDrawing">endDrawing</a>.
         </p>
     </div>
     
@@ -486,7 +492,8 @@
 
             
 
-            <td class="description last">The WebGL canvas context that will be used for the drawing.This will be set as the <a href="DrawingsHandler.html#current_webgl_context">current webgl context</a>.</td>
+            <td class="description last">The WebGL canvas context that will be used for the drawing.
+This will be set as the <a href="DrawingsHandler.html#current_webgl_context">current webgl context</a>.</td>
         </tr>
 
 	
@@ -509,7 +516,8 @@
 
             
 
-            <td class="description last">The Shader Program that should be used.This will be set as the <a href="DrawingsHandler.html#current_shader_program">current shader program</a>.</td>
+            <td class="description last">The Shader Program that should be used.
+This will be set as the <a href="DrawingsHandler.html#current_shader_program">current shader program</a>.</td>
         </tr>
 
 	
@@ -532,7 +540,8 @@
 
             
 
-            <td class="description last">The primitive that should be used for the drawing.This will be set as the <a href="DrawingsHandler.html#current_drawing_primitive">current drawing primitive</a>.</td>
+            <td class="description last">The primitive that should be used for the drawing.
+This will be set as the <a href="DrawingsHandler.html#current_drawing_primitive">current drawing primitive</a>.</td>
         </tr>
 
 	
@@ -596,7 +605,8 @@
     
     <div class="description">
         <p>
-        Creates an array with several elements matching the <a href="DrawingsHandler.html#current_drawing_color">current drawing color</a>.
+        Creates an array with several elements matching the 
+<a href="DrawingsHandler.html#current_drawing_color">current drawing color</a>.
         </p>
     </div>
     
@@ -707,7 +717,9 @@
 
 
 <span class="param-desc">
-    An array with it's number of entries equal to 4 times the number of elements specified. Every 4 entries match the RGBA color of the <a href="DrawingsHandler.html#current_drawing_color">current drawing color</a>.
+    An array with it's number of entries equal to 4 times the number of elements 
+specified. Every 4 entries match the RGBA color of the 
+<a href="DrawingsHandler.html#current_drawing_color">current drawing color</a>.
 </span>
 
 </div>
@@ -729,7 +741,11 @@
     
     <div class="description">
         <p>
-        Draws the given two dimesional vertices using the given WebGL primitive.Uses the <a href="DrawingsHandler.html#current_drawing_color">current drawing color</a> setby the method <a href="DrawingsHandler.html#setDrawingColor">setDrawingColor</a>.Note: The two dimensional vertices are actually treated as three dimensional vertices, with their thirdcoordinate set to zero.
+        Draws the given two dimesional vertices using the given WebGL primitive.
+Uses the <a href="DrawingsHandler.html#current_drawing_color">current drawing color</a> set
+by the method <a href="DrawingsHandler.html#setDrawingColor">setDrawingColor</a>.
+Note: The two dimensional vertices are actually treated as three dimensional vertices, with their third
+coordinate set to zero.
         </p>
     </div>
     
@@ -849,7 +865,8 @@
 
             
 
-            <td class="description last">The array containing the entries of the vertices that should be drawn.It's expected two entries per vertex.</td>
+            <td class="description last">The array containing the entries of the vertices that should be drawn.
+It's expected two entries per vertex.</td>
         </tr>
 
 	
@@ -936,7 +953,9 @@
     
     <div class="description">
         <p>
-        Draws the given three dimesional vertices using the given WebGL primitive.Uses the <a href="DrawingsHandler.html#current_drawing_color">current drawing color</a> setby the method <a href="DrawingsHandler.html#setDrawingColor">setDrawingColor</a>.
+        Draws the given three dimesional vertices using the given WebGL primitive.
+Uses the <a href="DrawingsHandler.html#current_drawing_color">current drawing color</a> set
+by the method <a href="DrawingsHandler.html#setDrawingColor">setDrawingColor</a>.
         </p>
     </div>
     
@@ -1056,7 +1075,8 @@
 
             
 
-            <td class="description last">The array containing the entries of the vertices that should be drawn.It's expected three entries per vertex.</td>
+            <td class="description last">The array containing the entries of the vertices that should be drawn.
+It's expected three entries per vertex.</td>
         </tr>
 
 	
@@ -1143,7 +1163,10 @@
     
     <div class="description">
         <p>
-        Draws the given two dimesional vertices using the given WebGL primitive and a colorper vertex.Note: The two dimensional vertices are actually treated as three dimensional vertices, with their thirdcoordinate set to zero.
+        Draws the given two dimesional vertices using the given WebGL primitive and a color
+per vertex.
+Note: The two dimensional vertices are actually treated as three dimensional vertices, with their third
+coordinate set to zero.
         </p>
     </div>
     
@@ -1263,7 +1286,8 @@
 
             
 
-            <td class="description last">The array containing the entries of the vertices that should be drawn.It's expected two entries per vertex.</td>
+            <td class="description last">The array containing the entries of the vertices that should be drawn.
+It's expected two entries per vertex.</td>
         </tr>
 
 	
@@ -1286,7 +1310,11 @@
 
             
 
-            <td class="description last">The array containing the color of the vertices that should be drawn.The colors should follow the same order of the vertices. A color is expected per vertex.It's expected four entries per color. Each entry should be a number from 0 to 1 (including).The entries represent the Red intensity, Green intensity, Blue intensity and Alpha transparency of the color, in that order.</td>
+            <td class="description last">The array containing the color of the vertices that should be drawn.
+The colors should follow the same order of the vertices. A color is expected per vertex.
+It's expected four entries per color. Each entry should be a number from 0 to 1 (including).
+The entries represent the Red intensity, Green intensity, Blue intensity and 
+Alpha transparency of the color, in that order.</td>
         </tr>
 
 	
@@ -1373,7 +1401,8 @@
     
     <div class="description">
         <p>
-        Draws the given three dimesional vertices using the given WebGL primitive and a colorper vertex.
+        Draws the given three dimesional vertices using the given WebGL primitive and a color
+per vertex.
         </p>
     </div>
     
@@ -1493,7 +1522,8 @@
 
             
 
-            <td class="description last">The array containing the entries of the vertices that should be drawn.It's expected three entries per vertex.</td>
+            <td class="description last">The array containing the entries of the vertices that should be drawn.
+It's expected three entries per vertex.</td>
         </tr>
 
 	
@@ -1516,7 +1546,11 @@
 
             
 
-            <td class="description last">The array containing the color of the vertices that should be drawn.The colors should follow the same order of the vertices. A color is expected per vertex.It's expected four entries per color. Each entry should be a number from 0 to 1 (including).The entries represent the Red intensity, Green intensity, Blue intensity and Alpha transparency of the color, in that order.</td>
+            <td class="description last">The array containing the color of the vertices that should be drawn.
+The colors should follow the same order of the vertices. A color is expected per vertex.
+It's expected four entries per color. Each entry should be a number from 0 to 1 (including).
+The entries represent the Red intensity, Green intensity, Blue intensity and 
+Alpha transparency of the color, in that order.</td>
         </tr>
 
 	
@@ -1603,7 +1637,13 @@
     
     <div class="description">
         <p>
-        Draws the vertices stored in the <a href="DrawingsHandler.html#vertices_buffer">vertices buffer</a> withthe methods <a href="DrawingsHandler.html#pushVertex2d">pushVertex2d</a> and<a href="DrawingsHandler.html#pushVertex3d">pushVertex3d</a>, using the<a href="DrawingsHandler.html#current_webgl_context">current webgl context</a>,<a href="DrawingsHandler.html#current_shader_program">current shader program</a> and<a href="DrawingsHandler.html#current_drawing_primitive">current drawing primitive</a> setby the method <a href="DrawingsHandler.html#beginDrawing">beginDrawing</a>.
+        Draws the vertices stored in the <a href="DrawingsHandler.html#vertices_buffer">vertices buffer</a> with
+the methods <a href="DrawingsHandler.html#pushVertex2d">pushVertex2d</a> and
+<a href="DrawingsHandler.html#pushVertex3d">pushVertex3d</a>, using the
+<a href="DrawingsHandler.html#current_webgl_context">current webgl context</a>,
+<a href="DrawingsHandler.html#current_shader_program">current shader program</a> and
+<a href="DrawingsHandler.html#current_drawing_primitive">current drawing primitive</a> set
+by the method <a href="DrawingsHandler.html#beginDrawing">beginDrawing</a>.
         </p>
     </div>
     
@@ -1669,7 +1709,13 @@
     
     <div class="description">
         <p>
-        Adds a two dimensional (two entries) vertex to the <a href="DrawingsHandler.html#vertices_buffer">vertices buffer</a>.It's expected to be preceeded by <a href="DrawingsHandler.html#beginDrawing">beginDrawing</a>.It's expected to be followed by <a href="DrawingsHandler.html#endDrawing">endDrawing</a>.Note: This two dimensional vertex is actually treated as a three dimensional vertex, with it's thirdcoordinate set to zero. It doesn't conflict with <a href="DrawingsHandler.html#pushVertex3d">pushVertex3d</a> butit's mixed use should be avoided to improve code organization.
+        Adds a two dimensional (two entries) vertex to the 
+<a href="DrawingsHandler.html#vertices_buffer">vertices buffer</a>.
+It's expected to be preceeded by <a href="DrawingsHandler.html#beginDrawing">beginDrawing</a>.
+It's expected to be followed by <a href="DrawingsHandler.html#endDrawing">endDrawing</a>.
+Note: This two dimensional vertex is actually treated as a three dimensional vertex, with it's third
+coordinate set to zero. It doesn't conflict with <a href="DrawingsHandler.html#pushVertex3d">pushVertex3d</a> but
+it's mixed use should be avoided to improve code organization.
         </p>
     </div>
     
@@ -1807,7 +1853,10 @@
     
     <div class="description">
         <p>
-        Adds a three dimensional (three entries) vertex to the <a href="DrawingsHandler.html#vertices_buffer">vertices buffer</a>.It's expected to be preceeded by <a href="DrawingsHandler.html#beginDrawing">beginDrawing</a>.It's expected to be followed by <a href="DrawingsHandler.html#endDrawing">endDrawing</a>.
+        Adds a three dimensional (three entries) vertex to the 
+<a href="DrawingsHandler.html#vertices_buffer">vertices buffer</a>.
+It's expected to be preceeded by <a href="DrawingsHandler.html#beginDrawing">beginDrawing</a>.
+It's expected to be followed by <a href="DrawingsHandler.html#endDrawing">endDrawing</a>.
         </p>
     </div>
     
@@ -2085,7 +2134,9 @@
 
             
 
-            <td class="description last">The new color to be used for drawing. The RBGA pattern is expected. Expects 4 numbers between or equal to 0 and 1 representing the colors Red, Green, Blue and the opacity Alpha, in that order.</td>
+            <td class="description last">The new color to be used for drawing. The RBGA pattern is expected. 
+Expects 4 numbers between or equal to 0 and 1 representing the colors Red, Green, Blue 
+and the opacity Alpha, in that order.</td>
         </tr>
 
 	
@@ -2156,7 +2207,7 @@
         <br clear="both">
 
       <footer>
-        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Wed May 21 2014 23:07:43 GMT-0300 (BRT)
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Mon Jun 09 2014 11:37:27 GMT-0300 (BRT)
         <br>
       </footer>
       <script> prettyPrint(); </script>

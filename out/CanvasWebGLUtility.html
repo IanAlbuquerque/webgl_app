@@ -32,7 +32,7 @@
           </div>
 
           <div class="span8">
-              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> ArrayWebGLBuffer</h1>
+              <h1 class="page-header"><i class="icon-shield" style="color:#0186d1"></i> CanvasWebGLUtility</h1>
               
 
 
@@ -41,7 +41,7 @@
     
 <header>
     <h2>
-    ArrayWebGLBuffer
+    CanvasWebGLUtility
     </h2>
     
 </header>  
@@ -57,7 +57,7 @@
     
         
 <dt>
-    <h4 class="name" id="ArrayWebGLBuffer">new ArrayWebGLBuffer<span class="signature">(webgl_context, _data, _item_size, _number_of_items)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="CanvasWebGLUtility">new CanvasWebGLUtility<span class="signature">(canvas)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -66,7 +66,8 @@
     
     <div class="description">
         <p>
-        A WebGL array buffer. Used to store a variety of data needed for setting up scenes.
+        The main utility class for drawing scenes with WebGL.
+Contains every method needed to handle scenes.
         </p>
     </div>
     
@@ -101,13 +102,13 @@
 
         <tr>
             
-                <td class="name">webgl_context</td>
+                <td class="name">canvas</td>
             
 
             <td class="type">
             
                 
-<span class="param-type">WebGLContext</span>
+<span class="param-type">HTMLCanvasElement</span>
 
 
             
@@ -117,77 +118,7 @@
 
             
 
-            <td class="description last">The WebGL canvas context that will be used for 
-loading the matrices.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">_data</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;number></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The array containing the data to be inserted into the buffer.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">_item_size</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The number of entries in the array that defines an unique element.</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name">_number_of_items</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The number of unique elements in the array.</td>
+            <td class="description last">The canvas html element that should be handled.</td>
         </tr>
 
 	
@@ -249,20 +180,109 @@ loading the matrices.</td>
     
     
     
-        <h3 class="subsection-title">Members</h3>
+    
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+
+
+<section>
+    
+<header>
+    <h2>
+    CanvasWebGLUtility
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview hero-unit">
+    
+
+    
+
+    
+    
+    
         
-        <dl class="bs-docs-example bs-members">
-            
 <dt>
-    <h4 class="name" id="content">content<span class="type-signature"> :glBuffer</span></h4>
+    <h4 class="name" id="CanvasWebGLUtility">new CanvasWebGLUtility<span class="signature">(canvas)</span><span class="type-signature"></span></h4>
     
     
 </dt>
 <dd>
     
+    
     <div class="description">
-        The WebGL buffer itself.
+        <p>
+        The main utility class for drawing scenes with WebGL.
+Contains every method needed to handle scenes.
+        </p>
     </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-bordered table-condensed">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">canvas</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLCanvasElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The canvas html element that should be handled.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
     
     
     
@@ -296,30 +316,7 @@ loading the matrices.</td>
 
     
     
-</dd>
 
-        
-            
-<dt>
-    <h4 class="name" id="data"><span class="label label-info">private</span> data<span class="type-signature"> :Array.&lt;number></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        The data of the buffer. It should contain 
-<a href="ArrayWebGLBuffer.html#item_size">item_size</a> x 
-<a href="ArrayWebGLBuffer.html#number_of_items">number_of_items</a> entries.
-    </div>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
     
 
     
@@ -327,48 +324,12 @@ loading the matrices.</td>
     
     
     
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
     
     
 </dd>
 
-        
-            
-<dt>
-    <h4 class="name" id="item_size">item_size<span class="type-signature"> :number</span></h4>
     
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        The number of entries in the array that defines an unique element.
-    </div>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
+   </div>
     
     
     
@@ -376,72 +337,6 @@ loading the matrices.</td>
     
     
     
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="number_of_items">number_of_items<span class="type-signature"> :number</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        The number of unique elements in the array.
-    </div>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        </dl>
     
     
     
